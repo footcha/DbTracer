@@ -1,6 +1,5 @@
 ﻿using DbTracker.MsSql.Model;
 using MbUnit.Framework;
-using NHibernate;
 using NHibernate.Criterion;
 
 namespace DbTracker.MsSql.Test.Model

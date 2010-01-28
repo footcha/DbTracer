@@ -1,5 +1,3 @@
-using System;
-
 namespace DbTracker.MsSql.Model
 {
     public class IndexMap : SqlClassMap<Index>

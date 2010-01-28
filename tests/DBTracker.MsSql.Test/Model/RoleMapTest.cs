@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DbTracker.MsSql.Model;
 using MbUnit.Framework;
 
