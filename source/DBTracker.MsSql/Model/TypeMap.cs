@@ -13,8 +13,9 @@ namespace DbTracker.MsSql.Model
             Table(TableName);
             Id(obj => obj.Id, "user_type_id");
             Map(obj => obj.Name, "name");
-            Map(o => o.SystemTypeId, "system_type_id");
-            //Map(o => o.Schema, "schema_id"); // TODO implement schema as type
+            References(o => o.SystemType, "system_type_id")
+                .Not.LazyLoad();
+            Map(o => o.Schema, "schema_id");
             Map(o => o.MaxLength, "max_length");
             Map(o => o.Precision, "precision");
             Map(o => o.Scale, "scale");

@@ -4,11 +4,11 @@ namespace DbTracker.MsSql.Model
     {
         public virtual int Id { get; set; }
 
-        public virtual int SystemTypeId { get; set; }
+        public virtual Type SystemType { get; set; }
 
         public virtual string Name { get; set; }
 
-        public virtual Schema Schema { get; set; }
+        public virtual int Schema { get; set; } // TODO foreing key to schema type
 
         public virtual int MaxLength { get; set; }
 
@@ -24,9 +24,9 @@ namespace DbTracker.MsSql.Model
 
         public virtual bool IsAssemblyType { get; set; }
 
-        public virtual int DefaultObjectId { get; set; }
+        public virtual int DefaultObjectId { get; set; } // TODO foreing key to object type
 
-        public virtual int RuleObjectId { get; set; }
+        public virtual int RuleObjectId { get; set; } // TODO foreing key to rule type
 
 #pragma warning disable 659
         public override bool Equals(object that)
@@ -38,6 +38,11 @@ namespace DbTracker.MsSql.Model
             var thatType = that as Type;
             if (thatType == null) return false;
             return thatType.Id == Id;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, ID={1}", GetType().FullName, Id);
         }
     }
 }
