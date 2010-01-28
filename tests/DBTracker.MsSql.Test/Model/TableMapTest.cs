@@ -30,12 +30,6 @@ namespace DbTracker.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, table);
         }
 
-        //[Test]
-        //public override void TypeTest()
-        //{
-        //    Assert.AreEqual(SqlObjectType.TableUserDefined, table.Type);
-        //}
-
         [Test]
         public void TriggersTest()
         {

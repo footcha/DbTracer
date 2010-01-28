@@ -28,12 +28,6 @@ namespace DbTracker.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, function);
         }
 
-        //[Test]
-        //public override void TypeTest()
-        //{
-        //    Assert.AreEqual(SqlObjectType.SqlScalarFunction, function.Type);
-        //}
-        
         [Test]
         public void DefinitionTest()
         {

@@ -25,7 +25,7 @@ namespace DbTracker.MsSql.Model
             if (destino == null) throw new ArgumentNullException("destino");
             if (origen == null) throw new ArgumentNullException("origen");
             if (origen.Count != destino.Count) return false;
-            for (int j = 0; j < origen.Count; j++)
+            for (var j = 0; j < origen.Count; j++)
             {
                 var item = destino[origen[j].FullName];
                 if (item == null)

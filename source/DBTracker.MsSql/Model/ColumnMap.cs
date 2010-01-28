@@ -23,7 +23,6 @@ namespace DbTracker.MsSql.Model
                 .Class<Type>()
                 .Column("user_type_id")
                 .Not.LazyLoad();
-            //Map(o => o.Schema, "schema_id");
             Map(o => o.MaxLength, "max_length");
             Map(o => o.Precision, "precision");
             Map(o => o.Scale, "scale");

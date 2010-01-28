@@ -29,12 +29,6 @@ namespace DbTracker.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, view);
         }
 
-        //[Test]
-        //public override void TypeTest()
-        //{
-        //    Assert.AreEqual(SqlObjectType.View, view.Type);
-        //}
-
         [Test]
         public void DefinitionTest()
         {

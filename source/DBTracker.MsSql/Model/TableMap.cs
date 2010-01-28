@@ -17,7 +17,6 @@ namespace DbTracker.MsSql.Model
                 .ReadOnly();
             HasMany(table => table.Indexes)
                 .KeyColumn("object_id")
-                //.AsMap("index_id")
                 .AsSet()
                 .Not.LazyLoad()
                 .ReadOnly();

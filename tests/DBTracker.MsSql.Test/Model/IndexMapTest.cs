@@ -38,12 +38,6 @@ namespace DbTracker.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, index);
         }
 
-        //[Test]
-        //public override void TypeTest()
-        //{
-        //    Assert.AreEqual(SqlObjectType.PrimarykeyConstraint, index.Type);
-        //}
-
         [Test]
         public void IndexTypeTest()
         {

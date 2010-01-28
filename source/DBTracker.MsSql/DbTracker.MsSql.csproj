@@ -70,7 +70,6 @@
     <Compile Include="Model\Code.cs" />
     <Compile Include="Model\Column.cs" />
     <Compile Include="Model\ColumnConstraint.cs" />
-    <Compile Include="Model\Columns.cs" />
     <Compile Include="Model\Constraint.cs" />
     <Compile Include="Model\ConstraintColumn.cs" />
     <Compile Include="Model\ConstraintColumns.cs" />

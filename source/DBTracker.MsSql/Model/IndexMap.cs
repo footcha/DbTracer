@@ -9,14 +9,11 @@ namespace DbTracker.MsSql.Model
 
         protected override void Configure()
         {
-            //ConfigureBasic(this);
             ReadOnly();
             Table(TableName);
             CompositeId()
                 .KeyProperty(obj => obj.Id, "object_id")
                 .KeyProperty(obj => obj.IndexId, "index_id");
-            //Map(obj => obj.IndexId);
-            //Map(obj => obj.Id);
             Map(obj => obj.Name, "name");
             Map(obj => obj.IndexType, "type")
                 .CustomType<IndexTypeMap>();
@@ -30,10 +27,6 @@ namespace DbTracker.MsSql.Model
             Map(obj => obj.IsHypothetical, "is_hypothetical");
             Map(obj => obj.AllowRowLocks, "allow_row_locks");
             Map(obj => obj.AllowPageLocks, "allow_page_locks");
-
-            //Join("sys.objects", i => i.KeyColumn("parent_object_id")
-            //    .Map(obj => obj.Type, "type")
-            //    .CustomType<SqlObjectTypeMap>());
         }
     }
 }

@@ -27,12 +27,6 @@ namespace DbTracker.MsSql.Test.Model
 
         #region Tests
 
-        //[Test, Ignore]
-        //public override void TypeTest()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         [RowTest,
         Row("Name", "test_role"),
         Row("IsLogin", false),

@@ -6,7 +6,7 @@ namespace DbTracker.MsSql.Model
     public class FullText : MsSqlSchemaBase
     {
         public FullText(ISchema parent)
-            : base(parent, MsSql.ObjectType1.FullText)
+            : base(parent, ObjectType1.FullText)
         {
 
         }
