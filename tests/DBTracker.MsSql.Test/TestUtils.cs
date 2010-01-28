@@ -16,6 +16,7 @@ namespace DbTracker.MsSql.Test
 
         public static void TestProperty<T>(string propertyName, object expectedValue, T testedObject)
         {
+            Assert.IsNotNull(testedObject, "Object cannot be null");
             var propInfo = typeof(T).GetProperty(propertyName);
             if (propInfo == null)
             {
