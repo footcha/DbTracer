@@ -17,7 +17,7 @@ namespace DbTracker.MsSql.Test.Model
             userType = GetTypeByName("test_type");
         }
 
-        private Type GetTypeByName(string typeName)
+        public static Type GetTypeByName(string typeName)
         {
             using (var session = SessionFactory.OpenStatelessSession())
             {

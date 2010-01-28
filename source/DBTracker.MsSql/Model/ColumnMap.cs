@@ -12,8 +12,8 @@ namespace DbTracker.MsSql.Model
             ReadOnly();
             Table(TableName);
             CompositeId()
-                .KeyProperty(obj => obj.Id, "object_id")
-                .KeyProperty(obj => obj.ColumnId, "column_id");
+                .KeyProperty(obj => obj.Table, "object_id")
+                .KeyProperty(obj => obj.Id, "column_id");
             Map(obj => obj.Name, "name");
             References(o => o.SystemType)
                 .Class<Type>()

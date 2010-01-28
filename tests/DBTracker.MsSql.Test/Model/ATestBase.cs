@@ -4,6 +4,6 @@ namespace DbTracker.MsSql.Test.Model
 {
     public abstract class ATestBase
     {
-        protected readonly ISessionFactory SessionFactory = TestConfig.SessionFactory;
+        public static readonly ISessionFactory SessionFactory = TestConfig.SessionFactory;
     }
 }
