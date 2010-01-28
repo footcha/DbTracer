@@ -62,7 +62,7 @@ namespace DbTracker.MsSql.Model
 
         public virtual ISchema Clone()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>

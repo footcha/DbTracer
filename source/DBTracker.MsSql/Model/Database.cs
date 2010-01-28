@@ -116,7 +116,7 @@ namespace DbTracker.MsSql.Model
 
         public override ISchema Clone()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public Boolean IsCaseSensitive

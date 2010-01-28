@@ -58,7 +58,7 @@ namespace DbTracker.MsSql
 
         public void NullSafeSet(IDbCommand cmd, object value, int index)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public object DeepCopy(object value)
@@ -68,17 +68,17 @@ namespace DbTracker.MsSql
 
         public object Replace(object original, object target, object owner)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public object Assemble(object cached, object owner)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public object Disassemble(object value)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public SqlType[] SqlTypes

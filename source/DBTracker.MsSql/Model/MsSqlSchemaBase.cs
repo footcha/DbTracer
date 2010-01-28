@@ -14,7 +14,7 @@ namespace DbTracker.MsSql.Model
         protected MsSqlSchemaBase(ISchema schema, ObjectType1 index)
             : base(ObjectType1.Undefined)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public virtual SchemaList<ExtendedProperty, SchemaBase> ExtendedProperties { get; private set; }
