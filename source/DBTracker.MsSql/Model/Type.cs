@@ -4,7 +4,7 @@ namespace DbTracker.MsSql.Model
     {
         public virtual int Id { get; set; }
 
-        public virtual int UserTypeId { get; set; }
+        public virtual int SystemTypeId { get; set; }
 
         public virtual string Name { get; set; }
 

@@ -22,7 +22,9 @@ namespace DbTracker.MsSql.Test.Model
 
         [RowTest,
         Row("Name", "sysname"),
-        //Row("Schema", 4),
+        //Row("Schema", 4), // TODO test
+        Row("Id", 256),
+        Row("SystemTypeId", 231),
         Row("MaxLength", 256),
         Row("Precision", 0),
         Row("Scale", 0),

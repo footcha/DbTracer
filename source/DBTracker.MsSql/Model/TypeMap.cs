@@ -11,10 +11,10 @@ namespace DbTracker.MsSql.Model
         {
             ReadOnly();
             Table(TableName);
-            Id(obj => obj.Id, "system_type_id");
+            Id(obj => obj.Id, "user_type_id");
             Map(obj => obj.Name, "name");
-            Map(o => o.UserTypeId, "user_type_id");
-            //Map(o => o.Schema, "schema_id"); // TODO
+            Map(o => o.SystemTypeId, "system_type_id");
+            //Map(o => o.Schema, "schema_id"); // TODO implement schema as type
             Map(o => o.MaxLength, "max_length");
             Map(o => o.Precision, "precision");
             Map(o => o.Scale, "scale");
