@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTracer.Core", "..\source\DbTracer.Core\DbTracer.Core.csproj", "{6F1CA101-C230-4282-972F-EFC460D0A18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTracer.MsSql", "..\source\DbTracer.MsSql\DbTracer.MsSql.csproj", "{914B0D38-9B42-4E18-928B-6B415E4B224F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbTracer.MsSql.Test", "DbTracer.MsSql.Test\DbTracer.MsSql.Test.csproj", "{BDA34ADC-FB00-4807-A148-193F4D324AC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F1CA101-C230-4282-972F-EFC460D0A18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1CA101-C230-4282-972F-EFC460D0A18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1CA101-C230-4282-972F-EFC460D0A18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1CA101-C230-4282-972F-EFC460D0A18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914B0D38-9B42-4E18-928B-6B415E4B224F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914B0D38-9B42-4E18-928B-6B415E4B224F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914B0D38-9B42-4E18-928B-6B415E4B224F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914B0D38-9B42-4E18-928B-6B415E4B224F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA34ADC-FB00-4807-A148-193F4D324AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA34ADC-FB00-4807-A148-193F4D324AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA34ADC-FB00-4807-A148-193F4D324AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA34ADC-FB00-4807-A148-193F4D324AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+﻿namespace DbTracer.MsSql.Options
+{
+    public class SqlOptionComparison
+    {
+        public enum CaseSensityOptions
+        {
+            Automatic = 0,
+            CaseInsensity = 1,
+            CaseSensity = 2
+        }
+
+        public SqlOptionComparison()
+        {
+            CaseSensityInCode = CaseSensityOptions.CaseInsensity;
+        }
+
+        public bool IgnoreWhiteSpacesInCode { get; set; }
+
+
+        public CaseSensityOptions CaseSensityInCode { get; set; }
+
+        public CaseSensityOptions CaseSensityType { get; set; }
+    }
+}
