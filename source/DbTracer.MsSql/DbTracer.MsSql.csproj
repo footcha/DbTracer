@@ -31,7 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Model\AObjectBase.cs" />
     <Compile Include="Model\ColumnMap.cs" />
+    <Compile Include="Model\Schema.cs" />
+    <Compile Include="Model\SchemaMap.cs" />
     <Compile Include="Model\Type.cs" />
     <Compile Include="Model\TypeMap.cs" />
     <Compile Include="Model\IndexTypeMap.cs" />
@@ -96,7 +99,7 @@
     <Compile Include="Model\PartitionScheme.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\Rule.cs" />
-    <Compile Include="Model\Schema.cs" />
+    <Compile Include="Model\SchemaObsolete.cs" />
     <Compile Include="Model\SchemaBase.cs" />
     <Compile Include="Model\SchemaList.cs" />
     <Compile Include="Model\SearchSchemaBase.cs" />
