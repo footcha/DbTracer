@@ -21,9 +21,9 @@ namespace DbTracer.MsSql.Test.Model
                     .ConnectionString(connectionStringBuilder =>
                                       connectionStringBuilder
                                           .Server(@"stroj\czprg3k10_dev1")
-                                          .Database("dbtracker")
-                                          .Username("dbtracker")
-                                          .Password("dbtracker"))
+                                          .Database("dbtracer")
+                                          .Username("dbtracer")
+                                          .Password("dbtracer"))
                 )
                 .Mappings(map => map.FluentMappings.AddFromAssemblyOf<DatabaseProperties>())
                 .BuildSessionFactory();

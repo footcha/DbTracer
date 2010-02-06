@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DbTracer.MsSql.Model;
 using MbUnit.Framework;
 using NHibernate;
@@ -7,7 +8,7 @@ using NHibernate.Criterion;
 namespace DbTracer.MsSql.Test.Model
 {
     [TestFixture]
-    public class TableMapTest : ASqlObjectTestBase
+    public class TableMapTest : AObjectTest<Table>
     {
         private Table table;
 
@@ -22,12 +23,38 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
-        Row("Name", "test_table"),
-        ]
-        public override void LoadTest(string propertyName, object expectedValue)
+        protected override Table ExpectedObject
         {
-            TestUtils.TestProperty(propertyName, expectedValue, table);
+            get
+            {
+                var schema = new Schema { Id = 1 };
+                return CreateObject(
+                    DateTime.MinValue, false, false, false, DateTime.MinValue,
+                    "test_table", null, 0, schema, SqlObjectType.TableUserDefined
+                    );
+            }
+        }
+
+        protected override Table TestedObject
+        {
+            get { return table; }
+        }
+
+        [RowTest,
+         Row("LobDataSpaceId", 0),
+         Row("LockOnBulkLoad", false),
+         Row("UsesAnsiNulls", true),
+         Row("IsReplicated", false),
+         Row("HasReplicationFilter", false),
+         Row("IsMergePublished", false),
+         Row("IsSyncTranSubscribed", false),
+         Row("HasUncheckedAssemblyData", false),
+         Row("TextInRowLimit", 0),
+         Row("LargeValueTypesOutOfRow", false),
+        ]
+        public void LoadTest(string propertyName, object expectedValue)
+        {
+            TestUtils.TestProperty(propertyName, expectedValue, TestedObject);
         }
 
         [Test]

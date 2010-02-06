@@ -29,7 +29,7 @@ namespace DbTracer.MsSql.Model
             Properties = new DatabaseProperties();
             //Roles = new SchemaList<Role, Database>();
             Rules = new SchemaList<Rule, Database>(this);
-            Schemas = new SchemaList<Schema, Database>(this);
+            Schemas = new SchemaList<SchemaObsolete, Database>(this);
             Synonyms = new SchemaList<Synonym, Database>(this);
             //Tables = new SchemaList<Table, Database>(this);
             TablesTypes = new SchemaList<TableType, Database>(this);
@@ -95,7 +95,7 @@ namespace DbTracer.MsSql.Model
         public SchemaList<ClrFunction, Database> ClrFunctions { get; private set; }
 
         [Description("Schemas")]
-        public SchemaList<Schema, Database> Schemas { get; private set; }
+        public SchemaList<SchemaObsolete, Database> Schemas { get; private set; }
 
         [Description("Xml Schemas")]
         public SchemaList<XmlSchema, Database> XmlSchemas { get; private set; }
