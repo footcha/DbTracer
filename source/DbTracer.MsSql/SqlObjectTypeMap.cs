@@ -37,6 +37,7 @@ namespace DbTracer.MsSql
             dict["V"] = SqlObjectType.View;
             dict["X"] = SqlObjectType.ExtendedStoredProcedure;
             dict["IT"] = SqlObjectType.InternalTable;
+            dict["S"] = SqlObjectType.SystemTable;
         }
 
         public new bool Equals(object x, object y)

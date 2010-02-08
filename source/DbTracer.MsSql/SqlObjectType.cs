@@ -26,5 +26,6 @@ namespace DbTracer.MsSql
         View,
         ExtendedStoredProcedure,
         InternalTable,
+        SystemTable
     }
 }
