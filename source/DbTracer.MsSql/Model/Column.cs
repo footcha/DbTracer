@@ -32,7 +32,8 @@ namespace DbTracer.MsSql.Model
             if (ReferenceEquals(this, that)) return true;
             var thatColumn = that as Column;
             if (thatColumn == null) return false;
-            return thatColumn.Id == Id && thatColumn.Table == Table;
+            if (Id == 0) return false;
+            return thatColumn.Id == Id;
         }
 
         public override int GetHashCode()
