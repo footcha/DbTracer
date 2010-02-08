@@ -12,7 +12,7 @@ namespace DbTracer.MsSql.Model
             ReadOnly();
             Table(TableName);
             CompositeId()
-                .KeyProperty(obj => obj.Table, "object_id")
+                .KeyProperty(obj => obj.Table.Id, "object_id")
                 .KeyProperty(obj => obj.Id, "column_id");
             Map(obj => obj.Name, "name");
             References(o => o.SystemType)
@@ -41,6 +41,9 @@ namespace DbTracer.MsSql.Model
             Map(o => o.XmlCollectionId, "xml_collection_id");
             Map(o => o.DefaultObjectId, "default_object_id");
             Map(o => o.RuleObjectId, "rule_object_id");
+            References(obj => obj.Table)
+                .Column("object_id")
+                .Not.LazyLoad();
         }
     }
 }

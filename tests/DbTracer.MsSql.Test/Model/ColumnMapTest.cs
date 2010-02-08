@@ -9,18 +9,19 @@ namespace DbTracer.MsSql.Test.Model
     {
         private Column column;
         private Type expectedType;
+        private Table expectedTable;
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
             using (var session = SessionFactory.OpenSession())
             {
-                var table = session.CreateCriteria<Table>()
+                expectedTable = session.CreateCriteria<Table>()
                     .Add(Restrictions.Eq("Name", "test_table"))
                     .UniqueResult<Table>();
                 column = session.CreateCriteria<Column>()
                     .Add(Restrictions.Eq("Name", "test"))
-                    .Add(Restrictions.Eq("Table", table.Id))
+                    .Add(Restrictions.Eq("Table", expectedTable))
                     .UniqueResult<Column>();
                 expectedType = TypeMapTest.GetTypeByName("varchar");
             }
@@ -51,6 +52,12 @@ namespace DbTracer.MsSql.Test.Model
         public override void LoadTest(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, column);
+        }
+
+        [Test]
+        public void TableTest()
+        {
+            Assert.AreEqual(expectedTable, column.Table);
         }
 
         [Test]

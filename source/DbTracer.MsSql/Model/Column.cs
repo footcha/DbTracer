@@ -24,7 +24,7 @@ namespace DbTracer.MsSql.Model
         public virtual int XmlCollectionId { get; set; }
         public virtual int DefaultObjectId { get; set; }
         public virtual int RuleObjectId { get; set; }
-        public virtual int Table { get; set; } // TODO foreign key to owning table
+        public virtual Table Table { get; set; }
 
         public override bool Equals(object that)
         {
@@ -36,11 +36,45 @@ namespace DbTracer.MsSql.Model
             return thatColumn.Id == Id;
         }
 
+        /// <summary>
+        /// Equality is based on all public properties including deep equality of composed objects.
+        /// </summary>
+        /// <param name="column">column to be compared with this object</param>
+        /// <returns></returns>
+        public virtual bool EqualsFully(Column column)
+        {
+            if (!Equals(column)) return false;
+            return (Id == column.Id
+                    && Name == column.Name
+                    && SystemType.Equals(column.SystemType)
+                    && UserType.Equals(column.UserType)
+                    && MaxLength == column.MaxLength
+                    && Precision == column.Precision
+                    && Scale == column.Scale
+                    && Collation == column.Collation
+                    && IsNullable == column.IsNullable
+                    && IsAnsiPadded == column.IsAnsiPadded
+                    && IsRowGuidCol == column.IsRowGuidCol
+                    && IsIdentity == column.IsIdentity
+                    && IsComputed == column.IsComputed
+                    && IsFileStream == column.IsFileStream
+                    && IsReplicated == column.IsReplicated
+                    && IsNonSqlSubscribed == column.IsNonSqlSubscribed
+                    && IsMergePublished == column.IsMergePublished
+                    && IsDtsReplicated == column.IsDtsReplicated
+                    && IsXmlDocument == column.IsXmlDocument
+                    && XmlCollectionId == column.XmlCollectionId
+                    && DefaultObjectId == column.DefaultObjectId
+                    && RuleObjectId == column.RuleObjectId
+                    && Table.Equals(column.Table)
+                   );
+        }
+
         public override int GetHashCode()
         {
             unchecked
             {
-                return (Id * 397) ^ Table;
+                return (Id * 397);
             }
         }
     }
