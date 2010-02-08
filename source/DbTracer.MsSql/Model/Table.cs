@@ -38,7 +38,7 @@ namespace DbTracer.MsSql.Model
 
         public virtual bool LargeValueTypesOutOfRow { get; set; }
 
-        public virtual ICollection<Index> Indexes { get; set; } // TODO foreign keys to indexes
+        public virtual ICollection<Index> Indexes { get; set; }
 
         public virtual ICollection<Trigger> Triggers { get; set; }
 
