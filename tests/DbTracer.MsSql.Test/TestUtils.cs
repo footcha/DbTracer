@@ -10,6 +10,7 @@ namespace DbTracer.MsSql.Test
 
         public static void TestSqlObjectDefinition(string expectedDefinition, string testedDefinition)
         {
+            Assert.IsNotNull(testedDefinition, "Parameter [testedDefinition] cannot be null.");
             Assert.AreEqual(
                 whiteCharactersRegex.Replace(expectedDefinition, ""),
                 whiteCharactersRegex.Replace(testedDefinition, ""));

@@ -5,14 +5,14 @@ using MbUnit.Framework;
 namespace DbTracer.MsSql.Test.Model
 {
     [TestFixture]
-    public class TriggerMapTest : ASqlObjectTestBase, ICodeTest
+    public class TriggerMapTest : AObjectTest<Trigger>, ICodeTest
     {
         private Trigger trigger;
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            using (var session = SessionFactory.OpenSession())
+            using (var session = SessionFactory.OpenStatelessSession())
             {
                 var triggers = session.CreateCriteria<Trigger>().List<Trigger>();
                 trigger = (from t in triggers where t.Name == "test_trigger" select t).First();
@@ -20,12 +20,11 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [RowTest,
-        Row("Name", "test_trigger"),
-        Row("IsDisabled", false),
+        Row("IsDisabled", true),
         Row("IsNotForReplication", false),
         Row("IsInsteadOfTrigger", false),
         ]
-        public override void LoadTest(string propertyName, object expectedValue)
+        public void LoadTest(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, trigger);
         }
@@ -33,8 +32,30 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void DefinitionTest()
         {
-            const string expectedDefinition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END";
-            TestUtils.TestSqlObjectDefinition(expectedDefinition, trigger.Definition);
+            TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, trigger.Definition);
+        }
+
+        protected override Trigger ExpectedObject
+        {
+            get
+            {
+                var schema = new Schema { Id = 1 };
+                return new Trigger
+                {
+                    Name = "test_trigger",
+                    IsDisabled = true,
+                    IsNotForReplication = false,
+                    IsInsteadOfTrigger = false,
+                    Schema = schema,
+                    Type = SqlObjectType.SqlDmLTrigger,
+                    Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END"
+                };
+            }
+        }
+
+        protected override Trigger TestedObject
+        {
+            get { return trigger; }
         }
     }
 }

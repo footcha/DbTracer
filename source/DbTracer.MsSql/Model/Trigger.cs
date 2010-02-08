@@ -1,12 +1,8 @@
 namespace DbTracer.MsSql.Model
 {
-    public class Trigger : ICode
+    public class Trigger : AObjectBase, ICode
     {
-        public virtual int Id { get; set; }
-
         public virtual string Definition { get; set; }
-
-        public virtual string Name { get; set; }
 
         public virtual bool IsDisabled { get; set; }
 
@@ -14,7 +10,7 @@ namespace DbTracer.MsSql.Model
 
         public virtual bool IsInsteadOfTrigger { get; set; }
 
-        public virtual SqlObjectType Type { get; set; }
+        // TODO parent object property (either table or view)
 
 #pragma warning disable 659
         public override bool Equals(object that)
