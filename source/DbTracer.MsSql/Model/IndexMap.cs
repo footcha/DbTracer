@@ -27,6 +27,9 @@ namespace DbTracer.MsSql.Model
             Map(obj => obj.IsHypothetical, "is_hypothetical");
             Map(obj => obj.AllowRowLocks, "allow_row_locks");
             Map(obj => obj.AllowPageLocks, "allow_page_locks");
+            References(obj => obj.Table)
+                .Column("object_id")
+                .Not.LazyLoad();
         }
     }
 }

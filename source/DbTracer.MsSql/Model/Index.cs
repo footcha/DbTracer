@@ -12,6 +12,8 @@ namespace DbTracer.MsSql.Model
 
         public virtual IndexType IndexType { get; set; }
 
+        //public virtual bool DataSpaceId { get; set; } // TODO foreing key to dataspace id
+
         public virtual bool IsUnique { get; set; }
 
         public virtual bool IgnoreDuplicityKey { get; set; }
@@ -32,10 +34,13 @@ namespace DbTracer.MsSql.Model
 
         public virtual bool AllowPageLocks { get; set; }
 
+        public virtual Table Table { get; set; }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
+            if (Id == 0 || IndexId == 0) return false;
             var thatIndex = obj as Index;
             if (thatIndex == null) return false;
             return thatIndex.Id == Id && thatIndex.IndexId == IndexId;
