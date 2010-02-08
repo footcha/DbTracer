@@ -7,7 +7,7 @@ namespace DbTracer.MsSql.Model
             ConfigureBasic(this);
             ConfigureCode(this);
             HasMany(view => view.Triggers)
-                .KeyColumn("parent_id")
+                .KeyColumn("parent_object_id")
                 .AsMap("object_id")
                 .Not.LazyLoad()
                 .ReadOnly();

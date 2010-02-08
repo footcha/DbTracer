@@ -28,10 +28,14 @@ namespace DbTracer.MsSql.Test.Model
             get
             {
                 var schema = new Schema { Id = 1 };
-                return CreateObject(
+                var tableLocal = CreateObject(
                     DateTime.MinValue, false, false, false, DateTime.MinValue,
                     "test_table", null, 0, schema, SqlObjectType.TableUserDefined
                     );
+                tableLocal.Columns.Add(new Column { Id = 1, Name = "id" });
+                tableLocal.Columns.Add(new Column { Id = 2, Name = "test" });
+
+                return tableLocal;
             }
         }
 
@@ -58,16 +62,31 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
+        public void ColumnsTest()
+        {
+            Assert.AreEqual(ExpectedObject.Columns.Count, table.Columns.Count);
+            var expectedIterator = ExpectedObject.Columns.GetEnumerator();
+            var testedIterator = table.Columns.GetEnumerator();
+            while (expectedIterator.MoveNext())
+            {
+                testedIterator.MoveNext();
+                var expectedColumn = expectedIterator.Current;
+                var testedColumn = testedIterator.Current;
+                Assert.AreEqual(expectedColumn, testedColumn);
+            }
+        }
+
+        [Test]
         public void TriggersTest()
         {
             Assert.AreEqual(1, table.Triggers.Count);
-            var testedTrigger = (from t in table.Triggers select t.Value).First();
-            using (var session = SessionFactory.OpenSession())
+            var testedTrigger = (from t in table.Triggers select t).First();
+            using (var session = SessionFactory.OpenStatelessSession())
             {
-                var testingTrigger = session.CreateCriteria<Trigger>()
+                var expectedTrigger = session.CreateCriteria<Trigger>()
                     .Add(Restrictions.Eq("Name", "test_trigger"))
                     .UniqueResult<Trigger>();
-                Assert.AreEqual(testingTrigger, testedTrigger);
+                Assert.AreEqual(expectedTrigger, testedTrigger);
             }
         }
 

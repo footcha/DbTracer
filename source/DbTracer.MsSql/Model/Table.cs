@@ -4,6 +4,18 @@ namespace DbTracer.MsSql.Model
 {
     public class Table : AObjectBase
     {
+        public Table()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            Triggers = new List<Trigger>();
+            Columns = new List<Column>();
+            Indexes = new List<Index>();
+        }
+
         public virtual int LobDataSpaceId { get; set; } // TODO foreign keys to LOB
 
         // public virtual int max_column_id_used{ get; set; } // It is not necessary in object model
@@ -26,10 +38,10 @@ namespace DbTracer.MsSql.Model
 
         public virtual bool LargeValueTypesOutOfRow { get; set; }
 
-        public virtual ICollection<Index> Indexes { get; set; }
+        public virtual ICollection<Index> Indexes { get; set; } // TODO foreign keys to indexes
 
-        public virtual IDictionary<int, Trigger> Triggers { get; set; }
-        
-        public virtual IDictionary<int, Column> Columns { get; set; } // TODO foreign keys to columns
+        public virtual ICollection<Trigger> Triggers { get; set; }
+
+        public virtual ICollection<Column> Columns { get; set; }
     }
 }

@@ -21,8 +21,13 @@ namespace DbTracer.MsSql.Model
             Map(obj => obj.TextInRowLimit, "text_in_row_limit");
             Map(obj => obj.LargeValueTypesOutOfRow, "large_value_types_out_of_row");
             HasMany(table => table.Triggers)
-                .KeyColumn("parent_id")
-                .AsMap("object_id")
+                .KeyColumn("parent_object_id")
+                .AsSet()
+                .Not.LazyLoad()
+                .ReadOnly();
+            HasMany(table => table.Columns)
+                .KeyColumn("object_id")
+                .AsSet()
                 .Not.LazyLoad()
                 .ReadOnly();
             HasMany(table => table.Indexes)
