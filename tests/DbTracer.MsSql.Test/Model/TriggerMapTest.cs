@@ -47,7 +47,7 @@ namespace DbTracer.MsSql.Test.Model
                     IsNotForReplication = false,
                     IsInsteadOfTrigger = false,
                     Schema = schema,
-                    Type = SqlObjectType.SqlDmLTrigger,
+                    Type = SqlObjectType.SqlDmlTrigger,
                     Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END"
                 };
             }

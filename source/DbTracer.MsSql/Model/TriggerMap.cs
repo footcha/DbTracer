@@ -10,7 +10,7 @@ namespace DbTracer.MsSql.Model
         protected override void Configure()
         {
             ConfigureDatabaseObject(this);
-            Where("type='TR'");
+            Where(this, SqlObjectType.SqlDmlTrigger);
             Join("sys.triggers",
                 joinPart =>
                 {

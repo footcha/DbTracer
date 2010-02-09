@@ -30,7 +30,7 @@ namespace DbTracer.MsSql
             dict["SN"] = SqlObjectType.Synonym;
             dict["SQ"] = SqlObjectType.ServiceQueue;
             dict["TA"] = SqlObjectType.AssemblyClrDmlTrigger;
-            dict["TR"] = SqlObjectType.SqlDmLTrigger;
+            dict["TR"] = SqlObjectType.SqlDmlTrigger;
             dict["IF"] = SqlObjectType.SqlInlinedTableValuedFunction;
             dict["TF"] = SqlObjectType.SqlTableValuedFunction;
             dict["U"] = SqlObjectType.TableUserDefined;

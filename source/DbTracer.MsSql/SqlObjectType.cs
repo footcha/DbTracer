@@ -18,7 +18,7 @@ namespace DbTracer.MsSql
         Synonym,
         ServiceQueue,
         AssemblyClrDmlTrigger,
-        SqlDmLTrigger,
+        SqlDmlTrigger,
         SqlInlinedTableValuedFunction,
         SqlTableValuedFunction,
         TableUserDefined,
