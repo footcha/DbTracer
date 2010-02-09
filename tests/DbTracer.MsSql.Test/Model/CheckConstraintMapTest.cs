@@ -50,6 +50,7 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void ParentColumnTest()
         {
+            Assert.IsNotNull(constraint.ParentColumn, "ParentColumn cannot be null");
             Assert.AreSame(expectedParentColumn, constraint.ParentColumn);
         }
 

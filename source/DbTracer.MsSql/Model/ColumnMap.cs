@@ -12,7 +12,7 @@ namespace DbTracer.MsSql.Model
             ReadOnly();
             Table(TableName);
             CompositeId()
-                .KeyProperty(obj => obj.Table.Id, "object_id")
+                .KeyReference(obj => obj.Table, "object_id")
                 .KeyProperty(obj => obj.Id, "column_id");
             Map(obj => obj.Name, "name");
             References(o => o.SystemType)

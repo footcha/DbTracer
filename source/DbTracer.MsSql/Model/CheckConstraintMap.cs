@@ -19,7 +19,7 @@ namespace DbTracer.MsSql.Model
             References(constraint => constraint.Table)
                 .Column("parent_object_id");
             References(constraint => constraint.ParentColumn)
-                .Columns("parent_object_id", "parent_column_id")
+                .Columns("parent_column_id", "parent_object_id")
                 .NotFound.Ignore();
         }
     }
