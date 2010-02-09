@@ -49,5 +49,11 @@ namespace DbTracer.MsSql.Model
             classMap.Map(view => view.Definition, "object_definition")
                 .Formula("OBJECT_DEFINITION(object_id)");
         }
+
+        protected static void Where<T1>(SqlClassMap<T1> classMap, SqlObjectType type)
+            where T1 : AObjectBase
+        {
+            classMap.Where(string.Format("type='{0}'", SqlObjectTypeMap.GetCode(type)));
+        }
     }
 }

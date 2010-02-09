@@ -7,7 +7,7 @@ namespace DbTracer.MsSql
         CheckConstraint,
         DefaultConstraint,
         ForeignKeyConstraint,
-        PrimarykeyConstraint,
+        PrimaryKeyConstraint,
         SqlStoredProcedure,
         AssemblyClrStoredProcedure,
         SqlScalarFunction,

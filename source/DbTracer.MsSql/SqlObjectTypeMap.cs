@@ -10,6 +10,7 @@ namespace DbTracer.MsSql
     public class SqlObjectTypeMap : IUserType
     {
         private static readonly IDictionary<string, SqlObjectType> dict;
+        private static readonly Dictionary<SqlObjectType, string> dict2;
 
         static SqlObjectTypeMap()
         {
@@ -18,7 +19,7 @@ namespace DbTracer.MsSql
             dict["C"] = SqlObjectType.CheckConstraint;
             dict["D"] = SqlObjectType.DefaultConstraint;
             dict["F"] = SqlObjectType.ForeignKeyConstraint;
-            dict["PK"] = SqlObjectType.PrimarykeyConstraint;
+            dict["PK"] = SqlObjectType.PrimaryKeyConstraint;
             dict["P"] = SqlObjectType.SqlStoredProcedure;
             dict["PC"] = SqlObjectType.AssemblyClrStoredProcedure;
             dict["FN"] = SqlObjectType.SqlScalarFunction;
@@ -38,6 +39,17 @@ namespace DbTracer.MsSql
             dict["X"] = SqlObjectType.ExtendedStoredProcedure;
             dict["IT"] = SqlObjectType.InternalTable;
             dict["S"] = SqlObjectType.SystemTable;
+
+            dict2 = new Dictionary<SqlObjectType, string>();
+            foreach (var item in dict)
+            {
+                dict2[item.Value] = item.Key;
+            }
+        }
+
+        public static string GetCode(SqlObjectType type)
+        {
+            return dict2[type];
         }
 
         public new bool Equals(object x, object y)
