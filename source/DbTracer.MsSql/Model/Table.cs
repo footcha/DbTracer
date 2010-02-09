@@ -14,6 +14,7 @@ namespace DbTracer.MsSql.Model
             Triggers = new List<Trigger>();
             Columns = new List<Column>();
             Indexes = new List<Index>();
+            CheckConstraints = new List<CheckConstraint>();
         }
 
         public virtual int LobDataSpaceId { get; set; } // TODO foreign keys to LOB
@@ -43,5 +44,7 @@ namespace DbTracer.MsSql.Model
         public virtual ICollection<Trigger> Triggers { get; set; }
 
         public virtual ICollection<Column> Columns { get; set; }
+
+        public virtual ICollection<CheckConstraint> CheckConstraints { get; set; }
     }
 }

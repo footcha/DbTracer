@@ -35,6 +35,11 @@ namespace DbTracer.MsSql.Model
                 .AsSet()
                 .Not.LazyLoad()
                 .ReadOnly();
+            HasMany(table => table.CheckConstraints)
+                .KeyColumn("parent_object_id")
+                .AsSet()
+                .Not.LazyLoad()
+                .ReadOnly();
         }
     }
 }

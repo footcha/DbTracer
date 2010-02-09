@@ -91,6 +91,15 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
+        public void ConstraintsTest()
+        {
+            Assert.AreEqual(2, table.CheckConstraints.Count);
+            var constraints = table.CheckConstraints.ToList();
+            Assert.AreEqual("CK_test_table", constraints[0].Name);
+            Assert.AreEqual("CK_test_table_2", constraints[1].Name);
+        }
+
+        [Test]
         public void IndexesTest()
         {
             Assert.AreEqual(2, table.Indexes.Count);
