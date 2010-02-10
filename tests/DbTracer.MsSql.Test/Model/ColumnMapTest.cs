@@ -34,7 +34,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("Precision", 0),
         Row("Scale", 0),
         Row("Collation", "Czech_CI_AS"),
-        Row("IsNullable", true),
+        Row("IsNullable", false),
         Row("IsAnsiPadded", true),
         Row("IsRowGuidCol", false),
         Row("IsIdentity", false),
