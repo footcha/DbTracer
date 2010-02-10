@@ -32,8 +32,9 @@ namespace DbTracer.MsSql.Model
             where T1 : SqlObject
         {
             ConfigureBasic(classMap);
-            classMap.References(obj => obj.Schema, "schema_id");
-            // classMap.Map(obj => obj.ParentObject, "parent_object_id"); // TODO map parent object
+            classMap.References(obj => obj.Schema, "schema_id")
+                .Not.LazyLoad()
+                .ReadOnly();
             classMap.Map(obj => obj.Type, "type")
                 .CustomType<SqlObjectTypeMap>();
             classMap.Map(obj => obj.CreateDate, "create_date");
