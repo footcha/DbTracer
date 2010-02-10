@@ -1,15 +1,13 @@
+using FluentNHibernate.Mapping;
+
 namespace DbTracer.MsSql.Model
 {
-    public class CheckConstraintMap : SqlClassMap<CheckConstraint>
+    public class CheckConstraintMap : SubclassMap<CheckConstraint>
     {
-        protected override string TableName
+        public CheckConstraintMap()
         {
-            get { return "sys.check_constraints"; }
-        }
-
-        protected override void Configure()
-        {
-            ConfigureDatabaseObject(this);
+            Table("sys.check_constraints");
+            KeyColumn("object_id");
             Map(constraint => constraint.IsDisabled, "is_disabled");
             Map(constraint => constraint.IsNotForReplication, "is_not_for_replication");
             Map(constraint => constraint.IsNotTrusted, "is_not_trusted");

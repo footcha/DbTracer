@@ -60,9 +60,9 @@
     <Compile Include="Model\ASqlObjectTestBase.cs" />
     <Compile Include="Model\ATestBase.cs" />
     <Compile Include="Model\ColumnMapTest.cs" />
-    <Compile Include="Model\AObjectTest.cs" />
     <Compile Include="Model\CheckConstraintMapTest.cs" />
     <Compile Include="Model\SchemaMapTest.cs" />
+    <Compile Include="Model\SqlObjectTest.cs" />
     <Compile Include="Model\TypeMapTest.cs" />
     <Compile Include="Model\IndexMapTest.cs" />
     <Compile Include="Model\ViewMapTest.cs" />

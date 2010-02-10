@@ -5,7 +5,7 @@ using MbUnit.Framework;
 namespace DbTracer.MsSql.Test.Model
 {
     [TestFixture]
-    public class TriggerMapTest : AObjectTest<Trigger>, ICodeTest
+    public class TriggerMapTest : SqlObjectTest<Trigger>, ICodeTest
     {
         private Trigger trigger;
 

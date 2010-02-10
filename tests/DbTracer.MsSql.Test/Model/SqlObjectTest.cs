@@ -4,7 +4,7 @@ using MbUnit.Framework;
 
 namespace DbTracer.MsSql.Test.Model
 {
-    public abstract class AObjectTest<T> : ATestBase
+    public abstract class SqlObjectTest<T> : ATestBase
         where T : SqlObject
     {
         protected abstract T ExpectedObject { get; }

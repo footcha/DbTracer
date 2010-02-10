@@ -8,7 +8,7 @@ using NHibernate.Criterion;
 namespace DbTracer.MsSql.Test.Model
 {
     [TestFixture]
-    public class TableMapTest : AObjectTest<Table>
+    public class TableMapTest : SqlObjectTest<Table>
     {
         private Table table;
 

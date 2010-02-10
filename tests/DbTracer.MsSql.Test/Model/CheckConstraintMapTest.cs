@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 namespace DbTracer.MsSql.Test.Model
 {
     [TestFixture]
-    public class CheckConstraintMapTest : AObjectTest<CheckConstraint>, ICodeTest
+    public class CheckConstraintMapTest : SqlObjectTest<CheckConstraint>, ICodeTest
     {
         private CheckConstraint constraint;
         private Column expectedParentColumn;

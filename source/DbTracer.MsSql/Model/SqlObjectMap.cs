@@ -1,6 +1,6 @@
 namespace DbTracer.MsSql.Model
 {
-    public class ObjectMap : SqlClassMap<SqlObject>
+    public class SqlObjectMap : SqlClassMap<SqlObject>
     {
         protected override string TableName
         {
