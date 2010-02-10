@@ -6,13 +6,16 @@ namespace DbTracer.MsSql.Model
     {
         public TriggerMap()
         {
-            Table("sys.triggers");
-            KeyColumn("object_id");
-            Map(trigger => trigger.Definition, "object_definition")
-                .Formula("OBJECT_DEFINITION(object_id)");
-            Map(trigger => trigger.IsDisabled, "is_disabled");
-            Map(trigger => trigger.IsNotForReplication, "is_not_for_replication");
-            Map(trigger => trigger.IsInsteadOfTrigger, "is_instead_of_trigger");
+            DiscriminatorValue(SqlObjectTypeMap.GetCode(SqlObjectType.SqlDmlTrigger));
+            Join("sys.triggers", t =>
+            {
+                t.KeyColumn("object_id");
+                t.Map(trigger => trigger.Definition, "object_definition")
+                    .Formula("OBJECT_DEFINITION(object_id)");
+                t.Map(trigger => trigger.IsDisabled, "is_disabled");
+                t.Map(trigger => trigger.IsNotForReplication, "is_not_for_replication");
+                t.Map(trigger => trigger.IsInsteadOfTrigger, "is_instead_of_trigger");
+            });
         }
     }
 }

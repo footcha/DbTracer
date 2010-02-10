@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using DbTracer.MsSql.Model;
 using MbUnit.Framework;
+using NHibernate.Criterion;
 
 namespace DbTracer.MsSql.Test.Model
 {
@@ -8,6 +9,7 @@ namespace DbTracer.MsSql.Test.Model
     public class TriggerMapTest : SqlObjectTest<Trigger>, ICodeTest
     {
         private Trigger trigger;
+        private Table expectedTable;
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
@@ -16,6 +18,9 @@ namespace DbTracer.MsSql.Test.Model
             {
                 var triggers = session.CreateCriteria<Trigger>().List<Trigger>();
                 trigger = (from t in triggers where t.Name == "test_trigger" select t).First();
+                expectedTable = session.CreateCriteria<Table>()
+                    .Add(Restrictions.Eq("Name", "test_table"))
+                    .UniqueResult<Table>();
             }
         }
 
@@ -48,7 +53,8 @@ namespace DbTracer.MsSql.Test.Model
                     IsInsteadOfTrigger = false,
                     Schema = schema,
                     Type = SqlObjectType.SqlDmlTrigger,
-                    Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END"
+                    Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END",
+                    ParentObject = expectedTable
                 };
             }
         }

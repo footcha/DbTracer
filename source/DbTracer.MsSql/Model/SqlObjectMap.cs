@@ -9,6 +9,9 @@ namespace DbTracer.MsSql.Model
 
         protected override void Configure()
         {
+            DiscriminateSubClassesOnColumn("type").AlwaysSelectWithValue()
+                .Formula("RTRIM(type)");
+
             ConfigureDatabaseObject(this);
             Id(o => o.Id, "object_id");
             References(obj => obj.ParentObject, "parent_object_id")

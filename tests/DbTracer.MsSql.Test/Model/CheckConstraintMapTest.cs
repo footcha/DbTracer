@@ -57,6 +57,7 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void TableTest()
         {
+            Assert.IsNotNull(constraint.Table, "Object cannot be null.");
             Assert.AreSame(expectedTable, constraint.Table);
         }
 
