@@ -12,7 +12,7 @@ namespace DbTracer.MsSql.Test.Model
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            using (var session = SessionFactory.OpenStatelessSession())
+            using (var session = SessionFactory.OpenSession())
             {
                 var triggers = session.CreateCriteria<Trigger>().List<Trigger>();
                 trigger = (from t in triggers where t.Name == "test_trigger" select t).First();

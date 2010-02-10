@@ -6,7 +6,7 @@ namespace DbTracer.MsSql.Test
 {
     public static class TestUtils
     {
-        private static readonly Regex whiteCharactersRegex = new Regex(@"\s+");
+        private static readonly Regex whiteCharactersRegex = new Regex(@"[\[\]\s]+");
 
         public static void TestSqlObjectDefinition(string expectedDefinition, string testedDefinition)
         {
