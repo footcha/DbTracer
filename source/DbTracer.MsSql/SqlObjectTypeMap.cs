@@ -71,7 +71,7 @@ namespace DbTracer.MsSql
 
         public void NullSafeSet(IDbCommand cmd, object value, int index)
         {
-            throw new NotSupportedException();
+            NHibernateUtil.String.NullSafeSet(cmd, dict2[(SqlObjectType)value], index);
         }
 
         public object DeepCopy(object value)
