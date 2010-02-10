@@ -16,7 +16,11 @@ namespace DbTracer.MsSql.Model
 
         public virtual Column ParentColumn { get; set; }
 
-        public virtual Table Table { get; set; }
+        public virtual Table Table
+        {
+            get { return (Table)ParentObject; }
+            set { ParentObject = value; }
+        }
 
 #pragma warning disable 659
         public override bool Equals(object that)

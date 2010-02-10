@@ -37,7 +37,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         protected T CreateObject(DateTime createDate, bool isMsShipped, bool isPublished, bool isSchemaPublished,
-            DateTime modifyDate, string name, object parentObject, int principalId, Schema schema,
+            DateTime modifyDate, string name, SqlObject parentObject, int principalId, Schema schema,
             SqlObjectType type)
         {
             var obj = typeof(T).GetConstructor(new System.Type[] { }).Invoke(new object[] { });

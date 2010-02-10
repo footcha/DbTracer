@@ -14,8 +14,6 @@ namespace DbTracer.MsSql.Model
             Map(constraint => constraint.Definition, "definition");
             Map(constraint => constraint.UsesDatabaseCollation, "uses_database_collation");
             Map(constraint => constraint.IsSystemNamed, "is_system_named");
-            References(constraint => constraint.Table)
-                .Column("parent_object_id");
             References(constraint => constraint.ParentColumn)
                 .Columns("parent_column_id", "parent_object_id")
                 .NotFound.Ignore();

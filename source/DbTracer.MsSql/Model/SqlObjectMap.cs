@@ -11,6 +11,9 @@ namespace DbTracer.MsSql.Model
         {
             ConfigureDatabaseObject(this);
             Id(o => o.Id, "object_id");
+            References(obj => obj.ParentObject, "parent_object_id")
+                .Not.LazyLoad()
+                .NotFound.Ignore();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace DbTracer.MsSql.Model
 
         public virtual int PrincipalId { get; set; }
 
-        public virtual object ParentObject { get; set; }
+        public virtual SqlObject ParentObject { get; set; }
 
         public virtual SqlObjectType Type { get; set; }
 

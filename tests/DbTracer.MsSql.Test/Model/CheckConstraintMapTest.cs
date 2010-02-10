@@ -71,7 +71,8 @@ namespace DbTracer.MsSql.Test.Model
                     IsNotForReplication = true,
                     Schema = schema,
                     Type = SqlObjectType.CheckConstraint,
-                    Definition = "([id]>(0))"
+                    Definition = "([id]>(0))",
+                    ParentObject = expectedTable
                 };
             }
         }
