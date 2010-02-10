@@ -11,6 +11,7 @@ namespace DbTracer.MsSql.Model
         {
             ConfigureBasic(this);
             ConfigureCode(this);
+            Where(this, SqlObjectType.SqlScalarFunction);
         }
     }
 }

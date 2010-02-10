@@ -51,10 +51,16 @@ namespace DbTracer.MsSql.Model
                 .Formula("OBJECT_DEFINITION(object_id)");
         }
 
-        protected static void Where<T1>(SqlClassMap<T1> classMap, SqlObjectType type)
+        public static void Where<T1>(SqlClassMap<T1> classMap, SqlObjectType type)
             where T1 : SqlObject
         {
             classMap.Where(string.Format("type='{0}'", SqlObjectTypeMap.GetCode(type)));
+        }
+
+        public static void Where<T1>(SubclassMap<T1> classMap, SqlObjectType type)
+            where T1 : SqlObject{
+            
+            classMap.Subselect(string.Format("type='{0}'", SqlObjectTypeMap.GetCode(type)));
         }
     }
 }
