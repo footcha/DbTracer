@@ -2,7 +2,7 @@ using System;
 
 namespace DbTracer.MsSql.Model
 {
-    public abstract class AObjectBase : ISqlObject
+    public abstract class SqlObject : ISqlObject
     {
         public virtual int Id { get; set; }
 

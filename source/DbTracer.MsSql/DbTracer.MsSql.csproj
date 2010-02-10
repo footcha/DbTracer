@@ -31,12 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Model\AObjectBase.cs" />
     <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
+    <Compile Include="Model\ObjectMap.cs" />
     <Compile Include="Model\Schema.cs" />
     <Compile Include="Model\SchemaMap.cs" />
+    <Compile Include="Model\SqlObject.cs" />
     <Compile Include="Model\Type.cs" />
     <Compile Include="Model\TypeMap.cs" />
     <Compile Include="Model\IndexTypeMap.cs" />

@@ -1,6 +1,6 @@
 namespace DbTracer.MsSql.Model
 {
-    public class CheckConstraint : AObjectBase, ICode
+    public class CheckConstraint : SqlObject, ICode
     {
         public virtual bool IsDisabled { get; set; }
 

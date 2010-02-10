@@ -1,15 +1,13 @@
+using FluentNHibernate.Mapping;
+
 namespace DbTracer.MsSql.Model
 {
-    public class TableMap : SqlClassMap<Table>
+    public class TableMap : SubclassMap<Table>
     {
-        protected override string TableName
+        public TableMap()
         {
-            get { return "sys.tables"; }
-        }
-
-        protected override void Configure()
-        {
-            ConfigureDatabaseObject(this);
+            Table("sys.tables");
+            KeyColumn("object_id");
             Map(obj => obj.LobDataSpaceId, "lob_data_space_id");
             Map(obj => obj.LockOnBulkLoad, "lock_on_bulk_load");
             Map(obj => obj.UsesAnsiNulls, "uses_ansi_nulls");
@@ -21,7 +19,7 @@ namespace DbTracer.MsSql.Model
             Map(obj => obj.TextInRowLimit, "text_in_row_limit");
             Map(obj => obj.LargeValueTypesOutOfRow, "large_value_types_out_of_row");
             HasMany(table => table.Triggers)
-                .KeyColumn("parent_object_id")
+                .KeyColumn("parent_id")
                 .AsSet()
                 .Not.LazyLoad()
                 .ReadOnly();

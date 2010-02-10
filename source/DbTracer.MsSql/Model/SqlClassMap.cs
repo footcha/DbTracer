@@ -29,7 +29,7 @@ namespace DbTracer.MsSql.Model
         }
 
         protected static void ConfigureDatabaseObject<T1>(SqlClassMap<T1> classMap)
-            where T1 : AObjectBase
+            where T1 : SqlObject
         {
             ConfigureBasic(classMap);
             classMap.References(obj => obj.Schema, "schema_id");
@@ -43,7 +43,7 @@ namespace DbTracer.MsSql.Model
             classMap.Map(obj => obj.IsSchemaPublished, "is_schema_published");
         }
 
-        protected static void ConfigureCode<T1>(SqlClassMap<T1> classMap)
+        public static void ConfigureCode<T1>(ClasslikeMapBase<T1> classMap)
             where T1 : ICode
         {
             classMap.Map(view => view.Definition, "object_definition")
@@ -51,7 +51,7 @@ namespace DbTracer.MsSql.Model
         }
 
         protected static void Where<T1>(SqlClassMap<T1> classMap, SqlObjectType type)
-            where T1 : AObjectBase
+            where T1 : SqlObject
         {
             classMap.Where(string.Format("type='{0}'", SqlObjectTypeMap.GetCode(type)));
         }

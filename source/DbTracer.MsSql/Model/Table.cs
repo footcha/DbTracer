@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace DbTracer.MsSql.Model
 {
-    public class Table : AObjectBase
+    public class Table : SqlObject
     {
         public Table()
         {

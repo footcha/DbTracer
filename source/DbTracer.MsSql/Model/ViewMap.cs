@@ -1,21 +1,19 @@
+using FluentNHibernate.Mapping;
+
 namespace DbTracer.MsSql.Model
 {
-    public class ViewMap : SqlClassMap<View>
+    public class ViewMap : SubclassMap<View>
     {
-        protected override void Configure()
+        public ViewMap()
         {
-            ConfigureBasic(this);
-            ConfigureCode(this);
+            Table("sys.views");
+            KeyColumn("object_id");
+            SqlClassMap<View>.ConfigureCode(this);
             HasMany(view => view.Triggers)
-                .KeyColumn("parent_object_id")
+                .KeyColumn("parent_id")
                 .AsMap("object_id")
                 .Not.LazyLoad()
                 .ReadOnly();
-        }
-
-        protected override string TableName
-        {
-            get { return "sys.views"; }
         }
     }
 }
