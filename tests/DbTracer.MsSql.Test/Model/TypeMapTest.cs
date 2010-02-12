@@ -1,20 +1,72 @@
-﻿using DbTracer.MsSql.Model;
-using MbUnit.Framework;
+﻿using MbUnit.Framework;
 using NHibernate.Criterion;
+using Type = DbTracer.MsSql.Model.Type;
 
 namespace DbTracer.MsSql.Test.Model
 {
-    [TestFixture]
-    public class TypeMapTest : ASqlObjectTestBase
+    public class SystemTypeTest : TypeMapTestBase
     {
-        private Type type;
-        private Type userType;
+        protected override Type ExpectedObject
+        {
+            get
+            {
+                return new Type
+                {
+                    Collation = "Czech_CI_AS",
+                    Default = null,
+                    Id = 256,
+                    IsAssemblyType = false,
+                    IsNullable = false,
+                    IsUserDefined = false,
+                    MaxLength = 256,
+                    Name = "sysname",
+                    Precision = 0,
+                    Rule = null,
+                    Scale = 0,
+                    Schema = SchemaMapTest.CreateSysSchema(),
+                    SystemType = GetTypeByName("nvarchar")
+                };
+            }
+        }
+    }
+
+    public class UserTypeTest : TypeMapTestBase
+    {
+        protected override Type ExpectedObject
+        {
+            get
+            {
+                return new Type
+                {
+                    Collation = "Czech_CI_AS",
+                    Default = null,
+                    Id = 257,
+                    IsAssemblyType = false,
+                    IsNullable = false,
+                    IsUserDefined = true,
+                    MaxLength = 8000,
+                    Name = "test_type",
+                    Precision = 0,
+                    Rule = null,
+                    Scale = 0,
+                    Schema = SchemaMapTest.CreateDboSchema(),
+                    SystemType = GetTypeByName("nvarchar")
+                };
+            }
+        }
+    }
+
+    [TestFixture]
+    public abstract class TypeMapTestBase : ASqlObjectTestBase
+    {
+        private Type testedObject;
+
+        protected abstract Type ExpectedObject { get; }
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            type = GetTypeByName("sysname");
-            userType = GetTypeByName("test_type");
+            testedObject = GetTypeByName(ExpectedObject.Name);
         }
 
         public static Type GetTypeByName(string typeName)
@@ -27,58 +79,51 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
-        Row("Name", "sysname"),
-        Row("Schema", 4),
-        Row("Id", 256),
-        Row("MaxLength", 256),
-        Row("Precision", 0),
-        Row("Scale", 0),
-        Row("Collation", "Czech_CI_AS"),
-        Row("IsNullable", false),
-        Row("IsUserDefined", false),
-        Row("IsAssemblyType", false),
-        Row("DefaultObjectId", 0),
-        Row("RuleObjectId", 0),
-        ]
-        public override void LoadTest(string propertyName, object expectedValue)
-        {
-            TestUtils.TestProperty(propertyName, expectedValue, type);
-        }
+        public override void LoadTest(string propertyName, object expectedValue) { }
 
         [RowTest,
-        Row("Name", "test_type"),
-        Row("Schema", 1),
-        Row("Id", 257),
-        Row("MaxLength", 8000),
-        Row("Precision", 0),
-        Row("Scale", 0),
-        Row("Collation", "Czech_CI_AS"),
-        Row("IsNullable", false),
-        Row("IsUserDefined", true),
-        Row("IsAssemblyType", false),
-        Row("DefaultObjectId", 0),
-        Row("RuleObjectId", 0),
-        ]
-        public void UserTypeLoadTest(string propertyName, object expectedValue)
+        Row("Name"),
+        Row("Id"),
+        Row("MaxLength"),
+        Row("Precision"),
+        Row("Scale"),
+        Row("Collation"),
+        Row("IsNullable"),
+        Row("IsUserDefined"),
+        Row("IsAssemblyType")]
+        public void LoadTest(string propertyName)
         {
-            TestUtils.TestProperty(propertyName, expectedValue, userType);
+            TestUtils.TestProperty(propertyName, ExpectedObject, testedObject);
         }
 
         [Test]
-        public void TypeGetSystemTypeTest()
+        public void SystemTypeTest()
         {
-            var testingObject = GetTypeByName("nvarchar");
-            Assert.IsAssignableFrom(typeof(Type), testingObject.SystemType);
-            Assert.AreEqual(testingObject.SystemType, type.SystemType);
+            Assert.IsAssignableFrom(typeof(Type), testedObject.SystemType);
+            Assert.AreEqual(ExpectedObject.SystemType, testedObject.SystemType);
         }
 
         [Test]
-        public void UserTypeGetSystemTypeTest()
+        public void SchemaTest()
         {
-            var testingObject = GetTypeByName("nvarchar");
-            Assert.IsAssignableFrom(typeof(Type), testingObject.SystemType);
-            Assert.AreEqual(testingObject.SystemType, userType.SystemType);
+            Assert.IsNotNull(testedObject.Schema);
+            Assert.AreEqual(ExpectedObject.Schema, testedObject.Schema);
+        }
+
+        [Test,
+        Ignore("Create test type containing default object setting")
+        ]
+        public void DefaultTest()
+        {
+            Assert.IsNotNull(testedObject.Default);
+        }
+
+        [Test,
+        Ignore("Create test type containing rule object setting")
+        ]
+        public void RuleTest()
+        {
+            Assert.IsNotNull(testedObject.Rule);
         }
     }
 }

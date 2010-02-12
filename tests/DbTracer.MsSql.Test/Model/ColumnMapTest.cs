@@ -23,7 +23,7 @@ namespace DbTracer.MsSql.Test.Model
                     .Add(Restrictions.Eq("Name", "test"))
                     .Add(Restrictions.Eq("Table", expectedTable))
                     .UniqueResult<Column>();
-                expectedType = TypeMapTest.GetTypeByName("varchar");
+                expectedType = TypeMapTestBase.GetTypeByName("varchar");
             }
         }
 

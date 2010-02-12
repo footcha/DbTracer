@@ -15,7 +15,8 @@ namespace DbTracer.MsSql.Model
             Map(obj => obj.Name, "name");
             References(o => o.SystemType, "system_type_id")
                 .Not.LazyLoad();
-            Map(o => o.Schema, "schema_id");
+            References(obj => obj.Schema, "schema_id")
+                .Not.LazyLoad();
             Map(o => o.MaxLength, "max_length");
             Map(o => o.Precision, "precision");
             Map(o => o.Scale, "scale");
@@ -23,8 +24,12 @@ namespace DbTracer.MsSql.Model
             Map(o => o.IsNullable, "is_nullable");
             Map(o => o.IsUserDefined, "is_user_defined");
             Map(o => o.IsAssemblyType, "is_assembly_type");
-            Map(o => o.DefaultObjectId, "default_object_id");
-            Map(o => o.RuleObjectId, "rule_object_id");
+            References(obj => obj.Default, "default_object_id")
+                .Not.LazyLoad()
+                .NotFound.Ignore();
+            References(obj => obj.Rule, "rule_object_id")
+                .Not.LazyLoad()
+                .NotFound.Ignore();
         }
     }
 }
