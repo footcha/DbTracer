@@ -26,11 +26,7 @@ namespace DbTracer.MsSql.Model
         public override bool Equals(object that)
 #pragma warning restore 659
         {
-            if (ReferenceEquals(null, that)) return false;
-            if (ReferenceEquals(this, that)) return true;
-            if (Id == 0) return false;
-            var thatConstraint = that as CheckConstraint;
-            return thatConstraint != null && Equals(Id, thatConstraint.Id);
+            return ModelUtils.Equals(this, that);
         }
     }
 }

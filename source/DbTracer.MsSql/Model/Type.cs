@@ -32,12 +32,7 @@ namespace DbTracer.MsSql.Model
         public override bool Equals(object that)
 #pragma warning restore 659
         {
-            if (ReferenceEquals(null, that)) return false;
-            if (ReferenceEquals(this, that)) return true;
-            if (Id == 0) return false;
-            var thatType = that as Type;
-            if (thatType == null) return false;
-            return thatType.Id == Id;
+            return ModelUtils.Equals(this, that);
         }
 
         public override string ToString()

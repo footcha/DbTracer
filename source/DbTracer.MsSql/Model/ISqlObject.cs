@@ -4,6 +4,5 @@ namespace DbTracer.MsSql.Model
     {
         int Id { get; }
         string Name { get; }
-        //SqlObjectType Type { get; }
     }
 }

@@ -28,12 +28,7 @@ namespace DbTracer.MsSql.Model
 
         public override bool Equals(object that)
         {
-            if (ReferenceEquals(null, that)) return false;
-            if (ReferenceEquals(this, that)) return true;
-            var thatColumn = that as Column;
-            if (thatColumn == null) return false;
-            if (Id == 0) return false;
-            return thatColumn.Id == Id;
+            return ModelUtils.Equals(this, that);
         }
 
         /// <summary>

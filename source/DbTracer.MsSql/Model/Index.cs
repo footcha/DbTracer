@@ -36,14 +36,12 @@ namespace DbTracer.MsSql.Model
 
         public virtual Table Table { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object that)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (Id == 0 || IndexId == 0) return false;
-            var thatIndex = obj as Index;
-            if (thatIndex == null) return false;
-            return thatIndex.Id == Id && thatIndex.IndexId == IndexId;
+            if (!ModelUtils.Equals(this, that)) return false;
+            if (IndexId == 0) return false;
+            var thatIndex = (Index)that;
+            return thatIndex.IndexId == IndexId;
         }
 
         public override int GetHashCode()
