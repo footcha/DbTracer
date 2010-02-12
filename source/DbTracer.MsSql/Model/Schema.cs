@@ -18,5 +18,10 @@ namespace DbTracer.MsSql.Model
             var thatSchema = that as Schema;
             return thatSchema != null && Equals(Id, thatSchema.Id);
         }
+
+        public override string ToString()
+        {
+            return ModelUtils.ToStringWithId(this);
+        }
     }
 }

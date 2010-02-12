@@ -18,7 +18,6 @@ namespace DbTracer.MsSql.Test.Model
                 view = session.CreateCriteria<View>()
                     .Add(Restrictions.Eq("Name", "test_view"))
                     .UniqueResult<View>();
-                var x = session.CreateCriteria<SqlObject>().List();
             }
         }
 
@@ -31,9 +30,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsDateCorrelationView")]
         public void LoadTest(string propertyName)
         {
-            var expectedValue = TestedObject.GetType()
-                .GetProperty(propertyName).GetValue(ExpectedObject, null);
-            TestUtils.TestProperty(propertyName, expectedValue, TestedObject);
+            TestUtils.TestProperty(propertyName, ExpectedObject, TestedObject);
         }
 
         [Test]

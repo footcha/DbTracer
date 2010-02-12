@@ -34,6 +34,7 @@
     <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
+    <Compile Include="Model\ModelUtils.cs" />
     <Compile Include="Model\Schema.cs" />
     <Compile Include="Model\SchemaMap.cs" />
     <Compile Include="Model\SqlObject.cs" />

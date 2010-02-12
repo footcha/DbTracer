@@ -26,5 +26,25 @@ namespace DbTracer.MsSql.Test.Model
         {
             TestUtils.TestProperty(propertyName, expectedValue, schema);
         }
+
+        public static Schema CreateDboSchema()
+        {
+            return new Schema
+            {
+                Id = 1,
+                Name = "dbo",
+                PrincipalId = 1,
+            };
+        }
+
+        public static Schema CreateSysSchema()
+        {
+            return new Schema
+            {
+                Id = 4,
+                Name = "dbo",
+                PrincipalId = 4,
+            };
+        }
     }
 }

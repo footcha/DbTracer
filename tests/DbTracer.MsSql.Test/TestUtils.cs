@@ -32,6 +32,13 @@ namespace DbTracer.MsSql.Test
             }
         }
 
+        public static void TestProperty<T>(string propertyName, T expectedObject, T testedObject)
+        {
+            var expectedValue = typeof(T)
+                .GetProperty(propertyName).GetValue(expectedObject, null);
+            TestProperty(propertyName, expectedValue, testedObject);
+        }
+
         public static void TestPropertyIsInRange<T, T1>(
             string propertyName, T1 expectedMinValue, T1 expectedMaxValue, T testedObject)
             where T1 : IComparable
