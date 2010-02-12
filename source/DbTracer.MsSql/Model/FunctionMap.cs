@@ -1,17 +1,13 @@
+using FluentNHibernate.Mapping;
+
 namespace DbTracer.MsSql.Model
 {
-    public class FunctionMap : SqlClassMap<Function>
+    public class FunctionMap : SubclassMap<Function>
     {
-        protected override string TableName
+        protected FunctionMap()
         {
-            get { return "sys.objects"; }
-        }
-
-        protected override void Configure()
-        {
-            ConfigureBasic(this);
-            ConfigureCode(this);
-            Where(this, SqlObjectType.SqlScalarFunction);
+            DiscriminatorValue(SqlObjectTypeMap.GetCode(SqlObjectType.SqlScalarFunction));
+            SqlClassMap<SqlObject>.ConfigureCode(this);
         }
     }
 }
