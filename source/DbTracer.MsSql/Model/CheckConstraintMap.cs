@@ -18,9 +18,9 @@ namespace DbTracer.MsSql.Model
                 join.Map(c => c.IsSystemNamed, "is_system_named");
                 join.References(c => c.ParentColumn)
                     .Columns("parent_column_id", "parent_object_id")
-                    .NotFound.Ignore();
-                join.References(c => c.Table, "parent_object_id")
                     .Not.LazyLoad();
+                //join.References(c => c.Table, "parent_object_id")
+                //    .Not.LazyLoad();
             });
         }
     }
