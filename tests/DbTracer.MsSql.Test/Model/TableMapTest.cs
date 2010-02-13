@@ -72,7 +72,7 @@ namespace DbTracer.MsSql.Test.Model
                 testedIterator.MoveNext();
                 var expectedColumn = expectedIterator.Current;
                 var testedColumn = testedIterator.Current;
-                Assert.AreEqual(expectedColumn, testedColumn);
+                Assert.AreEqual(expectedColumn.Name, testedColumn.Name);
             }
         }
 

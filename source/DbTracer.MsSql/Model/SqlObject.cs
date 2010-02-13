@@ -25,5 +25,20 @@ namespace DbTracer.MsSql.Model
         public virtual bool IsPublished { get; set; }
 
         public virtual bool IsSchemaPublished { get; set; }
+
+        public override string ToString()
+        {
+            return ModelUtils.ToStringWithId(this);
+        }
+
+        public override bool Equals(object that)
+        {
+            return ModelUtils.Equals(this, that);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

@@ -9,12 +9,5 @@ namespace DbTracer.MsSql.Model
         public virtual bool IsNotForReplication { get; set; }
 
         public virtual bool IsInsteadOfTrigger { get; set; }
-
-#pragma warning disable 659
-        public override bool Equals(object that)
-#pragma warning restore 659
-        {
-            return ModelUtils.Equals(this, that);
-        }
     }
 }

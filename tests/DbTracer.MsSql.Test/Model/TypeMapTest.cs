@@ -1,4 +1,5 @@
 ﻿using MbUnit.Framework;
+using NHibernate;
 using NHibernate.Criterion;
 using Type = DbTracer.MsSql.Model.Type;
 
@@ -71,12 +72,17 @@ namespace DbTracer.MsSql.Test.Model
 
         public static Type GetTypeByName(string typeName)
         {
-            using (var session = SessionFactory.OpenStatelessSession())
+            using (var session = SessionFactory.OpenSession())
             {
-                return session.CreateCriteria<Type>()
+                return GetTypeByName(typeName, session);
+            }
+        }
+
+        public static Type GetTypeByName(string typeName, ISession session)
+        {
+            return session.CreateCriteria<Type>()
                     .Add(Restrictions.Eq("Name", typeName))
                     .UniqueResult<Type>();
-            }
         }
 
         public override void LoadTest(string propertyName, object expectedValue) { }
