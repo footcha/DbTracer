@@ -7,7 +7,7 @@ namespace DbTracer.MsSql.Test.Model
     [TestFixture]
     public class IndexMapTest : ASqlObjectTestBase
     {
-        private Index index;
+        private Index testedObject;
         private Table expectedTable;
 
         [TestFixtureSetUp]
@@ -15,7 +15,7 @@ namespace DbTracer.MsSql.Test.Model
         {
             using (var session = SessionFactory.OpenSession())
             {
-                index = session.CreateCriteria<Index>()
+                testedObject = session.CreateCriteria<Index>()
                     .Add(Restrictions.Eq("Name", "PK_test_table"))
                     .UniqueResult<Index>();
                 expectedTable = session.CreateCriteria<Table>()
@@ -25,7 +25,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [RowTest,
-        Row("IndexId", 1),
+        Row("Id", 1),
         Row("Name", "PK_test_table"),
         Row("IsUnique", true),
         Row("IgnoreDuplicityKey", false),
@@ -40,19 +40,27 @@ namespace DbTracer.MsSql.Test.Model
         ]
         public override void LoadTest(string propertyName, object expectedValue)
         {
-            TestUtils.TestProperty(propertyName, expectedValue, index);
+            TestUtils.TestProperty(propertyName, expectedValue, testedObject);
         }
 
         [Test]
         public void IndexTypeTest()
         {
-            Assert.AreEqual(IndexType.Clustered, index.IndexType);
+            Assert.AreEqual(IndexType.Clustered, testedObject.IndexType);
         }
 
         [Test]
-        public void TableTest()
+        public void ParentObjectTest()
         {
-            Assert.AreEqual(expectedTable, index.Table);
+            Assert.IsNotNull(testedObject.ParentObject);
+            Assert.AreEqual(expectedTable, testedObject.ParentObject);
+            // Assert.AreSame(expectedTable, testedObject.ParentObject); // not working
+        }
+
+        [Test]
+        public void ColumnsTest()
+        {
+            Assert.AreEqual(2, testedObject.Columns.Count);
         }
     }
 }

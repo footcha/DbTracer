@@ -12,8 +12,8 @@ namespace DbTracer.MsSql.Model
             ReadOnly();
             Table(TableName);
             CompositeId()
-                .KeyProperty(obj => obj.Id, "object_id")
-                .KeyProperty(obj => obj.IndexId, "index_id");
+                .KeyReference(obj => obj.ParentObject, "object_id")
+                .KeyProperty(obj => obj.Id, "index_id");
             Map(obj => obj.Name, "name");
             Map(obj => obj.IndexType, "type")
                 .CustomType<IndexTypeMap>();
@@ -27,8 +27,18 @@ namespace DbTracer.MsSql.Model
             Map(obj => obj.IsHypothetical, "is_hypothetical");
             Map(obj => obj.AllowRowLocks, "allow_row_locks");
             Map(obj => obj.AllowPageLocks, "allow_page_locks");
-            References(obj => obj.Table)
+            References(obj => obj.ParentObject)
                 .Column("object_id")
+                .Not.LazyLoad();
+            HasManyToMany(obj => obj.Columns)
+                .Table("sys.index_columns")
+                .AsSet()
+                .ParentKeyColumn("index_id")
+                .ParentKeyColumn("index_idf")
+                .ChildKeyColumn("column_id1")
+                .ChildKeyColumn("object_id1")
+                .Subselect("aadsdf")
+                .ForeignKeyConstraintNames("object_id2", "column_id2")
                 .Not.LazyLoad();
         }
     }

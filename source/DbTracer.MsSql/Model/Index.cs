@@ -1,10 +1,20 @@
+using System.Collections.Generic;
+
 namespace DbTracer.MsSql.Model
 {
     public class Index : ISqlObject
     {
-        public virtual int Id { get; set; }
+        public Index()
+        {
+            Init();
+        }
 
-        public virtual int IndexId { get; set; }
+        private void Init()
+        {
+            Columns = new List<Column>();
+        }
+
+        public virtual int Id { get; set; }
 
         public virtual string Name { get; set; }
 
@@ -34,21 +44,23 @@ namespace DbTracer.MsSql.Model
 
         public virtual bool AllowPageLocks { get; set; }
 
-        public virtual Table Table { get; set; }
+        public virtual SqlObject ParentObject { get; set; }
+
+        public virtual ICollection<Column> Columns { get; set; }
 
         public override bool Equals(object that)
         {
             if (!ModelUtils.Equals(this, that)) return false;
-            if (IndexId == 0) return false;
+            if (ParentObject == null) return false;
             var thatIndex = (Index)that;
-            return thatIndex.IndexId == IndexId;
+            return Equals(ParentObject, thatIndex.ParentObject);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return (Id * 397) ^ IndexId;
+                return (Id * 397) ^ Id;
             }
         }
     }
