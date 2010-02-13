@@ -22,13 +22,15 @@ namespace DbTracer.MsSql.Model
         public virtual bool IsDtsReplicated { get; set; }
         public virtual bool IsXmlDocument { get; set; }
         public virtual int XmlCollectionId { get; set; }
-        public virtual int DefaultObjectId { get; set; }
-        public virtual int RuleObjectId { get; set; }
-        public virtual Table Table { get; set; }
+        public virtual SqlObject Default { get; set; }
+        public virtual SqlObject Rule { get; set; }
+        public virtual SqlObject ParentObject { get; set; }
 
         public override bool Equals(object that)
         {
-            return ModelUtils.Equals(this, that);
+            if (!ModelUtils.Equals(this, that)) return false;
+            var thatObject = that as Column;
+            return thatObject != null && Equals(ParentObject, thatObject.ParentObject);
         }
 
         /// <summary>
@@ -59,9 +61,9 @@ namespace DbTracer.MsSql.Model
                     && IsDtsReplicated == column.IsDtsReplicated
                     && IsXmlDocument == column.IsXmlDocument
                     && XmlCollectionId == column.XmlCollectionId
-                    && DefaultObjectId == column.DefaultObjectId
-                    && RuleObjectId == column.RuleObjectId
-                    && Table.Equals(column.Table)
+                    && Default == column.Default
+                    && Rule == column.Rule
+                    && ParentObject.Equals(column.ParentObject)
                    );
         }
 
@@ -71,6 +73,13 @@ namespace DbTracer.MsSql.Model
             {
                 return (Id * 397);
             }
+        }
+
+        public override string ToString()
+        {
+            var parentId = ParentObject != null ? ParentObject.Id.ToString() : "null";
+            return string.Format("{0}, Parent ID={1}, ID={2}",
+                GetType().FullName, parentId, Id);
         }
     }
 }

@@ -21,9 +21,9 @@ namespace DbTracer.MsSql.Test.Model
                     .UniqueResult<Table>();
                 column = session.CreateCriteria<Column>()
                     .Add(Restrictions.Eq("Name", "test"))
-                    .Add(Restrictions.Eq("Table", expectedTable))
+                    .Add(Restrictions.Eq("ParentObject", expectedTable))
                     .UniqueResult<Column>();
-                expectedType = TypeMapTestBase.GetTypeByName("varchar");
+                expectedType = TypeMapTestBase.GetTypeByName("varchar", session);
             }
         }
 
@@ -46,8 +46,6 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsDtsReplicated", false),
         Row("IsXmlDocument", false),
         Row("XmlCollectionId", 0),
-        Row("DefaultObjectId", 0),
-        Row("RuleObjectId", 0),
         ]
         public override void LoadTest(string propertyName, object expectedValue)
         {
@@ -55,21 +53,37 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void TableTest()
+        public void ParentObjectTest()
         {
-            Assert.AreEqual(expectedTable, column.Table);
+            Assert.AreSame(expectedTable, column.ParentObject);
         }
 
         [Test]
         public void SystemTypeTest()
         {
-            Assert.AreEqual(expectedType, column.SystemType);
+            Assert.AreSame(expectedType, column.SystemType);
         }
 
         [Test]
         public void UserTypeTest()
         {
-            Assert.AreEqual(expectedType, column.UserType);
+            Assert.AreSame(expectedType, column.UserType);
+        }
+
+        [Test,
+        Ignore("Create test type containing default object setting")
+        ]
+        public void DefaultTest()
+        {
+            Assert.IsNotNull(column.Default);
+        }
+
+        [Test,
+        Ignore("Create test type containing rule object setting")
+        ]
+        public void RuleTest()
+        {
+            Assert.IsNotNull(column.Rule);
         }
     }
 }
