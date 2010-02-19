@@ -15,6 +15,8 @@ namespace DbTracer.MsSql.Test.Model
 
         private static ISessionFactory CreateSessionFactory()
         {
+            //var defaultConfig = new Configuration().AddAssembly(typeof(Index).Assembly);
+            //defaultConfig.BuildMappings();
             return Fluently.Configure()
                 .Database(
                 FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2005
@@ -25,7 +27,11 @@ namespace DbTracer.MsSql.Test.Model
                                           .Username("dbtracer")
                                           .Password("dbtracer"))
                 )
-                .Mappings(map => map.FluentMappings.AddFromAssemblyOf<DatabaseProperties>())
+                .Mappings(map =>
+                {
+                    map.FluentMappings.AddFromAssemblyOf<DatabaseProperties>();
+                    map.HbmMappings.AddFromAssemblyOf<SqlObject>();
+                })
                 .BuildSessionFactory();
         }
     }

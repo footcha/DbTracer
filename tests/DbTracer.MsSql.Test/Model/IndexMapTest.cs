@@ -1,6 +1,7 @@
 ﻿using DbTracer.MsSql.Model;
 using MbUnit.Framework;
 using NHibernate.Criterion;
+using System.Linq;
 
 namespace DbTracer.MsSql.Test.Model
 {
@@ -60,7 +61,11 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void ColumnsTest()
         {
-            Assert.AreEqual(2, testedObject.Columns.Count);
+            var columns = testedObject.Columns.ToList();
+            Assert.AreEqual(3, columns.Count);
+            Assert.AreEqual("id", columns[0].Name);
+            Assert.AreEqual("test2", columns[1].Name);
+            Assert.AreEqual("test", columns[2].Name);
         }
     }
 }

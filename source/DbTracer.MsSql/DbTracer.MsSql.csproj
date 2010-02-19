@@ -44,7 +44,6 @@
     <Compile Include="Model\Type.cs" />
     <Compile Include="Model\TypeMap.cs" />
     <Compile Include="Model\IndexTypeMap.cs" />
-    <Compile Include="Model\IndexMap.cs" />
     <Compile Include="Model\IndexType.cs" />
     <Compile Include="Model\SqlClassMap.cs" />
     <Compile Include="Model\ViewMap.cs" />
@@ -145,6 +144,9 @@
       <Project>{6F1CA101-C230-4282-972F-EFC460D0A18B}</Project>
       <Name>DbTracer.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Index.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

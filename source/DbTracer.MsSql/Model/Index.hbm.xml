@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="DbTracer.MsSql"
+                   namespace="DbTracer.MsSql.Model">
+  <class
+    name="Index"
+    table="sys.indexes"
+    mutable="false"
+    batch-size="20"
+    >
+    <composite-id>
+      <key-many-to-one name="ParentObject" column="object_id" />
+      <key-property name="Id" column="index_id" />
+    </composite-id>
+    <property name="Name" column="name" />
+    <property name="IndexType" column="type" type="IndexTypeMap" />
+    <property name="IsUnique" column="is_unique" />
+    <property name="IgnoreDuplicityKey" column="ignore_dup_key" />
+    <property name="IsPrimaryKey" column="is_primary_key" />
+    <property name="IsUniqueConstraint" column="is_unique_constraint" />
+    <property name="FillFactor" column="fill_factor" />
+    <property name="IsPadded" column="is_padded" />
+    <property name="IsDisabled" column="is_disabled" />
+    <property name="IsHypothetical" column="is_hypothetical" />
+    <property name="AllowRowLocks" column="allow_row_locks" />
+    <property name="AllowPageLocks" column="allow_page_locks" />
+    <many-to-one name="ParentObject" column="object_id" lazy="false" />
+    <set name="Columns" lazy="false" table="sys.index_columns" order-by="key_ordinal">
+      <key>
+        <column name="[object_id]" />
+        <column name="index_id" />
+      </key>
+      <many-to-many
+        entity-name="DbTracer.MsSql.Model.Column"
+        lazy="false"
+        >
+        <column name="column_id" />
+        <column name="object_id" />
+      </many-to-many>
+    </set>
+    <!-- TODO support for descenting index columns -->
+  </class>
+</hibernate-mapping>

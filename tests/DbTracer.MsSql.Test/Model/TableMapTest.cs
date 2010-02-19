@@ -34,6 +34,7 @@ namespace DbTracer.MsSql.Test.Model
                     );
                 tableLocal.Columns.Add(new Column { Id = 1, Name = "id" });
                 tableLocal.Columns.Add(new Column { Id = 2, Name = "test" });
+                tableLocal.Columns.Add(new Column { Id = 3, Name = "test2" });
 
                 return tableLocal;
             }
