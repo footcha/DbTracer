@@ -25,19 +25,21 @@
     <property name="AllowRowLocks" column="allow_row_locks" />
     <property name="AllowPageLocks" column="allow_page_locks" />
     <many-to-one name="ParentObject" column="object_id" lazy="false" />
-    <set name="Columns" lazy="false" table="sys.index_columns" order-by="key_ordinal">
+    <set name="IndexColumns" lazy="false" table="sys.index_columns" order-by="key_ordinal">
       <key>
         <column name="[object_id]" />
         <column name="index_id" />
       </key>
-      <many-to-many
-        entity-name="DbTracer.MsSql.Model.Column"
-        lazy="false"
-        >
-        <column name="column_id" />
-        <column name="object_id" />
-      </many-to-many>
+      <composite-element class="DbTracer.MsSql.Model.IndexColumn">
+        <property name="KeyOrdinal" column="key_ordinal" />
+        <property name="PartitionOrdinal" column="partition_ordinal" />
+        <property name="IsDescendingKey" column="is_descending_key" />
+        <property name="IsIncludedColumn" column="is_included_column" />
+        <many-to-one name="Column">
+          <column name="column_id" />
+          <column name="object_id" />
+        </many-to-one>
+      </composite-element>
     </set>
-    <!-- TODO support for descenting index columns -->
   </class>
 </hibernate-mapping>

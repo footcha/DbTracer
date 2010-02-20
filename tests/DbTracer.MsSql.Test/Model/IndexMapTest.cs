@@ -58,14 +58,22 @@ namespace DbTracer.MsSql.Test.Model
             // Assert.AreSame(expectedTable, testedObject.ParentObject); // not working
         }
 
-        [Test]
-        public void ColumnsTest()
+        [RowTest,
+        Row("id", 0, 0, false, false),
+        Row("test2", 1, 0, true, false),
+        Row("test", 2, 0, false, false),
+        ]
+        public void ColumnsTest(string columnName, int columnIndex,
+            int partitionOrdinal, bool isDescendingKey, bool isIncludedColumn)
         {
-            var columns = testedObject.Columns.ToList();
-            Assert.AreEqual(3, columns.Count);
-            Assert.AreEqual("id", columns[0].Name);
-            Assert.AreEqual("test2", columns[1].Name);
-            Assert.AreEqual("test", columns[2].Name);
+            Assert.AreEqual(3, testedObject.IndexColumns.Count);
+            var column = testedObject.IndexColumns.ToList()[columnIndex];
+            var keyOrdinal = columnIndex + 1;
+            Assert.AreEqual(columnName, column.Column.Name);
+            Assert.AreEqual(keyOrdinal, column.KeyOrdinal);
+            Assert.AreEqual(partitionOrdinal, column.PartitionOrdinal);
+            Assert.AreEqual(isDescendingKey, column.IsDescendingKey);
+            Assert.AreEqual(isIncludedColumn, column.IsIncludedColumn);
         }
     }
 }

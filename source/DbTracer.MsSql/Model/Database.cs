@@ -146,7 +146,7 @@ namespace DbTracer.MsSql.Model
             //foreach (Index index in indexes)
             //{
             //    schema = index.Parent;
-            //    foreach (IndexColumn icolumn in index.Columns)
+            //    foreach (IndexColumnObsolete icolumn in index.Columns)
             //    {
             //        Dependencies.Add(this, schema.Id, icolumn.Id, schema.Id, icolumn.DataTypeId, index);
             //    }

@@ -11,11 +11,11 @@ namespace DbTracer.MsSql.Model
 
         private void Init()
         {
-            Columns = new List<Column>();
+            IndexColumns = new List<IndexColumn>();
         }
 
         public virtual int Id { get; set; }
-        
+
         public virtual int ObjectId { get; set; }
 
         public virtual string Name { get; set; }
@@ -48,7 +48,7 @@ namespace DbTracer.MsSql.Model
 
         public virtual SqlObject ParentObject { get; set; }
 
-        public virtual ICollection<Column> Columns { get; set; }
+        public virtual ICollection<IndexColumn> IndexColumns { get; set; }
 
         public override bool Equals(object that)
         {

@@ -2,7 +2,7 @@ using System;
 
 namespace DbTracer.MsSql.Model
 {
-    public class IndexColumns : SchemaList<IndexColumn, SchemaBase>
+    public class IndexColumns : SchemaList<IndexColumnObsolete, SchemaBase>
     {
         /// <summary>
         /// Clona el objeto ColumnConstraints en una nueva instancia.
@@ -30,14 +30,14 @@ namespace DbTracer.MsSql.Model
                 var item = destino[origen[j].FullName];
                 if (item == null)
                     return false;
-                if (!IndexColumn.Compare(origen[j], item)) return false;
+                if (!IndexColumnObsolete.Compare(origen[j], item)) return false;
             }
             for (int j = 0; j < destino.Count; j++)
             {
                 var item = origen[destino[j].FullName];
                 if (item == null)
                     return false;
-                if (!IndexColumn.Compare(destino[j], item)) return false;
+                if (!IndexColumnObsolete.Compare(destino[j], item)) return false;
             }
             return true;
         }

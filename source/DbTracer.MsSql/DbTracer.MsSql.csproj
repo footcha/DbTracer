@@ -34,6 +34,7 @@
     <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
+    <Compile Include="Model\IndexColumn.cs" />
     <Compile Include="Model\StoredProcedure.cs" />
     <Compile Include="Model\StoredProcedureMap.cs" />
     <Compile Include="Model\ModelUtils.cs" />
@@ -95,7 +96,7 @@
     <Compile Include="Model\FullTextIndexColumn.cs" />
     <Compile Include="Model\Function.cs" />
     <Compile Include="Model\Index.cs" />
-    <Compile Include="Model\IndexColumn.cs" />
+    <Compile Include="Model\IndexColumnObsolete.cs" />
     <Compile Include="Model\IndexColumns.cs" />
     <Compile Include="Model\ITable.cs" />
     <Compile Include="Model\ObjectDependency.cs" />
