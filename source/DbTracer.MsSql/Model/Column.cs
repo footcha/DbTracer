@@ -22,7 +22,20 @@ namespace DbTracer.MsSql.Model
         public virtual bool IsDtsReplicated { get; set; }
         public virtual bool IsXmlDocument { get; set; }
         public virtual int XmlCollectionId { get; set; }
-        public virtual SqlObject Default { get; set; }
+
+        private DefaultConstraint defaultConstraint;
+        public virtual DefaultConstraint Default
+        {
+            get { return defaultConstraint; }
+            set
+            {
+                defaultConstraint = value;
+                if (value == null) return;
+
+                defaultConstraint.Column = this;
+            }
+        }
+
         public virtual SqlObject Rule { get; set; }
         public virtual SqlObject ParentObject { get; set; }
 

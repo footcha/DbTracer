@@ -34,6 +34,8 @@
     <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
+    <Compile Include="Model\DefaultConstraint.cs" />
+    <Compile Include="Model\DefaultConstraintMap.cs" />
     <Compile Include="Model\IndexColumn.cs" />
     <Compile Include="Model\StoredProcedure.cs" />
     <Compile Include="Model\StoredProcedureMap.cs" />
@@ -129,6 +131,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\3rdparty\NHibernate\Fluentnhibernate\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Gallio, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\3rdparty\NHibernate\core\NHibernate.dll</HintPath>

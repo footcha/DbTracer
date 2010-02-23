@@ -70,12 +70,12 @@ namespace DbTracer.MsSql.Test.Model
             Assert.AreSame(expectedType, column.UserType);
         }
 
-        [Test,
-        Ignore("Create test type containing default object setting")
-        ]
+        [Test]
         public void DefaultTest()
         {
             Assert.IsNotNull(column.Default);
+            Assert.AreEqual(column, column.Default.Column);
+            // Assert.AreSame(column, column.Default.Column); // TODO test is not working
         }
 
         [Test,
