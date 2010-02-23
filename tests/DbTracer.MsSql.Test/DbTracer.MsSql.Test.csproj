@@ -65,6 +65,8 @@
     <Compile Include="Model\ColumnMapTest.cs" />
     <Compile Include="Model\CheckConstraintMapTest.cs" />
     <Compile Include="Model\DefaultConstraintMapTest.cs" />
+    <Compile Include="Model\KeyConstraintMapTest.cs" />
+    <Compile Include="Model\PrimaryKeyConstraintMapTest.cs" />
     <Compile Include="Model\StoredProcedureMapTest.cs" />
     <Compile Include="Model\SchemaMapTest.cs" />
     <Compile Include="Model\SqlObjectTest.cs" />

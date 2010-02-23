@@ -37,6 +37,10 @@
     <Compile Include="Model\DefaultConstraint.cs" />
     <Compile Include="Model\DefaultConstraintMap.cs" />
     <Compile Include="Model\IndexColumn.cs" />
+    <Compile Include="Model\KeyConstraint.cs" />
+    <Compile Include="Model\KeyConstraintMap.cs" />
+    <Compile Include="Model\PrimaryKeyConstraint.cs" />
+    <Compile Include="Model\PrimaryKeyConstraintMap.cs" />
     <Compile Include="Model\StoredProcedure.cs" />
     <Compile Include="Model\StoredProcedureMap.cs" />
     <Compile Include="Model\ModelUtils.cs" />
