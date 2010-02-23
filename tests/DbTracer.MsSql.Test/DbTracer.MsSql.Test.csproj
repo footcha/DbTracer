@@ -39,7 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\3rdparty\NHibernate\Fluentnhibernate\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Gallio, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL" />
     <Reference Include="MbUnit.Framework, Version=2.4.2.175, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\3rdparty\MbUnit\MbUnit.Framework.dll</HintPath>
@@ -56,8 +55,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ASqlObjectTestBase.cs" />
