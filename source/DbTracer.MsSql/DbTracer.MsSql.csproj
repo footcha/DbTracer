@@ -36,6 +36,8 @@
     <Compile Include="Model\CheckConstraintMap.cs" />
     <Compile Include="Model\DefaultConstraint.cs" />
     <Compile Include="Model\DefaultConstraintMap.cs" />
+    <Compile Include="Model\ForeignKeyConstraint.cs" />
+    <Compile Include="Model\ForeignKeyConstraintMap.cs" />
     <Compile Include="Model\IndexColumn.cs" />
     <Compile Include="Model\KeyConstraint.cs" />
     <Compile Include="Model\KeyConstraintMap.cs" />

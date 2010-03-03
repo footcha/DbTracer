@@ -56,7 +56,7 @@ namespace DbTracer.MsSql.Test.Model
             return x;
         }
 
-        private static object GetValue(string propertyName, object obj)
+        protected static object GetValue(string propertyName, object obj)
         {
             return typeof(T).GetProperty(propertyName).GetValue(obj, null);
         }
