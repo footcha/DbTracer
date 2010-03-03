@@ -53,6 +53,8 @@
     <Compile Include="Model\IndexTypeMap.cs" />
     <Compile Include="Model\IndexType.cs" />
     <Compile Include="Model\SqlClassMap.cs" />
+    <Compile Include="Model\UniqueKeyConstraint.cs" />
+    <Compile Include="Model\UniqueKeyConstraintMap.cs" />
     <Compile Include="Model\ViewMap.cs" />
     <Compile Include="Model\TableMap.cs" />
     <Compile Include="Model\FunctionMap.cs" />
