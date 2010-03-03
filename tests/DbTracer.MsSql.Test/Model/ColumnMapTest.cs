@@ -75,6 +75,7 @@ namespace DbTracer.MsSql.Test.Model
         {
             Assert.IsNotNull(column.Default);
             Assert.AreEqual(column, column.Default.Column);
+            Assert.AreEqual("(getdate())", column.Default.Definition);
             // Assert.AreSame(column, column.Default.Column); // TODO test is not working
         }
 
