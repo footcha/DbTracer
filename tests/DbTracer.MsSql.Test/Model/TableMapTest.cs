@@ -103,7 +103,7 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void IndexesTest()
         {
-            Assert.AreEqual(2, table.Indexes.Count);
+            Assert.AreEqual(3, table.Indexes.Count);
             var testedIndexPk = (from index in table.Indexes where index.Name == "PK_test_table" select index).First();
             var testedIndexIx = (from index in table.Indexes where index.Name == "IX_test" select index).First();
             using (var session = SessionFactory.OpenSession())
