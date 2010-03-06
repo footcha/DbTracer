@@ -1,3 +1,5 @@
+using DbTracer.Core.Schema.Model;
+
 namespace DbTracer.MsSql.Model
 {
     public class Column : ISqlObject

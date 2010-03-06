@@ -17,7 +17,7 @@ namespace DbTracer.MsSql.Model
             ClrProcedures = new SchemaList<ClrStoreProcedure, Database>(this);
             //DdlTriggers = new SchemaList<Trigger, Database>(this);
             Defaults = new SchemaList<Default, Database>(this);
-            Dependencies = new Dependencies();
+            //Dependencies = new Dependencies();
             FileGroups = new SchemaList<FileGroup, Database>();
             FullText = new SchemaList<FullText, Database>(this);
             //Functions = new SchemaList<Function, Database>(this);
@@ -112,7 +112,7 @@ namespace DbTracer.MsSql.Model
 
         #endregion
 
-        internal Dependencies Dependencies { get; set; }
+        //internal Dependencies Dependencies { get; set; }
 
         public override ISchema Clone()
         {
@@ -152,33 +152,33 @@ namespace DbTracer.MsSql.Model
             //    }
             //}
 
-            foreach (Constraint con in constraints)
-            {
-                schema = con.Parent;
-                if (con.Type != Constraint.ConstraintType.Check)
-                {
-                    foreach (ConstraintColumn ccolumn in con.Columns)
-                    {
-                        Dependencies.Add(this, schema.Id, ccolumn.Id, schema.Id, ccolumn.DataTypeId, con);
-                        if (con.Type == Constraint.ConstraintType.ForeignKey)
-                        {
-                            Dependencies.Add(this, con.RelationalTableId, ccolumn.ColumnRelationalId, schema.Id,
-                                             ccolumn.ColumnRelationalDataTypeId, con);
-                        }
-                        //else
-                        //{
-                            //if (
-                            //    ((Table)schema).FullTextIndex.Exists(
-                            //        item => { return item.Index.Equals(con.Name); }))
-                            //{
-                            //    Dependencies.Add(this, schema.Id, 0, schema.Id, 0, con);
-                            //}
-                        //}
-                    }
-                }
-                else
-                    Dependencies.Add(this, schema.Id, 0, schema.Id, 0, con);
-            }
+            //foreach (Constraint con in constraints)
+            //{
+            //    schema = con.Parent;
+            //    if (con.Type != Constraint.ConstraintType.Check)
+            //    {
+            //        foreach (ConstraintColumn ccolumn in con.Columns)
+            //        {
+            //            //Dependencies.Add(this, schema.Id, ccolumn.Id, schema.Id, ccolumn.DataTypeId, con);
+            //            //if (con.Type == Constraint.ConstraintType.ForeignKey)
+            //            //{
+            //            //    Dependencies.Add(this, con.RelationalTableId, ccolumn.ColumnRelationalId, schema.Id,
+            //            //                     ccolumn.ColumnRelationalDataTypeId, con);
+            //            //}
+            //            //else
+            //            //{
+            //                //if (
+            //                //    ((Table)schema).FullTextIndex.Exists(
+            //                //        item => { return item.Index.Equals(con.Name); }))
+            //                //{
+            //                //    Dependencies.Add(this, schema.Id, 0, schema.Id, 0, con);
+            //                //}
+            //            //}
+            //        }
+            //    }
+            //    //else
+            //        //Dependencies.Add(this, schema.Id, 0, schema.Id, 0, con);
+            //}
         }
     }
 }

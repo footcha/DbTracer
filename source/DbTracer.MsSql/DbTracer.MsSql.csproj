@@ -60,8 +60,19 @@
     <Compile Include="Model\ViewMap.cs" />
     <Compile Include="Model\TableMap.cs" />
     <Compile Include="Model\FunctionMap.cs" />
+    <Compile Include="SqlGenerator\CheckConstraintGenerator.cs" />
+    <Compile Include="SqlGenerator\CodeGeneratorBase.cs" />
+    <Compile Include="SqlGenerator\DefaultConstraintGenerator.cs" />
+    <Compile Include="SqlGenerator\FullNameWithSchemaBuilder.cs" />
+    <Compile Include="SqlGenerator\FunctionGenerator.cs" />
+    <Compile Include="SqlGenerator\GeneratorBase.cs" />
+    <Compile Include="SqlGenerator\KeywordEncoder.cs" />
+    <Compile Include="SqlGenerator\StoredProcedureGenerator.cs" />
+    <Compile Include="SqlGenerator\TriggerGenerator.cs" />
+    <Compile Include="SqlGenerator\TypeGenerator.cs" />
+    <Compile Include="SqlGenerator\Utils.cs" />
+    <Compile Include="SqlGenerator\ViewGenerator.cs" />
     <Compile Include="SqlObjectTypeMap.cs" />
-    <Compile Include="Model\ISqlObject.cs" />
     <Compile Include="SqlObjectType.cs" />
     <Compile Include="Model\TriggerMap.cs" />
     <Compile Include="Model\RoleMap.cs" />
@@ -95,8 +106,6 @@
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\DatabaseProperties.cs" />
     <Compile Include="Model\Default.cs" />
-    <Compile Include="Model\Dependence.cs" />
-    <Compile Include="Model\Dependencies.cs" />
     <Compile Include="Model\ExtendedProperty.cs" />
     <Compile Include="Model\FileGroup.cs" />
     <Compile Include="Model\FileGroupFile.cs" />
@@ -118,7 +127,6 @@
     <Compile Include="Model\SchemaObsolete.cs" />
     <Compile Include="Model\SchemaBase.cs" />
     <Compile Include="Model\SchemaList.cs" />
-    <Compile Include="Model\SearchSchemaBase.cs" />
     <Compile Include="Model\MsSqlSchemaBase.cs" />
     <Compile Include="Model\StoreProcedure.cs" />
     <Compile Include="Model\Synonym.cs" />

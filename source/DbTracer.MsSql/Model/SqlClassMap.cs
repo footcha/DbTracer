@@ -1,3 +1,4 @@
+using DbTracer.Core.Schema.Model;
 using FluentNHibernate.Mapping;
 
 namespace DbTracer.MsSql.Model

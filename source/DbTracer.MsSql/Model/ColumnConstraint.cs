@@ -71,9 +71,10 @@ namespace DbTracer.MsSql.Model
         {
             get
             {
-                var tableStatus = Parent.Parent.Status;
-                var columnStatus = Parent.Status;
-                return ((columnStatus != ObjectStatus.DropStatus) && (((tableStatus == ObjectStatus.AlterStatus) || (tableStatus == ObjectStatus.OriginalStatus) || (tableStatus == ObjectStatus.RebuildDependenciesStatus)) && (Status == ObjectStatus.OriginalStatus)));
+                return true;
+                //var tableStatus = Parent.Parent.Status;
+                //var columnStatus = Parent.Status;
+                //return ((columnStatus != ObjectStatus.DropStatus) && (((tableStatus == ObjectStatus.AlterStatus) || (tableStatus == ObjectStatus.OriginalStatus) || (tableStatus == ObjectStatus.RebuildDependenciesStatus)) && (Status == ObjectStatus.OriginalStatus)));
             }
         }
     }

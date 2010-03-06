@@ -41,17 +41,17 @@ namespace DbTracer.MsSql.Model
                 {
                     var db = par as Database;
                     if (db != null) database = db;
-                    else par = par.Parent;
+                    //else par = par.Parent;
                 }
 
                 return database;
             }
         }
 
-        IDatabase ISchema.Database
-        {
-            get { return Database; }
-        }
+        //IDatabase ISchema.Database
+        //{
+        //    get { return Database; }
+        //}
 
         public virtual int CompareFullNameTo(string namePar, string myName)
         {
@@ -75,11 +75,11 @@ namespace DbTracer.MsSql.Model
         /// </summary>
         public virtual ObjectType1 ObjectType1 { get; set; }
 
-        Enum ISchema.ObjectType
-        {
-            get { return ObjectType1; }
-            set { ObjectType1 = (ObjectType1)value; }
-        }
+        //Enum ISchema.ObjectType
+        //{
+        //    get { return ObjectType1; }
+        //    set { ObjectType1 = (ObjectType1)value; }
+        //}
 
         /// <summary>
         /// ID del objeto.
@@ -129,15 +129,15 @@ namespace DbTracer.MsSql.Model
                 if (Parent != null)
                 {
                     //Si el estado de la tabla era el original, lo cambia, sino deja el actual estado.
-                    if (Parent.Status == ObjectStatus.OriginalStatus || value == ObjectStatus.RebuildStatus || value == ObjectStatus.RebuildDependenciesStatus)
-                    {
-                        if ((value != ObjectStatus.OriginalStatus) && (value != ObjectStatus.RebuildStatus) && (value != ObjectStatus.RebuildDependenciesStatus))
-                            Parent.Status = ObjectStatus.AlterStatus;
-                        if (value == ObjectStatus.RebuildDependenciesStatus)
-                            Parent.Status = ObjectStatus.RebuildDependenciesStatus;
-                        if (value == ObjectStatus.RebuildStatus)
-                            Parent.Status = ObjectStatus.RebuildStatus;
-                    }
+                    //if (Parent.Status == ObjectStatus.OriginalStatus || value == ObjectStatus.RebuildStatus || value == ObjectStatus.RebuildDependenciesStatus)
+                    //{
+                    //    if ((value != ObjectStatus.OriginalStatus) && (value != ObjectStatus.RebuildStatus) && (value != ObjectStatus.RebuildDependenciesStatus))
+                    //        Parent.Status = ObjectStatus.AlterStatus;
+                    //    if (value == ObjectStatus.RebuildDependenciesStatus)
+                    //        Parent.Status = ObjectStatus.RebuildDependenciesStatus;
+                    //    if (value == ObjectStatus.RebuildStatus)
+                    //        Parent.Status = ObjectStatus.RebuildStatus;
+                    //}
                 }
             }
         }

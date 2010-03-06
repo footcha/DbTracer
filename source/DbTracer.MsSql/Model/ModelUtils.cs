@@ -1,4 +1,6 @@
-﻿namespace DbTracer.MsSql.Model
+﻿using DbTracer.Core.Schema.Model;
+
+namespace DbTracer.MsSql.Model
 {
     public class ModelUtils
     {

@@ -1,6 +1,8 @@
+using DbTracer.Core.Schema.Model;
+
 namespace DbTracer.MsSql.Model
 {
-    public class Type : ISqlObject
+    public class Type : ISqlObject, ISchemaMember, INullable
     {
         public virtual int Id { get; set; }
 
@@ -38,6 +40,25 @@ namespace DbTracer.MsSql.Model
         public override string ToString()
         {
             return ModelUtils.ToStringWithId(this);
+        }
+
+        /// <summary>
+        /// Determines whether this object is inherited from specified system type
+        /// </summary>
+        /// <param name="types">system type names</param>
+        /// <returns>true if this object matches one of given system types</returns>
+        public bool IsTypeOf(params string[] types)
+        {
+            foreach (var type in types)
+            {
+                if (SystemType.Name == type) return true;
+            }
+            return false;
+        }
+
+        ISchema ISchemaMember.Schema
+        {
+            get { return Schema; }
         }
     }
 }

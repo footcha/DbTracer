@@ -1,6 +1,8 @@
+using DbTracer.Core.Schema.Model;
+
 namespace DbTracer.MsSql.Model
 {
-    public class Schema : ISqlObject
+    public class Schema : ISqlObject, ISchema
     {
         public virtual int Id { get; set; }
 

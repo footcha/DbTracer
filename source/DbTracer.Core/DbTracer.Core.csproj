@@ -43,10 +43,18 @@
     <Compile Include="Reflection\Search.cs" />
     <Compile Include="Schema\Model\DatabasePropertyAttribute.cs" />
     <Compile Include="Schema\Model\IDatabase.cs" />
+    <Compile Include="Schema\Model\INullable.cs" />
     <Compile Include="Schema\Model\ISchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\Model\ISchemaList.cs" />
+    <Compile Include="Schema\Model\ISchemaMember.cs" />
+    <Compile Include="Schema\Model\ISqlObject.cs" />
     <Compile Include="Schema\Model\ObjectStatus.cs" />
+    <Compile Include="Schema\SqlGenerator\IFullNameBuilder.cs" />
+    <Compile Include="Schema\SqlGenerator\IGenerator.cs" />
+    <Compile Include="Schema\SqlGenerator\IKeywordEncoder.cs" />
+    <Compile Include="Schema\SqlGenerator\Indent.cs" />
+    <Compile Include="Schema\SqlGenerator\SqlBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

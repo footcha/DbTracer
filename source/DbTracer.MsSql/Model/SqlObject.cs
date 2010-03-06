@@ -1,4 +1,5 @@
 using System;
+using DbTracer.Core.Schema.Model;
 
 namespace DbTracer.MsSql.Model
 {

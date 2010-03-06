@@ -1,4 +1,4 @@
-namespace DbTracer.MsSql.Model
+namespace DbTracer.Core.Schema.Model
 {
     public interface ISqlObject
     {
