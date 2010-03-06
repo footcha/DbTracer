@@ -34,10 +34,10 @@
     <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
+    <Compile Include="Model\ColumnReference.cs" />
     <Compile Include="Model\DefaultConstraint.cs" />
     <Compile Include="Model\DefaultConstraintMap.cs" />
     <Compile Include="Model\ForeignKeyConstraint.cs" />
-    <Compile Include="Model\ForeignKeyConstraintMap.cs" />
     <Compile Include="Model\IndexColumn.cs" />
     <Compile Include="Model\KeyConstraint.cs" />
     <Compile Include="Model\KeyConstraintMap.cs" />
@@ -157,6 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model\Index.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\ForeignKeyConstraint.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

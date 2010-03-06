@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="DbTracer.MsSql"
+                   namespace="DbTracer.MsSql.Model">
+  <subclass
+    name="ForeignKeyConstraint"
+    batch-size="20" discriminator-value="F"
+    extends="SqlObject">
+    <join table="sys.foreign_keys">
+      <key column="object_id" />
+      <property name="IsDisabled" column="is_disabled" />
+      <property name="IsNotForReplication" column="is_not_for_replication" />
+      <property name="IsNotTrusted" column="is_not_trusted" />
+      <property name="DeleteReferentialAction" column="delete_referential_action" />
+      <property name="UpdateReferentialAction" column="update_referential_action" />
+      <property name="IsSystemNamed" column="is_system_named" />
+      <many-to-one name="ReferencedObject" column="referenced_object_id" lazy="false" />
+      <many-to-one name="Index" lazy="false">
+        <column name="referenced_object_id" />
+        <column name="key_index_id" />
+      </many-to-one>
+      <set name="Columns" lazy="false"
+           batch-size="20" table="sys.foreign_key_columns"
+           order-by="constraint_column_id">
+        <key column="constraint_object_id" />
+        <composite-element class="ColumnReference">
+          <many-to-one name="Source" >
+            <column name="parent_column_id" />
+            <column name="parent_object_id" />
+          </many-to-one>
+          <many-to-one name="Reference" >
+            <column name="referenced_column_id" />
+            <column name="referenced_object_id" />
+          </many-to-one>
+        </composite-element>
+      </set>
+    </join>
+  </subclass>
+</hibernate-mapping>

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using DbTracer.MsSql.Model;
 using MbUnit.Framework;
 using NHibernate.Criterion;
+using System.Linq;
 
 namespace DbTracer.MsSql.Test.Model
 {
@@ -9,7 +11,7 @@ namespace DbTracer.MsSql.Test.Model
     public class ForeignKeyConstraintMapTest : KeyConstraintMapTest<ForeignKeyConstraint>
     {
         private ForeignKeyConstraint testedObject;
-        private Table expectedTable;
+        private Table expectedSourceTable;
         private Index expectedIndex;
         private Table expectedReferencedTable;
 
@@ -24,7 +26,7 @@ namespace DbTracer.MsSql.Test.Model
                 testedObject = session.CreateCriteria<ForeignKeyConstraint>()
                     .Add(Restrictions.Eq("Name", "FK_test_table_test_table_2"))
                     .UniqueResult<ForeignKeyConstraint>();
-                expectedTable = session.CreateCriteria<Table>()
+                expectedSourceTable = session.CreateCriteria<Table>()
                     .Add(Restrictions.Eq("Name", "test_table"))
                     .UniqueResult<Table>();
                 expectedIndex = session.CreateCriteria<Index>()
@@ -57,7 +59,31 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void ColumnsTest()
         {
-            Assert.Fail("Not implemented. (sys.foreign_key_columns)");
+            var testedColumnReferences = testedObject.Columns.ToList();
+            var expectedParentColumns = GetColumnsByName(expectedSourceTable, "test", "id2");
+            var expectedReferencedColumns = GetColumnsByName(expectedReferencedTable, "test", "id2");
+
+            Assert.AreEqual(2, testedColumnReferences.Count, "Count of columns is not valid.");
+            for (var i = 0; i < testedColumnReferences.Count; ++i )
+            {
+                var testedColumnReference = testedColumnReferences[i];
+                var expectedParentColumn = expectedParentColumns[i];
+                var expectedReferencedColumn = expectedReferencedColumns[i];
+                Assert.AreSame(expectedParentColumn, testedColumnReference.Source);
+                Assert.AreSame(expectedReferencedColumn, testedColumnReference.Reference);
+            }
+        }
+
+        private static List<Column> GetColumnsByName(Table table, params string[] names)
+        {
+            var columns = new List<Column>();
+            foreach (var name in names)
+            {
+                var nameLocal = name;
+                var column = (table.Columns.Where(col => col.Name == nameLocal)).Single();
+                columns.Add(column);
+            }
+            return columns;
         }
 
         protected override Index ExpectedIndex
@@ -79,7 +105,7 @@ namespace DbTracer.MsSql.Test.Model
                     IsNotTrusted = true,
                     Name = "FK_test_table_test_table_2",
                     ModifyDate = DateTime.Now,
-                    ParentObject = expectedTable,
+                    ParentObject = expectedSourceTable,
                     Schema = schema,
                     Type = SqlObjectType.ForeignKeyConstraint,
                     UpdateReferentialAction = 1
