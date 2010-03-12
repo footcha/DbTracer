@@ -24,8 +24,8 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             testedObject = UserTypeTest.TestingObject;
             keyWordEncoder = mocks.DynamicMock<IKeywordEncoder>();
             fullNameBuilder = mocks.DynamicMock<IFullNameBuilder>();
-            Expect.Call(fullNameBuilder.BuildName(null))
-                .Repeat.Any().IgnoreArguments().Return("UnknownName");
+            SetupResult.For(fullNameBuilder.BuildName(null))
+                .IgnoreArguments().Return("UnknownName");
         }
 
         [TearDown]
@@ -48,14 +48,10 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void ParametersToStringTest(string type, string expectedParametersString)
         {
             var testType = mocks.DynamicMock<Type>();
-            Expect.Call(testType.IsTypeOf(type))
-                .Repeat.Any().Return(true);
-            Expect.Call(testType.MaxLength)
-                .Repeat.Any().Return(8);
-            Expect.Call(testType.Precision)
-                .Repeat.Any().Return(3);
-            Expect.Call(testType.Scale)
-                .Repeat.Any().Return(13);
+            SetupResult.For(testType.IsTypeOf(type)).Return(true);
+            SetupResult.For(testType.MaxLength).Return(8);
+            SetupResult.For(testType.Precision).Return(3);
+            SetupResult.For(testType.Scale).Return(13);
 
             mocks.ReplayAll();
 
