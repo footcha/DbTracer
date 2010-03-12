@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using DbTracer.Core.Schema.Model;
 using DbTracer.Core.Schema.SqlGenerator;
 using DbTracer.MsSql.SqlGenerator;
 using DbTracer.MsSql.Test.Model;
@@ -23,9 +24,13 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             mocks = new MockRepository();
             testedObject = UserTypeTest.TestingObject;
             keyWordEncoder = mocks.DynamicMock<IKeywordEncoder>();
+            SetupResult.For(keyWordEncoder.Encode(null))
+                .IgnoreArguments()
+                .Do(new Func<string, string>(text => string.Format("[{0}]", text)));
             fullNameBuilder = mocks.DynamicMock<IFullNameBuilder>();
             SetupResult.For(fullNameBuilder.BuildName(null))
-                .IgnoreArguments().Return("UnknownName");
+                .IgnoreArguments()
+                .Do(new Func<ISqlObject, string>(obj => string.Format("[{0}]", obj.Name)));
         }
 
         [TearDown]
@@ -75,32 +80,25 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void UserTypeCreateTest()
         {
             var generator = CreateGenerator(testedObject);
-            RegisterEncodeString("nvarchar");
 
             mocks.ReplayAll();
 
-            const string expectedSql = "CREATE TYPE UnknownName FROM [nvarchar](4000) NOT NULL";
+            const string expectedSql = "CREATE TYPE [test_type] FROM [nvarchar](4000) NOT NULL";
             Utils.AreSqlEqual(expectedSql, generator.ToCreateSql());
         }
 
         [Test]
         public void DropTest()
         {
-            var generator = CreateGenerator(new Type());
-            const string expectedSql = "DROP TYPE UnknownName";
+            var generator = CreateGenerator(testedObject);
+            const string expectedSql = "DROP TYPE [test_type]";
 
             mocks.ReplayAll();
 
             Utils.AreSqlEqual(expectedSql, generator.ToDropSql());
         }
 
-        private void RegisterEncodeString(string text)
-        {
-            Expect.Call(keyWordEncoder.Encode(text))
-                .Return(string.Format("[{0}]", text));
-        }
-
-        private TypeGenerator CreateGenerator(Type type)
+       private TypeGenerator CreateGenerator(Type type)
         {
             return new TypeGenerator(type)
             {
