@@ -47,7 +47,7 @@ namespace DbTracer.MsSql.Model
         /// </summary>
         /// <param name="types">system type names</param>
         /// <returns>true if this object matches one of given system types</returns>
-        public bool IsTypeOf(params string[] types)
+        public virtual bool IsTypeOf(params string[] types)
         {
             foreach (var type in types)
             {

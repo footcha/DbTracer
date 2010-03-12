@@ -15,8 +15,10 @@ namespace DbTracer.MsSql.SqlGenerator
         {
             var sb = new SqlBuilder();
             sb.AppendFormatLine("CREATE TYPE {0}", FullNameBuilder.BuildName(SourceObject));
-            if (SourceObject.IsAssemblyType) AppendDefinitionForAssemblyType(sb);
-            else AppendDefinitionForSimpleType(sb);
+            if (SourceObject.IsAssemblyType)
+                AppendDefinitionForAssemblyType(sb);
+            else
+                AppendDefinitionForSimpleType(sb);
 
             return sb.ToString();
         }
@@ -31,15 +33,8 @@ namespace DbTracer.MsSql.SqlGenerator
         protected virtual void AppendDefinitionForSimpleType(SqlBuilder sqlBuilder)
         {
             sqlBuilder.AppendFormat("FROM {0}", KeywordEncoder.Encode(SourceObject.SystemType.Name));
-            if (SourceObject.IsTypeOf("decimal", "numeric"))
-            {
-                sqlBuilder.AppendFormat("({0}, {1})", SourceObject.Precision.ToString(),
-                                SourceObject.Scale.ToString());
-            }
-            else if (SourceObject.IsTypeOf("binary", "varbinary", "varchar", "char", "nchar", "nvarchar"))
-            {
-                sqlBuilder.AppendFormat("({0})", SourceObject.Scale.ToString());
-            }
+            sqlBuilder.Append(ParametersToString(SourceObject));
+
             sqlBuilder.Append(" ")
                 .Append(Utils.GetNullableSql(SourceObject));
         }
@@ -47,6 +42,17 @@ namespace DbTracer.MsSql.SqlGenerator
         protected virtual void AppendDefinitionForAssemblyType(SqlBuilder sqlBuilder)
         {
             throw new NotSupportedException("Assembly types currently are not supported");
+        }
+
+        public static string ParametersToString(Type type)
+        {
+            if (type.IsTypeOf("decimal") || type.IsTypeOf("numeric"))
+                return string.Format("({0}, {1})", type.Precision, type.Scale);
+            if (type.IsTypeOf("nchar") || type.IsTypeOf("nvarchar"))
+                return string.Format("({0})", type.MaxLength / 2);
+            return type.IsTypeOf("binary") || type.IsTypeOf("varbinary") || type.IsTypeOf("varchar") || type.IsTypeOf("char")
+                ? string.Format("({0})", type.MaxLength)
+                : "";
         }
     }
 }

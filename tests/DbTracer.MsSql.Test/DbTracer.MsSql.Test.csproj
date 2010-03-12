@@ -51,6 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\3rdparty\NHibernate\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\3rdparty\RhinoMocks\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -75,6 +79,7 @@
     <Compile Include="Model\TableMapTest.cs" />
     <Compile Include="Model\FunctionMapTest.cs" />
     <Compile Include="Model\ICodeTest.cs" />
+    <Compile Include="SqlGenerator\TypeGeneratorTest.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="Model\TriggerMapTest.cs" />
     <Compile Include="Model\RoleMapTest.cs" />

@@ -35,25 +35,28 @@ namespace DbTracer.MsSql.Test.Model
     {
         protected override Type ExpectedObject
         {
-            get
-            {
-                return new Type
-                {
-                    Collation = "Czech_CI_AS",
-                    Default = null,
-                    Id = 257,
-                    IsAssemblyType = false,
-                    IsNullable = false,
-                    IsUserDefined = true,
-                    MaxLength = 8000,
-                    Name = "test_type",
-                    Precision = 0,
-                    Rule = null,
-                    Scale = 0,
-                    Schema = SchemaMapTest.CreateDboSchema(),
-                    SystemType = GetTypeByName("nvarchar")
-                };
-            }
+            get { return TestingObject; }
+        }
+
+        private static readonly Type testingObject = new Type
+        {
+            Collation = "Czech_CI_AS",
+            Default = null,
+            Id = 257,
+            IsAssemblyType = false,
+            IsNullable = false,
+            IsUserDefined = true,
+            MaxLength = 8000,
+            Name = "test_type",
+            Precision = 0,
+            Rule = null,
+            Scale = 0,
+            Schema = SchemaMapTest.CreateDboSchema(),
+            SystemType = GetTypeByName("nvarchar")
+        };
+        public static Type TestingObject
+        {
+            get { return testingObject; }
         }
     }
 
