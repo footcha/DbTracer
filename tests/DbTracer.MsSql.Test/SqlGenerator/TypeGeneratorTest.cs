@@ -5,7 +5,7 @@ using DbTracer.MsSql.SqlGenerator;
 using DbTracer.MsSql.Test.Model;
 using MbUnit.Framework;
 using Rhino.Mocks;
-using Type=DbTracer.MsSql.Model.Type;
+using Type = DbTracer.MsSql.Model.Type;
 
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
@@ -24,8 +24,8 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             testedObject = UserTypeTest.TestingObject;
             keyWordEncoder = mocks.DynamicMock<IKeywordEncoder>();
             fullNameBuilder = mocks.DynamicMock<IFullNameBuilder>();
-            fullNameBuilder.BuildName(null);
-            LastCall.Repeat.Any().IgnoreArguments().Return("UnknownName");
+            Expect.Call(fullNameBuilder.BuildName(null))
+                .Repeat.Any().IgnoreArguments().Return("UnknownName");
         }
 
         [TearDown]
@@ -48,11 +48,14 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void ParametersToStringTest(string type, string expectedParametersString)
         {
             var testType = mocks.DynamicMock<Type>();
-            testType.IsTypeOf(type);
-            LastCall.Repeat.Any().Return(true);
-            Expect.Call(testType.MaxLength).Repeat.Any().Return(8);
-            Expect.Call(testType.Precision).Repeat.Any().Return(3);
-            Expect.Call(testType.Scale).Repeat.Any().Return(13);
+            Expect.Call(testType.IsTypeOf(type))
+                .Repeat.Any().Return(true);
+            Expect.Call(testType.MaxLength)
+                .Repeat.Any().Return(8);
+            Expect.Call(testType.Precision)
+                .Repeat.Any().Return(3);
+            Expect.Call(testType.Scale)
+                .Repeat.Any().Return(13);
 
             mocks.ReplayAll();
 
@@ -68,7 +71,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             var generator = CreateGenerator(testType);
 
             mocks.ReplayAll();
-            
+
             generator.ToCreateSql();
         }
 
@@ -97,8 +100,8 @@ namespace DbTracer.MsSql.Test.SqlGenerator
 
         private void RegisterEncodeString(string text)
         {
-            keyWordEncoder.Encode(text);
-            LastCall.Return(string.Format("[{0}]", text));
+            Expect.Call(keyWordEncoder.Encode(text))
+                .Return(string.Format("[{0}]", text));
         }
 
         private TypeGenerator CreateGenerator(Type type)
