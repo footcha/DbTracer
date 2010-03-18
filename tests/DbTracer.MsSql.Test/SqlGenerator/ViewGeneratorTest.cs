@@ -7,12 +7,6 @@ namespace DbTracer.MsSql.Test.SqlGenerator
     [TestFixture]
     public class ViewGeneratorTest : CodeGeneratorBaseTest<View>
     {
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-        }
-
         [Test]
         public void CreateTest()
         {

@@ -42,7 +42,8 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             return keyWordEncoder;
         }
 
-        protected IGenerator<T> BuildGenerator(IGenerator<T> generator)
+        protected TGenerator BuildGenerator<TGenerator>(TGenerator generator)
+            where TGenerator : IGenerator<T>
         {
             generator.FullNameBuilder = FullNameBuilder;
             generator.KeywordEncoder = KeyWordEncoder;

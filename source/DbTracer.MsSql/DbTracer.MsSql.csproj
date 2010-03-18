@@ -57,6 +57,7 @@
     <Compile Include="Model\SqlClassMap.cs" />
     <Compile Include="Model\UniqueKeyConstraint.cs" />
     <Compile Include="Model\UniqueKeyConstraintMap.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewMap.cs" />
     <Compile Include="Model\TableMap.cs" />
     <Compile Include="Model\FunctionMap.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="SqlGenerator\FunctionGenerator.cs" />
     <Compile Include="SqlGenerator\GeneratorBase.cs" />
     <Compile Include="SqlGenerator\KeywordEncoder.cs" />
+    <Compile Include="SqlGenerator\SchemaGenerator.cs" />
     <Compile Include="SqlGenerator\StoredProcedureGenerator.cs" />
     <Compile Include="SqlGenerator\TriggerGenerator.cs" />
     <Compile Include="SqlGenerator\TypeGenerator.cs" />
@@ -135,7 +137,7 @@
     <Compile Include="Model\TablePartition.cs" />
     <Compile Include="Model\TableType.cs" />
     <Compile Include="Model\Trigger.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\User1.cs" />
     <Compile Include="Model\UserDataType.cs" />
     <Compile Include="Model\View.cs" />
     <Compile Include="Model\XMLSchema.cs" />

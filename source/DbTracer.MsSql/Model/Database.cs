@@ -33,7 +33,7 @@ namespace DbTracer.MsSql.Model
             Synonyms = new SchemaList<Synonym, Database>(this);
             //Tables = new SchemaList<Table, Database>(this);
             TablesTypes = new SchemaList<TableType, Database>(this);
-            Users = new SchemaList<User, Database>(this);
+            Users = new SchemaList<User1, Database>(this);
             UserTypes = new SchemaList<UserDataType, Database>(this);
             //Views = new SchemaList<View, Database>(this);
             XmlSchemas = new SchemaList<XmlSchema, Database>(this);
@@ -65,7 +65,7 @@ namespace DbTracer.MsSql.Model
         //public SchemaList<Function, Database> Functions { get; private set; }
 
         [Description("Users")]
-        public SchemaList<User, Database> Users { get; private set; }
+        public SchemaList<User1, Database> Users { get; private set; }
 
         //[Description("Views")]
         //public SchemaList<View, Database> Views { get; private set; }
@@ -103,7 +103,7 @@ namespace DbTracer.MsSql.Model
         //[Description("Tables")]
         //public SchemaList<Table, Database> Tables { get; private set; }
 
-        [Description("User Types")]
+        [Description("User1 Types")]
         public SchemaList<UserDataType, Database> UserTypes { get; private set; }
 
         public SqlOption Options { get; set; }

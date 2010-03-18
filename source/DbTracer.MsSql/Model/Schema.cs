@@ -9,6 +9,8 @@ namespace DbTracer.MsSql.Model
         public virtual string Name { get; set; }
 
         public virtual int PrincipalId { get; set; }
+        
+        public virtual User Principal { get; set; }
 
 #pragma warning disable 659
         public override bool Equals(object that)

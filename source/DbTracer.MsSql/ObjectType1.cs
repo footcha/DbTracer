@@ -12,7 +12,7 @@ namespace DbTracer.MsSql
         ConstraintColumn = 5,
         Index = 6,
         IndexColumn = 7,
-        [Description("User Data Type1")]
+        [Description("User Data Type")]
         UserDataType = 8,
         [Description("Xml Schema")]
         XmlSchema = 9,

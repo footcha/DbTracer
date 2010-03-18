@@ -81,6 +81,7 @@
     <Compile Include="Model\ICodeTest.cs" />
     <Compile Include="SqlGenerator\CodeGeneratorBaseTest.cs" />
     <Compile Include="SqlGenerator\GeneratorBaseTest.cs" />
+    <Compile Include="SqlGenerator\SchemaGeneratorTest.cs" />
     <Compile Include="SqlGenerator\TriggerGeneratorTest.cs" />
     <Compile Include="SqlGenerator\TypeGeneratorTest.cs" />
     <Compile Include="SqlGenerator\Utils.cs" />
