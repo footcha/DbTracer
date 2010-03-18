@@ -84,6 +84,7 @@
     <Compile Include="SqlGenerator\TriggerGeneratorTest.cs" />
     <Compile Include="SqlGenerator\TypeGeneratorTest.cs" />
     <Compile Include="SqlGenerator\Utils.cs" />
+    <Compile Include="SqlGenerator\ViewGeneratorTest.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="Model\TriggerMapTest.cs" />
     <Compile Include="Model\RoleMapTest.cs" />
