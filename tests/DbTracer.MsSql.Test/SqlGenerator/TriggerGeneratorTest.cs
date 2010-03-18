@@ -6,7 +6,7 @@ using MbUnit.Framework;
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public class TriggerGeneratorTest : CodeGeneratorBaseTest<Trigger>
+    public class TriggerGeneratorTest : CodeGeneratorBaseTest<TriggerGenerator, Trigger>
     {
         [SetUp]
         public override void SetUp()

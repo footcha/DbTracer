@@ -8,7 +8,7 @@ using Type = DbTracer.MsSql.Model.Type;
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public class TypeGeneratorTest : GeneratorBaseTest<Type>
+    public class TypeGeneratorTest : GeneratorBaseTest<TypeGenerator, Type>
     {
         [SetUp]
         public override void SetUp()

@@ -5,10 +5,11 @@ using MbUnit.Framework;
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public abstract class CodeGeneratorBaseTest<T> : GeneratorBaseTest<T>
+    public abstract class CodeGeneratorBaseTest<TGenerator, T> : GeneratorBaseTest<TGenerator, T>
         where T : ICode
+        where TGenerator : IGenerator<T>
     {
-        protected void ToCreateSqlTest(IGenerator<T> testedGenerator, string expectedSql)
+        protected void ToCreateSqlTest(TGenerator testedGenerator, string expectedSql)
         {
             using (Mocks.Record()) { }
             using (Mocks.Playback())

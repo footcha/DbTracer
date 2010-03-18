@@ -1,4 +1,3 @@
-using System;
 using DbTracer.MsSql.Model;
 
 namespace DbTracer.MsSql.SqlGenerator
@@ -10,7 +9,7 @@ namespace DbTracer.MsSql.SqlGenerator
 
         public override string ObjectNameKeyWord
         {
-            get { throw new NotImplementedException(); }
+            get { return "FUNCTION"; }
         }
     }
 }

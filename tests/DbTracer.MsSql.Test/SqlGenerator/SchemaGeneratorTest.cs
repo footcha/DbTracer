@@ -6,7 +6,7 @@ using Rhino.Mocks;
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public class SchemaGeneratorTest : GeneratorBaseTest<Schema>
+    public class SchemaGeneratorTest : GeneratorBaseTest<SchemaGenerator, Schema>
     {
         [Test]
         public void CreateTest()
@@ -39,10 +39,10 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             using (Mocks.Playback())
             {
                 const string expectedSql = "CREATE SCHEMA [test_schema] AUTHORIZATION [test_user]";
-                var testedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
-                testedGenerator.GenerateAuthorization = true;
+                TestedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
+                TestedGenerator.GenerateAuthorization = true;
 
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
+                Utils.AreSqlEqual(expectedSql, TestedGenerator.ToCreateSql());
             }
         }
 
@@ -57,8 +57,8 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             using (Mocks.Playback())
             {
                 const string expectedSql = "DROP SCHEMA [test_schema]";
-                var testedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
+                TestedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
+                Utils.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
             }
         }
     }

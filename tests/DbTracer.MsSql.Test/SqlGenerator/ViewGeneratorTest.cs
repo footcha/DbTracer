@@ -5,7 +5,7 @@ using MbUnit.Framework;
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public class ViewGeneratorTest : CodeGeneratorBaseTest<View>
+    public class ViewGeneratorTest : CodeGeneratorBaseTest<ViewGenerator, View>
     {
         [Test]
         public void CreateTest()

@@ -7,10 +7,12 @@ using Rhino.Mocks;
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public class GeneratorBaseTest<T>
+    public class GeneratorBaseTest<TGenerator, T>
+        where TGenerator : IGenerator<T>
     {
         protected MockRepository Mocks;
         protected T TestedObject;
+        protected TGenerator TestedGenerator;
         protected IKeywordEncoder KeyWordEncoder;
         protected IFullNameBuilder FullNameBuilder;
 
@@ -42,8 +44,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             return keyWordEncoder;
         }
 
-        protected TGenerator BuildGenerator<TGenerator>(TGenerator generator)
-            where TGenerator : IGenerator<T>
+        protected TGenerator BuildGenerator(TGenerator generator)
         {
             generator.FullNameBuilder = FullNameBuilder;
             generator.KeywordEncoder = KeyWordEncoder;
