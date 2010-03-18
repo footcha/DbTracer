@@ -11,6 +11,11 @@ namespace DbTracer.MsSql.SqlGenerator
         public TypeGenerator(Type sourceObject)
             : base(sourceObject) { }
 
+        public override string ObjectNameKeyWord
+        {
+            get { return "TYPE"; }
+        }
+
         public override string ToCreateSql()
         {
             var sb = new SqlBuilder();
@@ -21,13 +26,6 @@ namespace DbTracer.MsSql.SqlGenerator
                 AppendDefinitionForSimpleType(sb);
 
             return sb.ToString();
-        }
-
-        public override string ToDropSql()
-        {
-            return new SqlBuilder()
-                .AppendFormat("DROP TYPE {0}", FullNameBuilder.BuildName(SourceObject))
-                .ToString();
         }
 
         protected virtual void AppendDefinitionForSimpleType(SqlBuilder sqlBuilder)

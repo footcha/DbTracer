@@ -12,10 +12,5 @@ namespace DbTracer.MsSql.SqlGenerator
         {
             return SourceObject.Definition;
         }
-
-        public override string ToDropSql()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

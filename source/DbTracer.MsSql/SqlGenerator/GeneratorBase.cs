@@ -17,8 +17,19 @@ namespace DbTracer.MsSql.SqlGenerator
 
         public T SourceObject { get; private set; }
 
+        public abstract string ObjectNameKeyWord { get; }
+
         public abstract string ToCreateSql();
 
-        public abstract string ToDropSql();
+        public virtual string ToDropSql()
+        {
+            return ToDropSqlObjectNameKeyWord();
+        }
+
+        protected virtual string ToDropSqlObjectNameKeyWord()
+        {
+            return string.Format("DROP {0} {1}",
+                ObjectNameKeyWord, FullNameBuilder.BuildName(SourceObject));
+        }
     }
 }

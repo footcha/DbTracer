@@ -63,5 +63,27 @@ namespace DbTracer.MsSql.Test.Model
         {
             get { return trigger; }
         }
+
+        public static Trigger TestingObject
+        {
+            get
+            {
+                var schema = new Schema { Id = 1 };
+                return new Trigger
+                {
+                    Name = "test_trigger",
+                    IsDisabled = true,
+                    IsNotForReplication = false,
+                    IsInsteadOfTrigger = false,
+                    Schema = schema,
+                    Type = SqlObjectType.SqlDmlTrigger,
+                    Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END",
+                    ParentObject = new Table
+                    {
+                        Name = "tested_table"
+                    }
+                };
+            }
+        }
     }
 }

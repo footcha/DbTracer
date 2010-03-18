@@ -1,114 +1,53 @@
-using System;
-using System.Text.RegularExpressions;
-using DbTracer.Core.Schema.Model;
-using DbTracer.Core.Schema.SqlGenerator;
+using DbTracer.MsSql.Model;
 using DbTracer.MsSql.SqlGenerator;
 using DbTracer.MsSql.Test.Model;
 using MbUnit.Framework;
-using Rhino.Mocks;
-using Type = DbTracer.MsSql.Model.Type;
 
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
-    public class TriggerGeneratorTest
+    public class TriggerGeneratorTest : CodeGeneratorBaseTest<Trigger>
     {
-        private MockRepository mocks;
-        private Type testedObject;
-        private IKeywordEncoder keyWordEncoder;
-        private IFullNameBuilder fullNameBuilder;
-
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            mocks = new MockRepository();
-            testedObject = UserTypeTest.TestingObject;
-            keyWordEncoder = mocks.DynamicMock<IKeywordEncoder>();
-            SetupResult.For(keyWordEncoder.Encode(null))
-                .IgnoreArguments()
-                .Do(new Func<string, string>(text => string.Format("[{0}]", text)));
-            fullNameBuilder = mocks.DynamicMock<IFullNameBuilder>();
-            SetupResult.For(fullNameBuilder.BuildName(null))
-                .IgnoreArguments()
-                .Do(new Func<ISqlObject, string>(obj => string.Format("[{0}]", obj.Name)));
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            mocks.VerifyAll();
-        }
-
-        [RowTest,
-        Row("decimal", "(3, 13)"),
-        Row("numeric", "(3, 13)"),
-        Row("nchar", "(4)"),
-        Row("nvarchar", "(4)"),
-        Row("binary", "(8)"),
-        Row("varbinary", "(8)"),
-        Row("char", "(8)"),
-        Row("varchar", "(8)"),
-        Row("image", ""),
-        ]
-        public void ParametersToStringTest(string type, string expectedParametersString)
-        {
-            var testType = mocks.DynamicMock<Type>();
-            using (mocks.Record())
-            {
-                SetupResult.For(testType.IsTypeOf(type)).Return(true);
-                SetupResult.For(testType.MaxLength).Return(8);
-                SetupResult.For(testType.Precision).Return(3);
-                SetupResult.For(testType.Scale).Return(13);
-            }
-            Assert.AreEqual(expectedParametersString, TypeGenerator.ParametersToString(testType));
-        }
-
-        [Test,
-        ExpectedException(typeof(NotSupportedException), "Assembly types currently are not supported")]
-        public void AssemblyTypeTest()
-        {
-            var testType = mocks.DynamicMock<Type>();
-            using (mocks.Record())
-            {
-                Expect.Call(testType.IsAssemblyType).Return(true);
-            }
-            CreateGenerator(testType).ToCreateSql();
+            base.SetUp();
+            TestedObject = TriggerMapTest.TestingObject;
         }
 
         [Test]
-        public void UserTypeCreateTest()
+        public void CreateTest()
         {
-            using (mocks.Record()) { }
-            const string expectedSql = "CREATE TYPE [test_type] FROM [nvarchar](4000) NOT NULL";
-            Utils.AreSqlEqual(expectedSql, CreateGenerator(testedObject).ToCreateSql());
+            const string expectedSql = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END";
+            var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
+            ToCreateSqlTest(testedGenerator, expectedSql);
         }
 
         [Test]
         public void DropTest()
         {
-            using (mocks.Record()) { }
-            const string expectedSql = "DROP TYPE [test_type]";
-            Utils.AreSqlEqual(expectedSql, CreateGenerator(testedObject).ToDropSql());
+            using (Mocks.Record()) { }
+            using (Mocks.Playback())
+            {
+                const string expectedSql = "DROP TRIGGER [test_trigger]";
+                var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
+                Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
+            }
         }
 
-        private TypeGenerator CreateGenerator(Type type)
+        [Test]
+        public void DropDdlTriggerTest()
         {
-            return new TypeGenerator(type)
+            TestedObject = Mocks.Stub<Trigger>();
+            using (Mocks.Record())
             {
-                FullNameBuilder = fullNameBuilder,
-                KeywordEncoder = keyWordEncoder
-            };
-        }
-
-        private static class Utils
-        {
-            static readonly Regex regex = new Regex(@"\s+");
-
-            public static void AreSqlEqual(string sql1, string sql2)
+                TestedObject.Name = "test_trigger";
+            }
+            using (Mocks.Playback())
             {
-                sql1 = regex.Replace(sql1, "");
-                sql2 = regex.Replace(sql2, "");
-                Assert.AreEqual(sql1, sql2);
+                const string expectedSql = "DROP TRIGGER [test_trigger] ON DATABASE";
+                var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
+                Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
             }
         }
     }

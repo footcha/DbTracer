@@ -79,6 +79,7 @@
     <Compile Include="Model\TableMapTest.cs" />
     <Compile Include="Model\FunctionMapTest.cs" />
     <Compile Include="Model\ICodeTest.cs" />
+    <Compile Include="SqlGenerator\CodeGeneratorBaseTest.cs" />
     <Compile Include="SqlGenerator\GeneratorBaseTest.cs" />
     <Compile Include="SqlGenerator\TriggerGeneratorTest.cs" />
     <Compile Include="SqlGenerator\TypeGeneratorTest.cs" />

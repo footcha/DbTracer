@@ -6,5 +6,10 @@ namespace DbTracer.MsSql.SqlGenerator
     {
         public ViewGenerator(View sourceObject)
             : base(sourceObject) { }
+
+        public override string ObjectNameKeyWord
+        {
+            get { return "VIEW"; }
+        }
     }
 }
