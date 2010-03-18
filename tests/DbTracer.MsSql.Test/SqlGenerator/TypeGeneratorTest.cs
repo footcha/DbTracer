@@ -53,13 +53,13 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void ParametersToStringTest(string type, string expectedParametersString)
         {
             var testType = mocks.DynamicMock<Type>();
-            SetupResult.For(testType.IsTypeOf(type)).Return(true);
-            SetupResult.For(testType.MaxLength).Return(8);
-            SetupResult.For(testType.Precision).Return(3);
-            SetupResult.For(testType.Scale).Return(13);
-
-            mocks.ReplayAll();
-
+            using (mocks.Record())
+            {
+                SetupResult.For(testType.IsTypeOf(type)).Return(true);
+                SetupResult.For(testType.MaxLength).Return(8);
+                SetupResult.For(testType.Precision).Return(3);
+                SetupResult.For(testType.Scale).Return(13);
+            }
             Assert.AreEqual(expectedParametersString, TypeGenerator.ParametersToString(testType));
         }
 
@@ -68,37 +68,30 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void AssemblyTypeTest()
         {
             var testType = mocks.DynamicMock<Type>();
-            Expect.Call(testType.IsAssemblyType).Return(true);
-            var generator = CreateGenerator(testType);
-
-            mocks.ReplayAll();
-
-            generator.ToCreateSql();
+            using (mocks.Record())
+            {
+                Expect.Call(testType.IsAssemblyType).Return(true);
+            }
+            CreateGenerator(testType).ToCreateSql();
         }
 
         [Test]
         public void UserTypeCreateTest()
         {
-            var generator = CreateGenerator(testedObject);
-
-            mocks.ReplayAll();
-
+            using (mocks.Record()) { }
             const string expectedSql = "CREATE TYPE [test_type] FROM [nvarchar](4000) NOT NULL";
-            Utils.AreSqlEqual(expectedSql, generator.ToCreateSql());
+            Utils.AreSqlEqual(expectedSql, CreateGenerator(testedObject).ToCreateSql());
         }
 
         [Test]
         public void DropTest()
         {
-            var generator = CreateGenerator(testedObject);
+            using (mocks.Record()) { }
             const string expectedSql = "DROP TYPE [test_type]";
-
-            mocks.ReplayAll();
-
-            Utils.AreSqlEqual(expectedSql, generator.ToDropSql());
+            Utils.AreSqlEqual(expectedSql, CreateGenerator(testedObject).ToDropSql());
         }
 
-       private TypeGenerator CreateGenerator(Type type)
+        private TypeGenerator CreateGenerator(Type type)
         {
             return new TypeGenerator(type)
             {
