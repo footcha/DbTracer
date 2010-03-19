@@ -41,6 +41,9 @@
   <ItemGroup>
     <Compile Include="DescriptionAttribute.cs" />
     <Compile Include="Reflection\Search.cs" />
+    <Compile Include="Schema\Comparer\CompareResultBase.cs" />
+    <Compile Include="Schema\Comparer\ICompareResult.cs" />
+    <Compile Include="Schema\Comparer\ISqlComparer.cs" />
     <Compile Include="Schema\Model\DatabasePropertyAttribute.cs" />
     <Compile Include="Schema\Model\IDatabase.cs" />
     <Compile Include="Schema\Model\INullable.cs" />

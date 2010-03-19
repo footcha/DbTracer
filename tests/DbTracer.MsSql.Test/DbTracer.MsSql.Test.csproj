@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparer\ComparerTestBase.cs" />
+    <Compile Include="Comparer\TriggerComparerTest.cs" />
     <Compile Include="Model\ASqlObjectTestBase.cs" />
     <Compile Include="Model\ATestBase.cs" />
     <Compile Include="Model\ColumnMapTest.cs" />
