@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="Comparer\ComparerBase.cs" />
     <Compile Include="Comparer\TriggerComparer.cs" />
+    <Compile Include="Comparer\TriggerCompareResult.cs" />
     <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
