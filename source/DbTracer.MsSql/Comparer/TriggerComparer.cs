@@ -1,3 +1,4 @@
+using DbTracer.Core.Schema.Comparer;
 using DbTracer.MsSql.Model;
 
 namespace DbTracer.MsSql.Comparer
@@ -5,10 +6,11 @@ namespace DbTracer.MsSql.Comparer
     public class TriggerComparer : ComparerBase<Trigger>
     {
         public TriggerComparer(Trigger source)
-            : base(source)
+            : base(source) { }
+
+        public override ICompareResult<Trigger> Compare(Trigger destinationObject)
         {
-            ResultBuilder = (source1, destination1) =>
-                new TriggerCompareResult(source1, destination1);
+            return new TriggerCompareResult(Source, destinationObject);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using DbTracer.Core.Schema.Comparer;
 using DbTracer.Core.Schema.Model;
 
@@ -14,11 +13,6 @@ namespace DbTracer.MsSql.Comparer
 
         protected T Source { get; private set; }
 
-        protected Func<T, T, ICompareResult<T>> ResultBuilder;
-
-        public virtual ICompareResult<T> Compare(T destinationObject)
-        {
-            return ResultBuilder(Source, destinationObject);
-        }
+        public abstract ICompareResult<T> Compare(T destinationObject);
     }
 }
