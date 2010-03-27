@@ -65,9 +65,10 @@ namespace DbTracer.MsSql.Test.Comparer
             TestedObject1 = null;
 
             var x = CreateComparer();
-            x.DestinationToSourceGenerator.FullNameBuilder = new FullNameWithSchemaBuilder(x.SourceToDestinationGenerator.KeywordEncoder);
+            //x.DestinationToSourceGenerator.FullNameBuilder = new FullNameWithSchemaBuilder(x.SourceToDestinationGenerator.KeywordEncoder);
             var result = x.Compare();
-            Assert.AreEqual("DROP TRIGGER testSchema.trigger2", result.ToSqlSourceToDestination());
+            //Assert.AreEqual("DROP TRIGGER testSchema.trigger2", result.ToSqlSourceToDestination());
+            Assert.AreEqual("DROP TRIGGER trigger2", result.ToSqlSourceToDestination());
         }
     }
 }
