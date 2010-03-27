@@ -6,12 +6,12 @@ namespace DbTracer.MsSql.SqlGenerator
 {
     public class FullNameWithSchemaBuilder : IFullNameBuilder
     {
-        public FullNameWithSchemaBuilder(KeywordEncoder keywordEncoder)
+        public FullNameWithSchemaBuilder(IKeywordEncoder keywordEncoder)
         {
             this.keywordEncoder = keywordEncoder;
         }
 
-        private readonly KeywordEncoder keywordEncoder;
+        private readonly IKeywordEncoder keywordEncoder;
 
         public string BuildName(ISqlObject sqlObject)
         {

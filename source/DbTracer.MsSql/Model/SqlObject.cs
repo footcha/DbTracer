@@ -9,7 +9,7 @@ namespace DbTracer.MsSql.Model
 
         public virtual string Name { get; set; }
 
-        public virtual Schema Schema { get; set; }
+        public virtual ISchema Schema { get; set; }
 
         public virtual int PrincipalId { get; set; }
 

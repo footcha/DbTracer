@@ -1,6 +1,8 @@
+using DbTracer.Core.Schema.Model;
+
 namespace DbTracer.MsSql.Model
 {
-    public class Trigger : SqlObject, ICode
+    public class Trigger : SqlObject, ICode, ISchemaMember
     {
         public virtual string Definition { get; set; }
 

@@ -12,6 +12,11 @@ namespace DbTracer.MsSql.Comparer
 
         public override ICompareResult<T> Compare()
         {
+            return CreateResult();
+        }
+
+        private ICompareResult<T> CreateResult()
+        {
             var result = new CompareResult<T>(Source, Destination)
             {
                 SourceToDestinationSqlBuilder = CreateSqlConvertor(Source, Destination),
