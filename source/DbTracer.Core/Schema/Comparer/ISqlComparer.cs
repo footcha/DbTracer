@@ -5,6 +5,6 @@ namespace DbTracer.Core.Schema.Comparer
     public interface ISqlComparer<T>
         where T : ISqlObject
     {
-        ICompareResult<T> Compare(T destinationObject);
+        ICompareResult<T> Compare();
     }
 }

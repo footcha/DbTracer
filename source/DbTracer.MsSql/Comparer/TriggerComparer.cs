@@ -1,16 +1,17 @@
 using DbTracer.Core.Schema.Comparer;
 using DbTracer.MsSql.Model;
+using DbTracer.MsSql.SqlGenerator;
 
 namespace DbTracer.MsSql.Comparer
 {
-    public class TriggerComparer : ComparerBase<Trigger>
+    public class TriggerComparer : CodeComparerBase<Trigger>
     {
-        public TriggerComparer(Trigger source)
-            : base(source) { }
+        public TriggerComparer(Trigger source, Trigger destination) : base(source, destination) { }
 
-        public override ICompareResult<Trigger> Compare(Trigger destinationObject)
+        protected override SqlBuilder CreateSqlConvertor(Trigger source, Trigger destination)
         {
-            return new TriggerCompareResult(Source, destinationObject);
+            return Utils.CreateSqlBuilderForCodeSqlObject(source, destination, new TriggerGenerator(source),
+                                                            new TriggerGenerator(destination));
         }
     }
 }
