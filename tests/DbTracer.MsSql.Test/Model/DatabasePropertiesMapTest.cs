@@ -1,6 +1,4 @@
-﻿using DbTracer.Core.Reflection;
-using DbTracer.Core.Schema.Model;
-using DbTracer.MsSql.Model;
+﻿using DbTracer.MsSql.Model;
 using MbUnit.Framework;
 
 namespace DbTracer.MsSql.Test.Model
@@ -18,13 +16,6 @@ namespace DbTracer.MsSql.Test.Model
                 var q = DatabasePropertiesMap.CreateQuery(session);
                 testedObject = q.UniqueResult<DatabaseProperties>();
             }
-        }
-
-        [Test]
-        public void PropertiesCountTest()
-        {
-            var ps = Search.GetPropertiesWithAttribute<DatabasePropertyAttribute>(typeof(DatabaseProperties));
-            Assert.AreEqual(32, ps.Count);
         }
 
         [RowTest,

@@ -36,8 +36,8 @@
         <property name="IsDescendingKey" column="is_descending_key" />
         <property name="IsIncludedColumn" column="is_included_column" />
         <many-to-one name="Column">
-          <column name="column_id" />
           <column name="object_id" />
+          <column name="column_id" />
         </many-to-one>
       </composite-element>
     </set>

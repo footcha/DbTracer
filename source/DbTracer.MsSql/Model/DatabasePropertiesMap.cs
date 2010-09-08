@@ -6,7 +6,6 @@ namespace DbTracer.MsSql.Model
 {
     public class DatabasePropertiesMap : ClassMap<DatabaseProperties>
     {
-
         public DatabasePropertiesMap()
         {
             Configure();
@@ -17,12 +16,39 @@ namespace DbTracer.MsSql.Model
             ReadOnly();
             Id(obj => obj.Database);
 
-            foreach (var item in new DatabaseProperties())
-            {
-                var property = item.Key;
-                var sqlName = item.Value.SqlName ?? property.Name; 
-                Map(property, sqlName);
-            }
+            Map(p => p.Collation);
+            Map(p => p.ComparisonStyle);
+            Map(p => p.Database);
+            Map(p => p.IsAnsiNullDefault);
+            Map(p => p.IsAnsiNullsEnabled);
+            Map(p => p.IsAnsiPaddingEnabled);
+            Map(p => p.IsAnsiWarningsEnabled);
+            Map(p => p.IsArithmeticAbortEnabled);
+            Map(p => p.IsAutoClose);
+            Map(p => p.IsAutoCreateStatistics);
+            Map(p => p.IsAutoShrink);
+            Map(p => p.IsAutoUpdateStatistics);
+            Map(p => p.IsCloseCursorsOnCommitEnabled);
+            Map(p => p.IsFulltextEnabled);
+            Map(p => p.IsInStandBy);
+            Map(p => p.IsLocalCursorsDefault);
+            Map(p => p.IsMergePublished);
+            Map(p => p.IsNullConcat);
+            Map(p => p.IsNumericRoundAbortEnabled);
+            Map(p => p.IsParameterizationForced);
+            Map(p => p.IsPublished);
+            Map(p => p.IsQuotedIdentifiersEnabled);
+            Map(p => p.IsRecursiveTriggersEnabled);
+            Map(p => p.IsSubscribed);
+            Map(p => p.IsSyncWithBackup);
+            Map(p => p.IsTornPageDetectionEnabled);
+            Map(p => p.Lcid);
+            Map(p => p.Recovery);
+            Map(p => p.SqlSortOrder);
+            Map(p => p.Status);
+            Map(p => p.Updateability);
+            Map(p => p.UserAccess);
+            Map(p => p.Version);
         }
 
         public static ISQLQuery CreateQuery(ISession session)

@@ -17,7 +17,7 @@ namespace DbTracer.MsSql.Model
                 join.Map(c => c.UsesDatabaseCollation, "uses_database_collation");
                 join.Map(c => c.IsSystemNamed, "is_system_named");
                 join.References(c => c.ParentColumn)
-                    .Columns("parent_column_id", "parent_object_id")
+                    .Columns("parent_object_id", "parent_column_id")
                     .Not.LazyLoad();
             });
         }

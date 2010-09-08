@@ -25,12 +25,12 @@
         <key column="constraint_object_id" />
         <composite-element class="ColumnReference">
           <many-to-one name="Source" >
-            <column name="parent_column_id" />
             <column name="parent_object_id" />
+            <column name="parent_column_id" />
           </many-to-one>
           <many-to-one name="Reference" >
-            <column name="referenced_column_id" />
             <column name="referenced_object_id" />
+            <column name="referenced_column_id" />
           </many-to-one>
         </composite-element>
       </set>

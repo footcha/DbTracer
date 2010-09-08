@@ -16,13 +16,12 @@ namespace DbTracer.MsSql.Test.Model
         {
             using (var session = SessionFactory.OpenSession())
             {
-                // possible bug: if expected table is loaded AFTER constraint to session cache
-                constraint = session.CreateCriteria<CheckConstraint>()
-                    .Add(Restrictions.Eq("Name", "CK_test_table"))
-                    .UniqueResult<CheckConstraint>();
                 expectedTable = session.CreateCriteria<Table>()
                     .Add(Restrictions.Eq("Name", "test_table"))
                     .UniqueResult<Table>();
+                constraint = session.CreateCriteria<CheckConstraint>()
+                    .Add(Restrictions.Eq("Name", "CK_test_table"))
+                    .UniqueResult<CheckConstraint>();
                 expectedParentColumn = session.CreateCriteria<Column>()
                     .Add(Restrictions.Eq("Name", "id"))
                     .CreateCriteria("ParentObject").Add(Restrictions.Eq("Name", "test_table"))
@@ -61,7 +60,7 @@ namespace DbTracer.MsSql.Test.Model
         {
             Assert.IsNotNull(constraint.ParentObject, "Object cannot be null.");
             Assert.AreEqual(expectedTable, constraint.ParentObject);
-            // Assert.AreSame(expectedTable, constraint.ParentObject); // not works
+            Assert.AreSame(expectedTable, constraint.ParentObject);
         }
 
         protected override CheckConstraint ExpectedObject
