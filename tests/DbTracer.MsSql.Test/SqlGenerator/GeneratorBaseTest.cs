@@ -20,8 +20,11 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public virtual void SetUp()
         {
             Mocks = new MockRepository();
-            KeyWordEncoder = GetDefaultKeyWordEncoderMock();
-            FullNameBuilder = GetDefaultFullNameBuilderMock();
+            using (Mocks.Record())
+            {
+                KeyWordEncoder = GetDefaultKeyWordEncoderMock();
+                FullNameBuilder = GetDefaultFullNameBuilderMock();                
+            }
         }
 
         protected virtual IFullNameBuilder GetDefaultFullNameBuilderMock()

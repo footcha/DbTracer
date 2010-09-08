@@ -30,58 +30,41 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         ]
         public void ParametersToStringTest(string type, string expectedParametersString)
         {
-            var testType = Mocks.DynamicMock<Type>();
-            using (Mocks.Record())
-            {
-                SetupResult.For(testType.IsTypeOf(type)).Return(true);
-                SetupResult.For(testType.MaxLength).Return(8);
-                SetupResult.For(testType.Precision).Return(3);
-                SetupResult.For(testType.Scale).Return(13);
-            }
-            using (Mocks.Playback())
-            {
-                Assert.AreEqual(expectedParametersString, TypeGenerator.ParametersToString(testType));
-            }
+            var testType = Mocks.Stub<Type>();
+            testType.MaxLength = 8;
+            testType.Precision = 3;
+            testType.Scale = 13;
+            SetupResult.For(testType.IsTypeOf(type)).Return(true);
+            Mocks.ReplayAll();
+            Assert.AreEqual(expectedParametersString, TypeGenerator.ParametersToString(testType));
         }
 
         [Test,
         ExpectedException(typeof(NotSupportedException), "Assembly types currently are not supported")]
         public void AssemblyTypeTest()
         {
-            TestedObject = Mocks.DynamicMock<Type>();
-            using (Mocks.Record())
+            TestedObject = new Type
             {
-                Expect.Call(TestedObject.IsAssemblyType).Return(true);
-            }
-            using (Mocks.Playback())
-            {
-                var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
-                testedGenerator.ToCreateSql();
-            }
+                IsAssemblyType = true
+            };
+            var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
+            testedGenerator.ToCreateSql();
         }
 
         [Test]
         public void UserTypeCreateTest()
         {
-            using (Mocks.Record()) { }
-            using (Mocks.Playback())
-            {
-                var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
-                const string expectedSql = "CREATE TYPE [test_type] FROM [nvarchar](4000) NOT NULL";
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
-            }
+            var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
+            const string expectedSql = "CREATE TYPE [test_type] FROM [nvarchar](4000) NOT NULL";
+            Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
         }
 
         [Test]
         public void DropTest()
         {
-            using (Mocks.Record()) { }
-            using (Mocks.Playback())
-            {
-                var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
-                const string expectedSql = "DROP TYPE [test_type]";
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
-            }
+            var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
+            const string expectedSql = "DROP TYPE [test_type]";
+            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
     }
 }

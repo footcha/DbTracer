@@ -11,18 +11,13 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         [Test]
         public void CreateTest()
         {
-            TestedObject = Mocks.DynamicMock<Schema>();
-            using (Mocks.Record())
+            TestedObject = new Schema
             {
-                Expect.Call(TestedObject.Name)
-                    .Return("test_schema");
-            }
-            using (Mocks.Playback())
-            {
-                const string expectedSql = "CREATE SCHEMA [test_schema]";
-                var testedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
-            }
+                Name = "test_schema"
+            };
+            const string expectedSql = "CREATE SCHEMA [test_schema]";
+            var testedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
+            Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
         }
 
         [Test]
@@ -49,17 +44,13 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         [Test]
         public void DropTest()
         {
-            TestedObject = Mocks.Stub<Schema>();
-            using (Mocks.Record())
+            TestedObject = new Schema
             {
-                TestedObject.Name = "test_schema";
-            }
-            using (Mocks.Playback())
-            {
-                const string expectedSql = "DROP SCHEMA [test_schema]";
-                TestedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
-                Utils.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
-            }
+                Name = "test_schema"
+            };
+            const string expectedSql = "DROP SCHEMA [test_schema]";
+            TestedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
+            Utils.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
         }
     }
 }

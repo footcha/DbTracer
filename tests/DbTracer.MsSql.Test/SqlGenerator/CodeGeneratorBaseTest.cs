@@ -11,7 +11,6 @@ namespace DbTracer.MsSql.Test.SqlGenerator
     {
         protected void ToCreateSqlTest(TGenerator testedGenerator, string expectedSql)
         {
-            using (Mocks.Record()) { }
             using (Mocks.Playback())
             {
                 Utils.AreSqlEqual(expectedSql, BuildGenerator(testedGenerator).ToCreateSql());

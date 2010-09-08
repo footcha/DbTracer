@@ -26,29 +26,21 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         [Test]
         public void DropTest()
         {
-            using (Mocks.Record()) { }
-            using (Mocks.Playback())
-            {
-                const string expectedSql = "DROP TRIGGER [test_trigger]";
-                var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
-            }
+            const string expectedSql = "DROP TRIGGER [test_trigger]";
+            var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
+            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
 
         [Test]
         public void DropDdlTriggerTest()
         {
-            TestedObject = Mocks.Stub<Trigger>();
-            using (Mocks.Record())
+            TestedObject = new Trigger
             {
-                TestedObject.Name = "test_trigger";
-            }
-            using (Mocks.Playback())
-            {
-                const string expectedSql = "DROP TRIGGER [test_trigger] ON DATABASE";
-                var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
-                Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
-            }
+                Name = "test_trigger"
+            };
+            const string expectedSql = "DROP TRIGGER [test_trigger] ON DATABASE";
+            var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
+            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
     }
 }
