@@ -1,6 +1,9 @@
+using DbTracer.Core.Schema.SqlGenerator;
 using DbTracer.MsSql.Model;
 using DbTracer.MsSql.SqlGenerator;
 using MbUnit.Framework;
+using Rhino.Mocks;
+
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
     [TestFixture]
@@ -10,9 +13,15 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public override void SetUp()
         {
             base.SetUp();
-            TestedObject = Mocks.Stub<Function>();
-            TestedObject.Name = "test_function";
-            TestedObject.Definition = "CREATE FUNCTION [dbo].[test_function] AS RETURN 1";
+            TestedObject = new Function
+            {
+                Name = "test_function",
+                Definition = "CREATE FUNCTION [dbo].[test_function] AS RETURN 1",
+                Schema = new Schema
+                {
+                    Name = "test_schema"
+                }
+            };
             TestedGenerator = BuildGenerator(new FunctionGenerator(TestedObject));
             Mocks.ReplayAll();
         }
@@ -29,6 +38,21 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         {
             const string expectedSql = "DROP FUNCTION [test_function]";
             Utils.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
+        }
+
+        [Test,
+        Ignore("Neither function nor other code generators implement properly schema name")]
+        public void CreateWithNameIncludingSchema()
+        {
+            using (Mocks.Record())
+            {
+                var fullNameBuilder = Mocks.DynamicMock<IFullNameBuilder>();
+                Expect.Call(fullNameBuilder.BuildName(TestedObject))
+                    .Return(string.Format("[{0}].[{1}]", TestedObject.Schema.Name, TestedObject.Name));
+                TestedGenerator.FullNameBuilder = fullNameBuilder;
+            }
+            const string expectedSql = "CREATE FUNCTION [test_schema].[test_function] AS RETURN 1";
+            ToCreateSqlTest(TestedGenerator, expectedSql);
         }
     }
 }

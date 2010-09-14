@@ -15,14 +15,14 @@ namespace DbTracer.MsSql.Test.Comparer
             {
                 Name = "testSchema"
             };
-            TestedObject1 = new Trigger
+            SourceDatabaseObject = new Trigger
             {
                 Definition = "CREATE TRIGGER trigger1", 
                 Name = "trigger1", 
                 ParentObject = new Table(),
                 Schema = schema
             };
-            TestedObject2 = new Trigger
+            DestinationDatabaseObject = new Trigger
             {
                 Definition = "CREATE TRIGGER trigger2", 
                 Name = "trigger2", 
@@ -33,10 +33,10 @@ namespace DbTracer.MsSql.Test.Comparer
 
         private TriggerComparer CreateComparer()
         {
-            return new TriggerComparer(TestedObject1, TestedObject2)
+            return new TriggerComparer(SourceDatabaseObject, DestinationDatabaseObject)
             {
-                SourceToDestinationGenerator = new TriggerGenerator(TestedObject1),
-                DestinationToSourceGenerator = new TriggerGenerator(TestedObject2)
+                SourceToDestinationGenerator = new TriggerGenerator(SourceDatabaseObject),
+                DestinationToSourceGenerator = new TriggerGenerator(DestinationDatabaseObject)
             };
         }
 
@@ -52,7 +52,7 @@ namespace DbTracer.MsSql.Test.Comparer
         [Test]
         public void TestName2Test()
         {
-            TestedObject2 = null;
+            DestinationDatabaseObject = null;
 
             var x = CreateComparer();
             var result = x.Compare();
@@ -62,7 +62,7 @@ namespace DbTracer.MsSql.Test.Comparer
         [Test]
         public void TestName3Test()
         {
-            TestedObject1 = null;
+            SourceDatabaseObject = null;
 
             var x = CreateComparer();
             //x.DestinationToSourceGenerator.FullNameBuilder = new FullNameWithSchemaBuilder(x.SourceToDestinationGenerator.KeywordEncoder);

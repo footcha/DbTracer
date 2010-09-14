@@ -7,8 +7,8 @@ namespace DbTracer.MsSql.Test.Comparer
         where T : ISqlObject
         where TComparer : ISqlComparer<T>
     {
-        protected T TestedObject1;
-        protected T TestedObject2;
+        protected T SourceDatabaseObject;
+        protected T DestinationDatabaseObject;
         protected TComparer TestedComparer;
     }
 }
