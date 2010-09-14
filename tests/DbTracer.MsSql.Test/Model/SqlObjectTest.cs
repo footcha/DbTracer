@@ -20,7 +20,7 @@ namespace DbTracer.MsSql.Test.Model
          Row("ParentObject"),
          Row("Type"),
         ]
-        public void BasicPropertyTest(string propertyName)
+        public void CheckProperty(string propertyName)
         {
             var expectedValue = GetValue(propertyName, ExpectedObject);
             TestUtils.TestProperty(propertyName, expectedValue, TestedObject);
@@ -29,7 +29,7 @@ namespace DbTracer.MsSql.Test.Model
         [RowTest,
         Row("CreateDate"),
         Row("ModifyDate")]
-        public void DateTest(string propertyName)
+        public void CheckDate(string propertyName)
         {
             var testedValue = GetValue(propertyName, TestedObject);
             var testedDate = (DateTime)testedValue;

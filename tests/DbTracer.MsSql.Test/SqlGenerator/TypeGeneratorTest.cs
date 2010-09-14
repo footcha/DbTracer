@@ -28,7 +28,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         Row("varchar", "(8)"),
         Row("image", ""),
         ]
-        public void ParametersToStringTest(string type, string expectedParametersString)
+        public void ParametersToString(string type, string expectedParametersString)
         {
             var testType = Mocks.Stub<Type>();
             testType.MaxLength = 8;
@@ -41,7 +41,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
 
         [Test,
         ExpectedException(typeof(NotSupportedException), "Assembly types currently are not supported")]
-        public void AssemblyTypeTest()
+        public void AssemblyTypeIsNotSupported()
         {
             TestedObject = new Type
             {
@@ -52,19 +52,19 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         }
 
         [Test]
-        public void UserTypeCreateTest()
+        public void CreateSql()
         {
             var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
             const string expectedSql = "CREATE TYPE [test_type] FROM [nvarchar](4000) NOT NULL";
-            Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
         }
 
         [Test]
-        public void DropTest()
+        public void DropSql()
         {
             var testedGenerator = BuildGenerator(new TypeGenerator(TestedObject));
             const string expectedSql = "DROP TYPE [test_type]";
-            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
     }
 }

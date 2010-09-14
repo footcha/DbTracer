@@ -58,13 +58,13 @@ namespace DbTracer.MsSql.Test.Model
          Row("TextInRowLimit", 0),
          Row("LargeValueTypesOutOfRow", false),
         ]
-        public void LoadTest(string propertyName, object expectedValue)
+        public void CheckPropertySpecialForTable(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, TestedObject);
         }
 
         [Test]
-        public void ColumnsTest()
+        public void CkeckColumns()
         {
             Assert.AreEqual(ExpectedObject.Columns.Count, table.Columns.Count);
             var expectedIterator = ExpectedObject.Columns.GetEnumerator();
@@ -79,7 +79,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void TriggersTest()
+        public void CheckTriggers()
         {
             Assert.AreEqual(1, table.Triggers.Count);
             var testedTrigger = (from t in table.Triggers select t).First();
@@ -93,7 +93,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void ConstraintsTest()
+        public void CheckConstraints()
         {
             Assert.AreEqual(2, table.CheckConstraints.Count);
             var constraints = table.CheckConstraints.ToList();
@@ -102,7 +102,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void IndexesTest()
+        public void CheckIndexes()
         {
             Assert.AreEqual(3, table.Indexes.Count);
             var testedIndexPk = (from index in table.Indexes where index.Name == "PK_test_table" select index).First();

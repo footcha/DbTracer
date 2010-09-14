@@ -47,42 +47,42 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsXmlDocument", false),
         Row("XmlCollectionId", 0),
         ]
-        public override void LoadTest(string propertyName, object expectedValue)
+        public override void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, column);
         }
 
         [Test]
-        public void ParentObjectTest()
+        public void CheckParentObject()
         {
             Assert.AreSame(expectedTable, column.ParentObject);
         }
 
         [Test]
-        public void SystemTypeTest()
+        public void CheckSystemType()
         {
             Assert.AreSame(expectedType, column.SystemType);
         }
 
         [Test]
-        public void UserTypeTest()
+        public void CheckUserType()
         {
             Assert.AreSame(expectedType, column.UserType);
         }
 
         [Test]
-        public void DefaultTest()
+        public void CheckDefaultConstraint()
         {
             Assert.IsNotNull(column.Default);
             Assert.AreEqual(column, column.Default.Column);
             Assert.AreEqual("(getdate())", column.Default.Definition);
-            // Assert.AreSame(column, column.Default.Column); // TODO test is not working
+            //Assert.AreSame(column, column.Default.Column); // TODO test is not working
         }
 
         [Test,
         Ignore("Create test type containing rule object setting")
         ]
-        public void RuleTest()
+        public void CheckRule()
         {
             Assert.IsNotNull(column.Rule);
         }

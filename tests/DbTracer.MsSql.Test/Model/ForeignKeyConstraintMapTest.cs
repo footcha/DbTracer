@@ -42,14 +42,14 @@ namespace DbTracer.MsSql.Test.Model
          Row("DeleteReferentialAction"),
          Row("UpdateReferentialAction")
         ]
-        public void PropertyTest(string propertyName)
+        public void CheckPropertySpecialForForeignKey(string propertyName)
         {
             var expectedValue = GetValue(propertyName, ExpectedObject);
             TestUtils.TestProperty(propertyName, expectedValue, TestedObject);
         }
 
         [Test]
-        public void ReferencedObjectTest()
+        public void CheckReferencedObject()
         {
             Assert.IsNotNull(TestedObject.ReferencedObject);
             Assert.AreEqual(expectedReferencedTable, TestedObject.ReferencedObject);
@@ -57,7 +57,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void ColumnsTest()
+        public void CheckColumns()
         {
             var testedColumnReferences = testedObject.Columns.ToList();
             var expectedParentColumns = GetColumnsByName(expectedSourceTable, "test", "id2");

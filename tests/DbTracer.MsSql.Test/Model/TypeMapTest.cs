@@ -88,7 +88,7 @@ namespace DbTracer.MsSql.Test.Model
                     .UniqueResult<Type>();
         }
 
-        public override void LoadTest(string propertyName, object expectedValue) { }
+        public override void CheckProperty(string propertyName, object expectedValue) { }
 
         [RowTest,
         Row("Name"),
@@ -100,20 +100,20 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsNullable"),
         Row("IsUserDefined"),
         Row("IsAssemblyType")]
-        public void LoadTest(string propertyName)
+        public void CheckPropertySpecialForType(string propertyName)
         {
             TestUtils.TestProperty(propertyName, ExpectedObject, testedObject);
         }
 
         [Test]
-        public void SystemTypeTest()
+        public void CheckSystemType()
         {
             Assert.IsAssignableFrom(typeof(Type), testedObject.SystemType);
             Assert.AreEqual(ExpectedObject.SystemType, testedObject.SystemType);
         }
 
         [Test]
-        public void SchemaTest()
+        public void CheckSchema()
         {
             Assert.IsNotNull(testedObject.Schema);
             Assert.AreEqual(ExpectedObject.Schema, testedObject.Schema);
@@ -122,7 +122,7 @@ namespace DbTracer.MsSql.Test.Model
         [Test,
         Ignore("Create test type containing default object setting")
         ]
-        public void DefaultTest()
+        public void CheckDefault()
         {
             Assert.IsNotNull(testedObject.Default);
         }
@@ -130,7 +130,7 @@ namespace DbTracer.MsSql.Test.Model
         [Test,
         Ignore("Create test type containing rule object setting")
         ]
-        public void RuleTest()
+        public void CheckRule()
         {
             Assert.IsNotNull(testedObject.Rule);
         }

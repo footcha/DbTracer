@@ -9,7 +9,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
     public class SchemaGeneratorTest : GeneratorBaseTest<SchemaGenerator, Schema>
     {
         [Test]
-        public void CreateTest()
+        public void CreateSql()
         {
             TestedObject = new Schema
             {
@@ -17,11 +17,11 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             };
             const string expectedSql = "CREATE SCHEMA [test_schema]";
             var testedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
-            Utils.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
         }
 
         [Test]
-        public void CreateWithAuthorizationTest()
+        public void CreateWithAuthorizationSql()
         {
             TestedObject = Mocks.DynamicMock<Schema>();
             using (Mocks.Record())
@@ -37,12 +37,12 @@ namespace DbTracer.MsSql.Test.SqlGenerator
                 TestedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
                 TestedGenerator.GenerateAuthorization = true;
 
-                Utils.AreSqlEqual(expectedSql, TestedGenerator.ToCreateSql());
+                SqlAssert.AreSqlEqual(expectedSql, TestedGenerator.ToCreateSql());
             }
         }
 
         [Test]
-        public void DropTest()
+        public void DropSql()
         {
             TestedObject = new Schema
             {
@@ -50,7 +50,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             };
             const string expectedSql = "DROP SCHEMA [test_schema]";
             TestedGenerator = BuildGenerator(new SchemaGenerator(TestedObject));
-            Utils.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
+            SqlAssert.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
         }
     }
 }

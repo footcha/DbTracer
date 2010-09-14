@@ -11,10 +11,11 @@ namespace DbTracer.MsSql.Test.SqlGenerator
     {
         protected void ToCreateSqlTest(TGenerator testedGenerator, string expectedSql)
         {
-            using (Mocks.Playback())
-            {
-                Utils.AreSqlEqual(expectedSql, BuildGenerator(testedGenerator).ToCreateSql());
-            }
+            var generator = new GeneratorBuilder()
+                .WithFullNameBuilder(FullNameBuilder)
+                .WithKeyWordEncoder(KeyWordEncoder)
+                .Build(testedGenerator);
+            SqlAssert.AreSqlEqual(expectedSql, generator.ToCreateSql());
         }
     }
 }

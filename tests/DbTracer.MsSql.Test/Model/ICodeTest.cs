@@ -2,6 +2,6 @@ namespace DbTracer.MsSql.Test.Model
 {
     public interface ICodeTest
     {
-        void DefinitionTest();
+        void CheckDefinition();
     }
 }

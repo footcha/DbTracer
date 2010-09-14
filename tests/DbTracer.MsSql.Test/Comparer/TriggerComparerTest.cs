@@ -41,7 +41,7 @@ namespace DbTracer.MsSql.Test.Comparer
         }
 
         [Test]
-        public void TestNameTest()
+        public void BothTriggersExist()
         {
             var x = CreateComparer();
 
@@ -50,7 +50,7 @@ namespace DbTracer.MsSql.Test.Comparer
         }
 
         [Test]
-        public void TestName2Test()
+        public void DestinationTriggerMissing()
         {
             DestinationDatabaseObject = null;
 
@@ -60,7 +60,7 @@ namespace DbTracer.MsSql.Test.Comparer
         }
 
         [Test]
-        public void TestName3Test()
+        public void SourceTriggerMissing()
         {
             SourceDatabaseObject = null;
 

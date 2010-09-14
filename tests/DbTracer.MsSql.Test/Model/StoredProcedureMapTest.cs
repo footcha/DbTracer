@@ -26,13 +26,13 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsExecutionReplicated"),
         Row("IsReplSerializableOnly"),
         Row("SkipsReplConstraints")]
-        public void LoadTest(string propertyName)
+        public void CheckPropertySpecialForStoredProcedure(string propertyName)
         {
             TestUtils.TestProperty(propertyName, ExpectedObject, testedObject);
         }
 
         [Test]
-        public void DefinitionTest()
+        public void CheckDefinition()
         {
             TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, testedObject.Definition);
         }

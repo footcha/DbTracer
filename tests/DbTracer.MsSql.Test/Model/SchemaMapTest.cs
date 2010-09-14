@@ -22,7 +22,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("Id", 1),
         Row("PrincipalId", 1),
         ]
-        public override void LoadTest(string propertyName, object expectedValue)
+        public override void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, schema);
         }

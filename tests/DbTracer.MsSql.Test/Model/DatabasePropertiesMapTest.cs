@@ -51,7 +51,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("Updateability", "READ_WRITE"),
         Row("UserAccess", "MULTI_USER"),
         Row("Version", 611)]
-        public void LoadTest(string propertyName, object expectedValue)
+        public void CheckProperty(string propertyName, object expectedValue)
         {
             var propInfo = typeof(DatabaseProperties).GetProperty(propertyName);
             var testedValue = propInfo.GetValue(testedObject, null);

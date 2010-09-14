@@ -1,6 +1,6 @@
 using DbTracer.MsSql.Model;
 using DbTracer.MsSql.SqlGenerator;
-using DbTracer.MsSql.Test.Model;
+using DbTracer.MsSql.Test.TestingUtils;
 using MbUnit.Framework;
 
 namespace DbTracer.MsSql.Test.SqlGenerator
@@ -8,39 +8,36 @@ namespace DbTracer.MsSql.Test.SqlGenerator
     [TestFixture]
     public class TriggerGeneratorTest : CodeGeneratorBaseTest<TriggerGenerator, Trigger>
     {
+        private TriggerGenerator testedGenerator;
+
         [SetUp]
         public override void SetUp()
         {
             base.SetUp();
-            TestedObject = TriggerMapTest.TestingObject;
+            TestedObject = new TriggerBuilder().Build();
+            testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
         }
 
         [Test]
-        public void CreateTest()
+        public void CreateSql()
         {
             const string expectedSql = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END";
-            var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
             ToCreateSqlTest(testedGenerator, expectedSql);
         }
 
         [Test]
-        public void DropTest()
+        public void DropSql()
         {
             const string expectedSql = "DROP TRIGGER [test_trigger]";
-            var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
-            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
 
         [Test]
-        public void DropDdlTriggerTest()
+        public void DropDdlTrigger()
         {
-            TestedObject = new Trigger
-            {
-                Name = "test_trigger"
-            };
+            TestedObject.ParentObject = null;
             const string expectedSql = "DROP TRIGGER [test_trigger] ON DATABASE";
-            var testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
-            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
     }
 }

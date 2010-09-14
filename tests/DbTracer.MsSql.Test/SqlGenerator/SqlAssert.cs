@@ -3,7 +3,7 @@ using MbUnit.Framework;
 
 namespace DbTracer.MsSql.Test.SqlGenerator
 {
-    public static class Utils
+    public static class SqlAssert
     {
         static readonly Regex regex = new Regex(@"\s+");
 

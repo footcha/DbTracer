@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using DbTracer.MsSql.Model;
+﻿using DbTracer.MsSql.Model;
+using DbTracer.MsSql.Test.TestingUtils;
 using MbUnit.Framework;
 using NHibernate.Criterion;
 
@@ -16,8 +16,9 @@ namespace DbTracer.MsSql.Test.Model
         {
             using (var session = SessionFactory.OpenSession())
             {
-                var triggers = session.CreateCriteria<Trigger>().List<Trigger>();
-                trigger = (from t in triggers where t.Name == "test_trigger" select t).First();
+                trigger = session.CreateCriteria<Trigger>()
+                    .Add(Restrictions.Eq("Name", "test_trigger"))
+                    .UniqueResult<Trigger>();
                 expectedTable = session.CreateCriteria<Table>()
                     .Add(Restrictions.Eq("Name", "test_table"))
                     .UniqueResult<Table>();
@@ -29,13 +30,13 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsNotForReplication", false),
         Row("IsInsteadOfTrigger", false),
         ]
-        public void LoadTest(string propertyName, object expectedValue)
+        public void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, trigger);
         }
 
         [Test]
-        public void DefinitionTest()
+        public void CheckDefinition()
         {
             TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, trigger.Definition);
         }
@@ -45,45 +46,26 @@ namespace DbTracer.MsSql.Test.Model
             get
             {
                 var schema = new Schema { Id = 1 };
-                return new Trigger
-                {
-                    Name = "test_trigger",
-                    IsDisabled = true,
-                    IsNotForReplication = false,
-                    IsInsteadOfTrigger = false,
-                    Schema = schema,
-                    Type = SqlObjectType.SqlDmlTrigger,
-                    Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END",
-                    ParentObject = expectedTable
-                };
+                var trigger = new TriggerBuilder()
+                    .With(expectedTable)
+                    .With(schema)
+                    .Build();
+                trigger.Name = "test_trigger";
+                trigger.IsDisabled = true;
+                trigger.IsMsShipped = false;
+                trigger.IsPublished = false;
+                trigger.IsSchemaPublished = false;
+                trigger.IsNotForReplication = false;
+                trigger.IsInsteadOfTrigger = false;
+                trigger.Definition =
+                    "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END";
+                return trigger;
             }
         }
 
         protected override Trigger TestedObject
         {
             get { return trigger; }
-        }
-
-        public static Trigger TestingObject
-        {
-            get
-            {
-                var schema = new Schema { Id = 1 };
-                return new Trigger
-                {
-                    Name = "test_trigger",
-                    IsDisabled = true,
-                    IsNotForReplication = false,
-                    IsInsteadOfTrigger = false,
-                    Schema = schema,
-                    Type = SqlObjectType.SqlDmlTrigger,
-                    Definition = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END",
-                    ParentObject = new Table
-                    {
-                        Name = "tested_table"
-                    }
-                };
-            }
         }
     }
 }

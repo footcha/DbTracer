@@ -28,13 +28,13 @@ namespace DbTracer.MsSql.Test.Model
         [RowTest,
         Row("IsSystemNamed", false),
         ]
-        public void LoadTest(string propertyName, object expectedValue)
+        public void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, testedObject);
         }
 
         [Test]
-        public void DefinitionTest()
+        public void CheckDefinition()
         {
             TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, testedObject.Definition);
         }

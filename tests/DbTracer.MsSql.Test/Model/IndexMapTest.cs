@@ -39,19 +39,19 @@ namespace DbTracer.MsSql.Test.Model
         Row("AllowRowLocks", true),
         Row("AllowPageLocks", true),
         ]
-        public override void LoadTest(string propertyName, object expectedValue)
+        public override void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, testedObject);
         }
 
         [Test]
-        public void IndexTypeTest()
+        public void CheckIndexType()
         {
             Assert.AreEqual(IndexType.Clustered, testedObject.IndexType);
         }
 
         [Test]
-        public void ParentObjectTest()
+        public void CheckParentObject()
         {
             Assert.IsNotNull(testedObject.ParentObject);
             Assert.AreEqual(expectedTable, testedObject.ParentObject);
@@ -63,7 +63,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("test2", 1, 0, true, false),
         Row("test", 2, 0, false, false),
         ]
-        public void ColumnsTest(string columnName, int columnIndex,
+        public void CheckColumns(string columnName, int columnIndex,
             int partitionOrdinal, bool isDescendingKey, bool isIncludedColumn)
         {
             Assert.AreEqual(3, testedObject.IndexColumns.Count);

@@ -22,7 +22,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void DefinitionTest()
+        public void CheckDefinition()
         {
             TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, testedObject.Definition);
         }

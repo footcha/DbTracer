@@ -8,7 +8,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
     public class ViewGeneratorTest : CodeGeneratorBaseTest<ViewGenerator, View>
     {
         [Test]
-        public void CreateTest()
+        public void CreateSql()
         {
             const string expectedSql = "CREATE VIEW [dbo].[test_view] AS  SELECT * FROM test_table";
             TestedObject = new View
@@ -20,7 +20,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         }
 
         [Test]
-        public void DropTest()
+        public void DropSql()
         {
             TestedObject = new View
             {
@@ -28,7 +28,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             };
             const string expectedSql = "DROP VIEW [test_view]";
             var testedGenerator = BuildGenerator(new ViewGenerator(TestedObject));
-            Utils.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToDropSql());
         }
     }
 }

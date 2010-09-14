@@ -10,13 +10,13 @@ namespace DbTracer.MsSql.Test.Model
         protected abstract Index ExpectedIndex { get; }
 
         [Test]
-        public void IsSystemNamedTest()
+        public void CheckIsSystemNamed()
         {
             Assert.AreEqual(ExpectedObject.IsSystemNamed, TestedObject.IsSystemNamed);
         }
 
         [Test]
-        public void IndexTest()
+        public void CheckIndex()
         {
             Assert.IsNotNull(TestedObject.Index);
             Assert.AreEqual(ExpectedIndex, TestedObject.Index);

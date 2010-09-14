@@ -9,7 +9,7 @@ namespace DbTracer.MsSql.Test.Model
     public class DatabasePropertiesTest : ATestBase
     {
         [Test]
-        public void PropertiesCountTest()
+        public void CheckPropertiesCount()
         {
             var ps = Search.GetPropertiesWithAttribute<DatabasePropertyAttribute>(typeof(DatabaseProperties));
             Assert.AreEqual(32, ps.Count);

@@ -36,19 +36,19 @@ namespace DbTracer.MsSql.Test.Model
         Row("UsesDatabaseCollation", true),
         Row("IsSystemNamed", false),
         ]
-        public void LoadTest(string propertyName, object expectedValue)
+        public void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, constraint);
         }
 
         [Test]
-        public void DefinitionTest()
+        public void CheckDefinition()
         {
             TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, constraint.Definition);
         }
 
         [Test]
-        public void ParentColumnTest()
+        public void CheckParentColumn()
         {
             Assert.IsNotNull(constraint.ParentColumn, "ParentColumn cannot be null");
             Assert.AreEqual(expectedParentColumn, constraint.ParentColumn);
@@ -56,7 +56,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void ParentObjectTest()
+        public void CheckParentObject()
         {
             Assert.IsNotNull(constraint.ParentObject, "Object cannot be null.");
             Assert.AreEqual(expectedTable, constraint.ParentObject);

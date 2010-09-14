@@ -28,19 +28,19 @@ namespace DbTracer.MsSql.Test.Model
         Row("HasUncheckedAssemblyData"),
         Row("WithCheckOption"),
         Row("IsDateCorrelationView")]
-        public void LoadTest(string propertyName)
+        public void CheckPropertySpecialForView(string propertyName)
         {
             TestUtils.TestProperty(propertyName, ExpectedObject, TestedObject);
         }
 
         [Test]
-        public void DefinitionTest()
+        public void CheckDefinition()
         {
             TestUtils.TestSqlObjectDefinition(ExpectedObject.Definition, view.Definition);
         }
 
         [Test]
-        public void TriggersTest()
+        public void CheckTriggers()
         {
             Assert.AreEqual(1, view.Triggers.Count);
             var testedTrigger = (from t in view.Triggers select t).First();

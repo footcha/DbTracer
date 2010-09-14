@@ -37,7 +37,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void DropTest()
         {
             const string expectedSql = "DROP FUNCTION [test_function]";
-            Utils.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
+            SqlAssert.AreSqlEqual(expectedSql, TestedGenerator.ToDropSql());
         }
 
         [Test,

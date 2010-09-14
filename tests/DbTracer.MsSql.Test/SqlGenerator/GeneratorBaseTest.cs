@@ -23,7 +23,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             using (Mocks.Record())
             {
                 KeyWordEncoder = GetDefaultKeyWordEncoderMock();
-                FullNameBuilder = GetDefaultFullNameBuilderMock();                
+                FullNameBuilder = GetDefaultFullNameBuilderMock();
             }
         }
 
@@ -49,8 +49,34 @@ namespace DbTracer.MsSql.Test.SqlGenerator
 
         protected TGenerator BuildGenerator(TGenerator generator)
         {
-            generator.FullNameBuilder = FullNameBuilder;
-            generator.KeywordEncoder = KeyWordEncoder;
+            return (TGenerator)new GeneratorBuilder()
+                                    .WithFullNameBuilder(FullNameBuilder)
+                                    .WithKeyWordEncoder(KeyWordEncoder)
+                                    .Build(generator);
+        }
+    }
+
+    public class GeneratorBuilder
+    {
+        private IFullNameBuilder fullnameBuilder;
+        private IKeywordEncoder keyWordEncoder;
+
+        public GeneratorBuilder WithFullNameBuilder(IFullNameBuilder builder)
+        {
+            fullnameBuilder = builder;
+            return this;
+        }
+
+        public GeneratorBuilder WithKeyWordEncoder(IKeywordEncoder encoder)
+        {
+            keyWordEncoder = encoder;
+            return this;
+        }
+
+        public IGenerator<T> Build<T>(IGenerator<T> generator)
+        {
+            generator.FullNameBuilder = fullnameBuilder;
+            generator.KeywordEncoder = keyWordEncoder;
 
             return generator;
         }

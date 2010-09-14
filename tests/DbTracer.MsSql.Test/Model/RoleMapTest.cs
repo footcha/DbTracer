@@ -38,7 +38,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsSqlRole", false),
         Row("IsApplicationRole", true),
         ]
-        public override void LoadTest(string propertyName, object expectedValue)
+        public override void CheckProperty(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, testRole);
         }
@@ -54,7 +54,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsSqlRole", true),
         Row("IsApplicationRole", false),
         ]
-        public void LoadDbOwnerRoleTest(string propertyName, object expectedValue)
+        public void CheckDbOwnerRole(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, dbOwnerRole);
         }
@@ -71,7 +71,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsSqlRole", false),
         Row("IsApplicationRole", false),
         ]
-        public void LoadDboRoleTest(string propertyName, object expectedValue)
+        public void CheckDboRole(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, dboRole);
         }
@@ -87,7 +87,7 @@ namespace DbTracer.MsSql.Test.Model
         Row("IsSqlRole", false),
         Row("IsApplicationRole", false),
         ]
-        public void LoadGuestRoleTest(string propertyName, object expectedValue)
+        public void CheckGuestRole(string propertyName, object expectedValue)
         {
             TestUtils.TestProperty(propertyName, expectedValue, guestRole);
         }
