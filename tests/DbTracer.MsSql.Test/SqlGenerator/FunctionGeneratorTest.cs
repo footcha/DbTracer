@@ -30,7 +30,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
         public void CreateTest()
         {
             const string expectedSql = "CREATE FUNCTION [dbo].[test_function] AS RETURN 1";
-            ToCreateSqlTest(TestedGenerator, expectedSql);
+            SqlAssert.AreSqlEqual(expectedSql, TestedGenerator.ToCreateSql());
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
                 TestedGenerator.FullNameBuilder = fullNameBuilder;
             }
             const string expectedSql = "CREATE FUNCTION [test_schema].[test_function] AS RETURN 1";
-            ToCreateSqlTest(TestedGenerator, expectedSql);
+            SqlAssert.AreSqlEqual(expectedSql, TestedGenerator.ToCreateSql());
         }
     }
 }

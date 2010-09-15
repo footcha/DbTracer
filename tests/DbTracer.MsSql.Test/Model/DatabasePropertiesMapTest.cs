@@ -8,8 +8,8 @@ namespace DbTracer.MsSql.Test.Model
     {
         private DatabaseProperties testedObject;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -18,7 +18,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
         Row("Collation", "Czech_CI_AS"),
         Row("ComparisonStyle", 196609),
         Row("IsAnsiNullDefault", false),

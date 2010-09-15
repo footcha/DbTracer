@@ -10,8 +10,8 @@ namespace DbTracer.MsSql.Test.Model
     {
         private Function testedObject;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {

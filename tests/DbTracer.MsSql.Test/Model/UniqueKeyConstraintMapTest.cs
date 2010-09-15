@@ -12,8 +12,8 @@ namespace DbTracer.MsSql.Test.Model
         private Table expectedTable;
         private Index expectedIndex;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {

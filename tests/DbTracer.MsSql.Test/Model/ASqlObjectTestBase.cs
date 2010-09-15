@@ -7,7 +7,7 @@ namespace DbTracer.MsSql.Test.Model
 
     //public abstract class AObjectTestBase : ASqlObjectTestBase
     //{
-    //    [RowTest,
+    //    [Test,
     //    Row("Name", "test_table"),
     //    ]
     //    public void LoadObjectTest()

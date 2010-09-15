@@ -15,8 +15,8 @@ namespace DbTracer.MsSql.Test.Model
         private Index expectedIndex;
         private Table expectedReferencedTable;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -35,7 +35,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
          Row("IsDisabled"),
          Row("IsNotForReplication"),
          Row("IsNotTrusted"),

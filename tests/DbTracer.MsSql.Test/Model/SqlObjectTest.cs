@@ -10,7 +10,7 @@ namespace DbTracer.MsSql.Test.Model
         protected abstract T ExpectedObject { get; }
         protected abstract T TestedObject { get; }
 
-        [RowTest,
+        [Test,
          Row("Name"),
          Row("PrincipalId"),
          Row("IsMsShipped"),
@@ -26,7 +26,7 @@ namespace DbTracer.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, TestedObject);
         }
 
-        [RowTest,
+        [Test,
         Row("CreateDate"),
         Row("ModifyDate")]
         public void CheckDate(string propertyName)

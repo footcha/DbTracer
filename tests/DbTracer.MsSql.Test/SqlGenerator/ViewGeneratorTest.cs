@@ -16,7 +16,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
                 Definition = expectedSql
             };
             var testedGenerator = BuildGenerator(new ViewGenerator(TestedObject));
-            ToCreateSqlTest(testedGenerator, expectedSql);
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
         }
 
         [Test]

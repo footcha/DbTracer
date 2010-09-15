@@ -17,7 +17,7 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             TestedObject = UserTypeTest.TestingObject;
         }
 
-        [RowTest,
+        [Test,
         Row("decimal", "(3, 13)"),
         Row("numeric", "(3, 13)"),
         Row("nchar", "(4)"),

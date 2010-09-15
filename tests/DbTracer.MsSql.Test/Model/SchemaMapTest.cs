@@ -8,8 +8,8 @@ namespace DbTracer.MsSql.Test.Model
     {
         private Schema schema;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenStatelessSession())
             {
@@ -17,7 +17,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
         Row("Name", "dbo"),
         Row("Id", 1),
         Row("PrincipalId", 1),

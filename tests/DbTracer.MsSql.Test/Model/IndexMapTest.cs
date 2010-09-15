@@ -11,8 +11,8 @@ namespace DbTracer.MsSql.Test.Model
         private Index testedObject;
         private Table expectedTable;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -25,7 +25,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
         Row("Id", 1),
         Row("Name", "PK_test_table"),
         Row("IsUnique", true),
@@ -58,7 +58,7 @@ namespace DbTracer.MsSql.Test.Model
             // Assert.AreSame(expectedTable, testedObject.ParentObject); // not working
         }
 
-        [RowTest,
+        [Test,
         Row("id", 0, 0, false, false),
         Row("test2", 1, 0, true, false),
         Row("test", 2, 0, false, false),

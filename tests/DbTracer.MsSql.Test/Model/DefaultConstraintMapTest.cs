@@ -11,8 +11,8 @@ namespace DbTracer.MsSql.Test.Model
         private DefaultConstraint testedObject;
         private Table expectedTable;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -25,7 +25,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
         Row("IsSystemNamed", false),
         ]
         public void CheckProperty(string propertyName, object expectedValue)

@@ -67,8 +67,8 @@ namespace DbTracer.MsSql.Test.Model
 
         protected abstract Type ExpectedObject { get; }
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             testedObject = GetTypeByName(ExpectedObject.Name);
         }
@@ -90,7 +90,7 @@ namespace DbTracer.MsSql.Test.Model
 
         public override void CheckProperty(string propertyName, object expectedValue) { }
 
-        [RowTest,
+        [Test,
         Row("Name"),
         Row("Id"),
         Row("MaxLength"),
@@ -108,7 +108,6 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void CheckSystemType()
         {
-            Assert.IsAssignableFrom(typeof(Type), testedObject.SystemType);
             Assert.AreEqual(ExpectedObject.SystemType, testedObject.SystemType);
         }
 

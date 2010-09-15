@@ -10,8 +10,8 @@ namespace DbTracer.MsSql.Test.Model
     {
         private View view;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -21,7 +21,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
         Row("IsReplicated"),
         Row("HasReplicationFilter"),
         Row("HasOpaqueMetadata"),

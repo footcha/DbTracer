@@ -12,8 +12,8 @@ namespace DbTracer.MsSql.Test.Model
     {
         private Table table;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -46,7 +46,7 @@ namespace DbTracer.MsSql.Test.Model
             get { return table; }
         }
 
-        [RowTest,
+        [Test,
          Row("LobDataSpaceId", 0),
          Row("LockOnBulkLoad", false),
          Row("UsesAnsiNulls", true),

@@ -1,3 +1,4 @@
+using System;
 using DbTracer.MsSql.Model;
 using DbTracer.MsSql.SqlGenerator;
 using DbTracer.MsSql.Test.TestingUtils;
@@ -18,11 +19,27 @@ namespace DbTracer.MsSql.Test.SqlGenerator
             testedGenerator = BuildGenerator(new TriggerGenerator(TestedObject));
         }
 
+        //[TestSuite]
+        //public TestSuite Suite()
+        //{
+        //    var suite = new TestSuite("test test test"){};
+        //    suite.Add(suite.Add( "Test1", new TestDelegate(x=> Test(x) ), "hello" );
+
+        //    return suite;
+        //}
+
+        //public void Test(object testContext)
+        //{
+        //    Console.WriteLine("Test");
+        //    Assert.AreEqual("hello", testContext);
+        //}
+
+
         [Test]
         public void CreateSql()
         {
             const string expectedSql = "CREATE TRIGGER [dbo].[test_trigger]     ON  [dbo].[test_table]     AFTER INSERT,DELETE  AS   BEGIN   SET NOCOUNT ON;  END";
-            ToCreateSqlTest(testedGenerator, expectedSql);
+            SqlAssert.AreSqlEqual(expectedSql, testedGenerator.ToCreateSql());
         }
 
         [Test]

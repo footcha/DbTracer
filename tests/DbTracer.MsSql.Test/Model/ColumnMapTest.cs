@@ -11,8 +11,8 @@ namespace DbTracer.MsSql.Test.Model
         private Type expectedType;
         private Table expectedTable;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -27,7 +27,7 @@ namespace DbTracer.MsSql.Test.Model
             }
         }
 
-        [RowTest,
+        [Test,
         Row("Name", "test"),
         Row("Id", 2),
         Row("MaxLength", 50),

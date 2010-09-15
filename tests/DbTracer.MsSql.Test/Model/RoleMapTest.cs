@@ -12,8 +12,8 @@ namespace DbTracer.MsSql.Test.Model
         private Role dboRole;
         private Role guestRole;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
+        [FixtureSetUp]
+        public void FixtureSetUp()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -27,7 +27,7 @@ namespace DbTracer.MsSql.Test.Model
 
         #region Tests
 
-        [RowTest,
+        [Test,
         Row("Name", "test_role"),
         Row("IsLogin", false),
         Row("IsNtName", false),
@@ -43,7 +43,7 @@ namespace DbTracer.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, testRole);
         }
 
-        [RowTest,
+        [Test,
         Row("Name", "db_owner"),
         Row("IsLogin", false),
         Row("IsNtName", false),
@@ -60,7 +60,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
 
-        [RowTest,
+        [Test,
         Row("Name", "dbo"),
         Row("IsLogin", true),
         Row("IsNtName", true),
@@ -76,7 +76,7 @@ namespace DbTracer.MsSql.Test.Model
             TestUtils.TestProperty(propertyName, expectedValue, dboRole);
         }
 
-        [RowTest,
+        [Test,
         Row("Name", "guest"),
         Row("IsLogin", true),
         Row("IsNtName", false),
