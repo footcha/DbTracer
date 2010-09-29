@@ -35,9 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\3rdparty\NHibernate\Castle\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+    <Reference Include="ConfOrm, Version=1.0.0.3, Culture=neutral, PublicKeyToken=ed8affdf01cbe4cf, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\3rdparty\NHibernate\Fluentnhibernate\FluentNHibernate.dll</HintPath>
+      <HintPath>..\..\lib\3rdparty\ConfOrm\ConfOrm.dll</HintPath>
     </Reference>
     <Reference Include="Gallio, Version=3.2.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -99,7 +99,7 @@
     <Compile Include="Model\TriggerMapTest.cs" />
     <Compile Include="Model\RoleMapTest.cs" />
     <Compile Include="Model\DatabasePropertiesTest.cs" />
-    <Compile Include="Model\DatabasePropertiesMapTest.cs" />
+    <None Include="Model\DatabasePropertiesMapTest.cs" />
     <Compile Include="Model\DatabaseTest.cs" />
     <Compile Include="Model\TestConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

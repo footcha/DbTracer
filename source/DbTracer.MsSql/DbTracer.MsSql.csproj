@@ -36,36 +36,36 @@
     <Compile Include="Comparer\TriggerComparer.cs" />
     <Compile Include="Comparer\Utils.cs" />
     <Compile Include="SqlGenerator\SqlScriptBuilderForCodeSqlObject.cs" />
-    <Compile Include="Model\ColumnMap.cs" />
+    <None Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
-    <Compile Include="Model\CheckConstraintMap.cs" />
+    <None Include="Model\CheckConstraintMap.cs" />
     <Compile Include="Model\ColumnReference.cs" />
     <Compile Include="Model\DefaultConstraint.cs" />
-    <Compile Include="Model\DefaultConstraintMap.cs" />
+    <None Include="Model\DefaultConstraintMap.cs" />
     <Compile Include="Model\ForeignKeyConstraint.cs" />
     <Compile Include="Model\IndexColumn.cs" />
     <Compile Include="Model\KeyConstraint.cs" />
-    <Compile Include="Model\KeyConstraintMap.cs" />
+    <None Include="Model\KeyConstraintMap.cs" />
     <Compile Include="Model\PrimaryKeyConstraint.cs" />
-    <Compile Include="Model\PrimaryKeyConstraintMap.cs" />
+    <None Include="Model\PrimaryKeyConstraintMap.cs" />
     <Compile Include="Model\StoredProcedure.cs" />
-    <Compile Include="Model\StoredProcedureMap.cs" />
+    <None Include="Model\StoredProcedureMap.cs" />
     <Compile Include="Model\ModelUtils.cs" />
     <Compile Include="Model\Schema.cs" />
     <Compile Include="Model\SchemaMap.cs" />
     <Compile Include="Model\SqlObject.cs" />
     <Compile Include="Model\SqlObjectMap.cs" />
     <Compile Include="Model\Type.cs" />
-    <Compile Include="Model\TypeMap.cs" />
+    <None Include="Model\TypeMap.cs" />
     <Compile Include="Model\IndexTypeMap.cs" />
     <Compile Include="Model\IndexType.cs" />
-    <Compile Include="Model\SqlClassMap.cs" />
+    <None Include="Model\SqlClassMap.cs" />
     <Compile Include="Model\UniqueKeyConstraint.cs" />
-    <Compile Include="Model\UniqueKeyConstraintMap.cs" />
+    <None Include="Model\UniqueKeyConstraintMap.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewMap.cs" />
     <Compile Include="Model\TableMap.cs" />
-    <Compile Include="Model\FunctionMap.cs" />
+    <None Include="Model\FunctionMap.cs" />
     <Compile Include="SqlGenerator\CheckConstraintGenerator.cs" />
     <Compile Include="SqlGenerator\CodeGeneratorBase.cs" />
     <Compile Include="SqlGenerator\DefaultConstraintGenerator.cs" />
@@ -82,8 +82,8 @@
     <Compile Include="SqlObjectTypeMap.cs" />
     <Compile Include="SqlObjectType.cs" />
     <Compile Include="Model\TriggerMap.cs" />
-    <Compile Include="Model\RoleMap.cs" />
-    <Compile Include="Model\DatabasePropertiesMap.cs" />
+    <None Include="Model\RoleMap.cs" />
+    <None Include="Model\DatabasePropertiesMap.cs" />
     <Compile Include="Model\RoleType.cs" />
     <Compile Include="Model\SqlAction.cs" />
     <Compile Include="ObjectType1.cs" />
@@ -150,9 +150,9 @@
     <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+    <Reference Include="ConfOrm, Version=1.0.0.3, Culture=neutral, PublicKeyToken=ed8affdf01cbe4cf, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\3rdparty\NHibernate\Fluentnhibernate\FluentNHibernate.dll</HintPath>
+      <HintPath>..\..\lib\3rdparty\ConfOrm\ConfOrm.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

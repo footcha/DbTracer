@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DbTracer.MsSql.Model;
 using MbUnit.Framework;
 using NHibernate.Criterion;

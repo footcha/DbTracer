@@ -1,28 +1,39 @@
-using FluentNHibernate.Mapping;
+using System.Collections.Generic;
+using ConfOrm;
+using ConfOrm.Mappers;
+using ConfOrm.NH;
 
 namespace DbTracer.MsSql.Model
 {
-    public class ViewMap : SubclassMap<View>
+    public class ViewMap
     {
-        public ViewMap()
+        //    DiscriminatorValue(SqlObjectTypeMap.GetCode(SqlObjectType.View));
+
+        public void Configure(ObjectRelationalMapper orm, Mapper mapper, List<System.Type> entities)
         {
-            DiscriminatorValue(SqlObjectTypeMap.GetCode(SqlObjectType.View));
-            Join("sys.views", join =>
+            mapper.JoinedSubclass<View>(j =>
             {
-                join.KeyColumn("object_id");
-                join.Map(t => t.IsReplicated, "is_replicated");
-                join.Map(t => t.HasReplicationFilter, "has_replication_filter");
-                join.Map(t => t.HasOpaqueMetadata, "has_opaque_metadata");
-                join.Map(t => t.HasUncheckedAssemblyData, "has_unchecked_assembly_data");
-                join.Map(t => t.WithCheckOption, "with_check_option");
-                join.Map(t => t.IsDateCorrelationView, "is_date_correlation_view");
+                j.Key(k => k.Column("object_id"));
+                j.Property(w => w.Type, m => m.Type<SqlObjectTypeMap>());
+                j.Schema("sys");
+                j.Table("views");
+                j.Property(t => t.IsReplicated, m => m.Column("is_replicated"));
+                j.Property(t => t.HasReplicationFilter, m => m.Column("has_replication_filter"));
+                j.Property(t => t.HasOpaqueMetadata, m => m.Column("has_opaque_metadata"));
+                j.Property(t => t.HasUncheckedAssemblyData, m => m.Column("has_unchecked_assembly_data"));
+                j.Property(t => t.WithCheckOption, m => m.Column("with_check_option"));
+                j.Property(t => t.IsDateCorrelationView, m => m.Column("is_date_correlation_view"));
+                j.Property(t => t.Definition, m => m.Formula("OBJECT_DEFINITION(object_id)"));
+                j.Set(w => w.Triggers,
+                    m =>
+                    {
+                        m.Key(k => k.Column("parent_id"));
+                        m.Lazy(CollectionLazy.NoLazy);
+                    },
+                    r => r.OneToMany(mm => mm.NotFound(NotFoundMode.Ignore)));
             });
-            HasMany(view => view.Triggers)
-                .KeyColumn("parent_object_id")
-                .AsSet()
-                .Not.LazyLoad()
-                .ReadOnly();
-            SqlClassMap<View>.ConfigureCode(this);
+
+            entities.Add(typeof(View));
         }
     }
 }

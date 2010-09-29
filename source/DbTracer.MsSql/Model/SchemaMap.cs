@@ -1,19 +1,24 @@
+using System.Collections.Generic;
+using ConfOrm;
+using ConfOrm.NH;
+
 namespace DbTracer.MsSql.Model
 {
-    public class SchemaMap : SqlClassMap<Schema>
+    public class SchemaMap
     {
-        protected override string TableName
+        public void Configure(ObjectRelationalMapper orm, Mapper mapper, List<System.Type> entities)
         {
-            get { return "sys.schemas"; }
-        }
-
-        protected override void Configure()
-        {
-            ReadOnly();
-            Table(TableName);
-            Id(obj => obj.Id, "schema_id");
-            Map(obj => obj.Name, "name");
-            Map(obj => obj.PrincipalId, "principal_id");
+            mapper.Class<Schema>(
+                cm =>
+                {
+                    cm.Schema("sys");
+                    cm.Table("schemas");
+                    cm.Id(c => c.Id, x => x.Column("schema_id"));
+                    cm.Property(c => c.Name, c => c.Column("name"));
+                    cm.Property(c => c.PrincipalId, c => c.Column("principal_id"));
+                });
+            orm.TablePerClass(new List<System.Type> { typeof(Schema) });
+            entities.Add(typeof(Schema));
         }
     }
 }

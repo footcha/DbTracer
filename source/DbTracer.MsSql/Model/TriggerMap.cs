@@ -1,21 +1,28 @@
-using FluentNHibernate.Mapping;
+using System.Collections.Generic;
+using ConfOrm;
+using ConfOrm.NH;
 
 namespace DbTracer.MsSql.Model
 {
-    public class TriggerMap : SubclassMap<Trigger>
+    public class TriggerMap
     {
-        public TriggerMap()
+        public void Configure(ObjectRelationalMapper orm, Mapper mapper, List<System.Type> entities)
         {
-            DiscriminatorValue(SqlObjectTypeMap.GetCode(SqlObjectType.SqlDmlTrigger));
-            Join("sys.triggers", t =>
+            mapper.JoinedSubclass<Trigger>(j =>
             {
-                t.KeyColumn("object_id");
-                t.Map(trigger => trigger.Definition, "object_definition")
-                    .Formula("OBJECT_DEFINITION(object_id)");
-                t.Map(trigger => trigger.IsDisabled, "is_disabled");
-                t.Map(trigger => trigger.IsNotForReplication, "is_not_for_replication");
-                t.Map(trigger => trigger.IsInsteadOfTrigger, "is_instead_of_trigger");
+                j.Key(k => k.Column("object_id"));
+                j.Property(w => w.Type, m => m.Type<SqlObjectTypeMap>());
+                j.Schema("sys");
+                j.Table("triggers");
+                j.Property(t => t.IsDisabled, m => m.Column("is_disabled"));
+                j.Property(t => t.IsNotForReplication, m => m.Column("is_not_for_replication"));
+                j.Property(t => t.IsInsteadOfTrigger, m => m.Column("is_instead_of_trigger"));
+                j.Property(t => t.Definition, m => m.Formula("OBJECT_DEFINITION(object_id)"));
             });
+
+            entities.Add(typeof(Trigger));
         }
+
+        //    DiscriminatorValue(SqlObjectTypeMap.GetCode(SqlObjectType.SqlDmlTrigger));
     }
 }
