@@ -38,7 +38,7 @@
     <Compile Include="SqlGenerator\SqlScriptBuilderForCodeSqlObject.cs" />
     <None Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
-    <None Include="Model\CheckConstraintMap.cs" />
+    <Compile Include="Model\CheckConstraintMap.cs" />
     <Compile Include="Model\ColumnReference.cs" />
     <Compile Include="Model\DefaultConstraint.cs" />
     <None Include="Model\DefaultConstraintMap.cs" />

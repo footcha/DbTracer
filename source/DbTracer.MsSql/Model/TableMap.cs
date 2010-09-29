@@ -32,11 +32,17 @@ namespace DbTracer.MsSql.Model
                         m.Lazy(CollectionLazy.NoLazy);
                     },
                     r => r.OneToMany(mm => mm.NotFound(NotFoundMode.Ignore)));
+                j.Set(w => w.CheckConstraints,
+                    m =>
+                    {
+                        m.Key(k => k.Column("parent_object_id"));
+                        m.Lazy(CollectionLazy.NoLazy);
+                    },
+                    r => r.OneToMany(mm => mm.NotFound(NotFoundMode.Ignore)));
             });
 
-            orm.ExcludeProperty<Table>(t=> t.Columns);
-            orm.ExcludeProperty<Table>(t=> t.Indexes);
-            orm.ExcludeProperty<Table>(t=> t.CheckConstraints);
+            orm.ExcludeProperty<Table>(t => t.Columns);
+            orm.ExcludeProperty<Table>(t => t.Indexes);
             entities.Add(typeof(Table));
         }
 
@@ -50,11 +56,6 @@ namespace DbTracer.MsSql.Model
         //        .ReadOnly();
         //    HasMany(table => table.Indexes)
         //        .KeyColumn("object_id")
-        //        .AsSet()
-        //        .Not.LazyLoad()
-        //        .ReadOnly();
-        //    HasMany(table => table.CheckConstraints)
-        //        .KeyColumn("parent_object_id")
         //        .AsSet()
         //        .Not.LazyLoad()
         //        .ReadOnly();
