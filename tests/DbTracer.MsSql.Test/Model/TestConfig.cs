@@ -51,6 +51,9 @@ namespace DbTracer.MsSql.Test.Model
             new TriggerMap().Configure(orm, mapper, entities);
             new TableMap().Configure(orm, mapper, entities);
             new CheckConstraintMap().Configure(orm, mapper, entities);
+            new ColumnMap().Configure(orm, mapper, entities);
+            new TypeMap().Configure(orm, mapper, entities);
+            new DefaultConstraintMap().Configure(orm, mapper, entities);
 
             return mapper.CompileMappingFor(entities);
         }

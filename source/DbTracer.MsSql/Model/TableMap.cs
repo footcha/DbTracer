@@ -39,6 +39,13 @@ namespace DbTracer.MsSql.Model
                         m.Lazy(CollectionLazy.NoLazy);
                     },
                     r => r.OneToMany(mm => mm.NotFound(NotFoundMode.Ignore)));
+                j.Set(w => w.Columns,
+                    m =>
+                    {
+                        m.Key(k => k.Column("object_id"));
+                        m.Lazy(CollectionLazy.NoLazy);
+                    },
+                    r => r.OneToMany(mm => mm.NotFound(NotFoundMode.Ignore)));
             });
 
             orm.ExcludeProperty<Table>(t => t.Columns);

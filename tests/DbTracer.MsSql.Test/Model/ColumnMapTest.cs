@@ -16,13 +16,13 @@ namespace DbTracer.MsSql.Test.Model
         {
             using (var session = SessionFactory.OpenSession())
             {
-                expectedTable = session.CreateCriteria<Table>()
-                    .Add(Restrictions.Eq("Name", "test_table"))
-                    .UniqueResult<Table>();
-                column = session.CreateCriteria<Column>()
-                    .Add(Restrictions.Eq("Name", "test"))
-                    .Add(Restrictions.Eq("ParentObject", expectedTable))
-                    .UniqueResult<Column>();
+                expectedTable = session.QueryOver<Table>()
+                    .And(e => e.Name == "test_table")
+                    .SingleOrDefault();
+                column = session.QueryOver<Column>()
+                    .And(e => e.Name == "test")
+                    .And(e => e.ParentObject == expectedTable)
+                    .SingleOrDefault();
                 expectedType = TypeMapTestBase.GetTypeByName("varchar", session);
             }
         }
@@ -55,18 +55,21 @@ namespace DbTracer.MsSql.Test.Model
         [Test]
         public void CheckParentObject()
         {
+            Assert.IsNotNull(expectedTable);
             Assert.AreSame(expectedTable, column.ParentObject);
         }
 
         [Test]
         public void CheckSystemType()
         {
+            Assert.IsNotNull(expectedType);
             Assert.AreSame(expectedType, column.SystemType);
         }
 
         [Test]
         public void CheckUserType()
         {
+            Assert.IsNotNull(expectedType);
             Assert.AreSame(expectedType, column.UserType);
         }
 

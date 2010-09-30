@@ -1,35 +1,46 @@
+using ConfOrm;
+using ConfOrm.NH;
+using System.Collections.Generic;
+
 namespace DbTracer.MsSql.Model
 {
-    public class TypeMap : SqlClassMap<Type>
+    public class TypeMap
     {
-        protected override string TableName
+        public void Configure(ObjectRelationalMapper orm, Mapper mapper, List<System.Type> entities)
         {
-            get { return "sys.types"; }
+            mapper.Class<Type>(j =>
+            {
+                j.Schema("sys");
+                j.Table("types");
+                j.Id(e => e.Column("user_type_id"));
+                j.Property(e => e.MaxLength, m => m.Column("max_length"));
+                j.Property(e => e.Precision, m => m.Column("precision"));
+                j.Property(e => e.Scale, m => m.Column("scale"));
+                j.Property(e => e.Collation, m => m.Column("collation_name"));
+                j.Property(e => e.IsNullable, m => m.Column("is_nullable"));
+                j.Property(e => e.IsUserDefined, m => m.Column("is_user_defined"));
+                j.Property(e => e.IsAssemblyType, m => m.Column("is_assembly_type"));
+                j.Property(e => e.Name, m => m.Column("name"));
+                j.ManyToOne(e => e.Schema, m => m.Column("schema_id"));
+                j.ManyToOne(e => e.SystemType, m => m.Column("system_type_id"));
+            });
+
+            entities.Add(typeof(Type));
+            orm.TablePerClass<Type>();
+
+            orm.ExcludeProperty<Type>(e => e.Rule);
+            orm.ExcludeProperty<Type>(e => e.Default);
+            //orm.ExcludeProperty<Type>(e => e.SystemType);
         }
 
-        protected override void Configure()
-        {
-            ReadOnly();
-            Table(TableName);
-            Id(obj => obj.Id, "user_type_id");
-            Map(obj => obj.Name, "name");
-            References(o => o.SystemType, "system_type_id")
-                .Not.LazyLoad();
-            References(obj => obj.Schema, "schema_id")
-                .Not.LazyLoad();
-            Map(o => o.MaxLength, "max_length");
-            Map(o => o.Precision, "precision");
-            Map(o => o.Scale, "scale");
-            Map(o => o.Collation, "collation_name");
-            Map(o => o.IsNullable, "is_nullable");
-            Map(o => o.IsUserDefined, "is_user_defined");
-            Map(o => o.IsAssemblyType, "is_assembly_type");
-            References(obj => obj.Default, "default_object_id")
-                .Not.LazyLoad()
-                .NotFound.Ignore();
-            References(obj => obj.Rule, "rule_object_id")
-                .Not.LazyLoad()
-                .NotFound.Ignore();
-        }
+        //protected override void Configure()
+        //{
+        //    References(obj => obj.Default, "default_object_id")
+        //        .Not.LazyLoad()
+        //        .NotFound.Ignore();
+        //    References(obj => obj.Rule, "rule_object_id")
+        //        .Not.LazyLoad()
+        //        .NotFound.Ignore();
+        //}
     }
 }

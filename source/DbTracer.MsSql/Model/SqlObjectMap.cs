@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using ConfOrm;
-using ConfOrm.Mappers;
 using ConfOrm.NH;
 
 namespace DbTracer.MsSql.Model
