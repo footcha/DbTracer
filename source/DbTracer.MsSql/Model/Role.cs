@@ -24,8 +24,6 @@ namespace DbTracer.MsSql.Model
 
         public virtual bool IsApplicationRole { get; set; }
 
-        public virtual SqlObjectType Type { get; set; }
-
 #pragma warning disable 659
         public override bool Equals(object that)
 #pragma warning restore 659

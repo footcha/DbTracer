@@ -82,7 +82,7 @@
     <Compile Include="SqlObjectTypeMap.cs" />
     <Compile Include="SqlObjectType.cs" />
     <Compile Include="Model\TriggerMap.cs" />
-    <None Include="Model\RoleMap.cs" />
+    <Compile Include="Model\RoleMap.cs" />
     <None Include="Model\DatabasePropertiesMap.cs" />
     <Compile Include="Model\RoleType.cs" />
     <Compile Include="Model\SqlAction.cs" />
