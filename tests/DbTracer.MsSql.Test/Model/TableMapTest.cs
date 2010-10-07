@@ -64,7 +64,7 @@ namespace DbTracer.MsSql.Test.Model
         }
 
         [Test]
-        public void CkeckColumns()
+        public void CheckColumns()
         {
             Assert.AreEqual(ExpectedObject.Columns.Count, table.Columns.Count);
             var expectedIterator = ExpectedObject.Columns.GetEnumerator();
