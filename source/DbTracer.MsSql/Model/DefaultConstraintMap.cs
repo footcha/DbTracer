@@ -16,6 +16,7 @@ namespace DbTracer.MsSql.Model
                 j.Key(k => k.Column("object_id"));
                 j.Property(e => e.Definition, m => m.Column("definition"));
                 j.Property(e => e.IsSystemNamed, m => m.Column("is_system_named"));
+                j.ManyToOne(e => e.Column, m => m.Columns(x => x.Name("parent_object_id"), x => x.Name("parent_column_id")));
             });
 
             orm.ExcludeProperty<DefaultConstraint>(c => c.Column);

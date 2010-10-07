@@ -35,7 +35,7 @@
         <property name="PartitionOrdinal" column="partition_ordinal" />
         <property name="IsDescendingKey" column="is_descending_key" />
         <property name="IsIncludedColumn" column="is_included_column" />
-        <many-to-one name="Column">
+        <many-to-one name="Column" lazy="false">
           <column name="object_id" />
           <column name="column_id" />
         </many-to-one>

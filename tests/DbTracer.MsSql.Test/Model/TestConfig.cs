@@ -34,6 +34,7 @@ namespace DbTracer.MsSql.Test.Model
                 db.Timeout = 6;
             });
             cfg.Proxy(proxy => proxy.ProxyFactoryFactory<ProxyFactoryFactory>());
+            cfg.AddAssembly(typeof(Column).Assembly);
             cfg.AddDeserializedMapping(GetMapping(), "ORMSamples_ConfORM");
 
             return cfg.BuildSessionFactory();
@@ -51,10 +52,12 @@ namespace DbTracer.MsSql.Test.Model
             new TriggerMap().Configure(orm, mapper, entities);
             new TableMap().Configure(orm, mapper, entities);
             new CheckConstraintMap().Configure(orm, mapper, entities);
-            new ColumnMap().Configure(orm, mapper, entities);
             new TypeMap().Configure(orm, mapper, entities);
             new DefaultConstraintMap().Configure(orm, mapper, entities);
             new RoleMap().Configure(orm, mapper, entities);
+            new KeyConstraintMap().Configure(orm, mapper, entities);
+            new UniqueKeyConstraintMap().Configure(orm, mapper, entities);
+            //new IndexMap().Configure(orm, mapper, entities);
 
             return mapper.CompileMappingFor(entities);
         }

@@ -1,7 +1,7 @@
 ﻿using DbTracer.MsSql.Model;
 using MbUnit.Framework;
-using NHibernate.Criterion;
 using System.Linq;
+using NHibernate;
 
 namespace DbTracer.MsSql.Test.Model
 {
@@ -10,19 +10,24 @@ namespace DbTracer.MsSql.Test.Model
     {
         private Index testedObject;
         private Table expectedTable;
+        private ISession session;
 
         [FixtureSetUp]
         public void FixtureSetUp()
         {
-            using (var session = SessionFactory.OpenSession())
-            {
-                testedObject = session.CreateCriteria<Index>()
-                    .Add(Restrictions.Eq("Name", "PK_test_table"))
-                    .UniqueResult<Index>();
-                expectedTable = session.CreateCriteria<Table>()
-                    .Add(Restrictions.Eq("Name", "test_table"))
-                    .UniqueResult<Table>();
-            }
+            session = SessionFactory.OpenSession();
+            testedObject = session.QueryOver<Index>()
+                .And(r => r.Name == "PK_test_table")
+                .SingleOrDefault();
+            expectedTable = session.QueryOver<Table>()
+                .And(r => r.Name == "test_table")
+                .SingleOrDefault();
+        }
+
+        [FixtureTearDown]
+        public void TearDown()
+        {
+            session.Dispose();
         }
 
         [Test,
@@ -55,7 +60,7 @@ namespace DbTracer.MsSql.Test.Model
         {
             Assert.IsNotNull(testedObject.ParentObject);
             Assert.AreEqual(expectedTable, testedObject.ParentObject);
-            // Assert.AreSame(expectedTable, testedObject.ParentObject); // not working
+            //Assert.AreSame(expectedTable, testedObject.ParentObject); // not working
         }
 
         [Test,
@@ -67,13 +72,13 @@ namespace DbTracer.MsSql.Test.Model
             int partitionOrdinal, bool isDescendingKey, bool isIncludedColumn)
         {
             Assert.AreEqual(3, testedObject.IndexColumns.Count);
-            var column = testedObject.IndexColumns.ToList()[columnIndex];
+            var indexColumn = testedObject.IndexColumns.ToList()[columnIndex];
             var keyOrdinal = columnIndex + 1;
-            Assert.AreEqual(columnName, column.Column.Name);
-            Assert.AreEqual(keyOrdinal, column.KeyOrdinal);
-            Assert.AreEqual(partitionOrdinal, column.PartitionOrdinal);
-            Assert.AreEqual(isDescendingKey, column.IsDescendingKey);
-            Assert.AreEqual(isIncludedColumn, column.IsIncludedColumn);
+            Assert.AreEqual(columnName, indexColumn.Column.Name);
+            Assert.AreEqual(keyOrdinal, indexColumn.KeyOrdinal);
+            Assert.AreEqual(partitionOrdinal, indexColumn.PartitionOrdinal);
+            Assert.AreEqual(isDescendingKey, indexColumn.IsDescendingKey);
+            Assert.AreEqual(isIncludedColumn, indexColumn.IsIncludedColumn);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using DbTracer.MsSql.Model;
 using MbUnit.Framework;
-using NHibernate.Criterion;
+using NHibernate;
 
 namespace DbTracer.MsSql.Test.Model
 {
@@ -10,21 +10,26 @@ namespace DbTracer.MsSql.Test.Model
         private Column column;
         private Type expectedType;
         private Table expectedTable;
+        private ISession session;
 
         [FixtureSetUp]
         public void FixtureSetUp()
         {
-            using (var session = SessionFactory.OpenSession())
-            {
-                expectedTable = session.QueryOver<Table>()
-                    .And(e => e.Name == "test_table")
-                    .SingleOrDefault();
-                column = session.QueryOver<Column>()
-                    .And(e => e.Name == "test")
-                    .And(e => e.ParentObject == expectedTable)
-                    .SingleOrDefault();
-                expectedType = TypeMapTestBase.GetTypeByName("varchar", session);
-            }
+            session = SessionFactory.OpenSession();
+            expectedTable = session.QueryOver<Table>()
+                .And(e => e.Name == "test_table")
+                .SingleOrDefault();
+            column = session.QueryOver<Column>()
+                .And(e => e.Name == "test")
+                .And(e => e.ParentObject == expectedTable)
+                .SingleOrDefault();
+            expectedType = TypeMapTestBase.GetTypeByName("varchar", session);
+        }
+
+        [TearDown]
+        public void FixtureTearDown()
+        {
+            session.Dispose();
         }
 
         [Test,
@@ -79,7 +84,7 @@ namespace DbTracer.MsSql.Test.Model
             Assert.IsNotNull(column.Default);
             Assert.AreEqual(column, column.Default.Column);
             Assert.AreEqual("(getdate())", column.Default.Definition);
-            //Assert.AreSame(column, column.Default.Column); // TODO test is not working
+            Assert.AreSame(column, column.Default.Column); // TODO test is not working
         }
 
         [Test,

@@ -35,8 +35,8 @@
     <Compile Include="Comparer\CodeComparerBase.cs" />
     <Compile Include="Comparer\TriggerComparer.cs" />
     <Compile Include="Comparer\Utils.cs" />
+    <Compile Include="Model\IndexMap.cs" />
     <Compile Include="SqlGenerator\SqlScriptBuilderForCodeSqlObject.cs" />
-    <Compile Include="Model\ColumnMap.cs" />
     <Compile Include="Model\CheckConstraint.cs" />
     <Compile Include="Model\CheckConstraintMap.cs" />
     <Compile Include="Model\ColumnReference.cs" />
@@ -45,7 +45,7 @@
     <Compile Include="Model\ForeignKeyConstraint.cs" />
     <Compile Include="Model\IndexColumn.cs" />
     <Compile Include="Model\KeyConstraint.cs" />
-    <None Include="Model\KeyConstraintMap.cs" />
+    <Compile Include="Model\KeyConstraintMap.cs" />
     <Compile Include="Model\PrimaryKeyConstraint.cs" />
     <None Include="Model\PrimaryKeyConstraintMap.cs" />
     <Compile Include="Model\StoredProcedure.cs" />
@@ -61,7 +61,7 @@
     <Compile Include="Model\IndexType.cs" />
     <None Include="Model\SqlClassMap.cs" />
     <Compile Include="Model\UniqueKeyConstraint.cs" />
-    <None Include="Model\UniqueKeyConstraintMap.cs" />
+    <Compile Include="Model\UniqueKeyConstraintMap.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ViewMap.cs" />
     <Compile Include="Model\TableMap.cs" />
@@ -174,7 +174,10 @@
     <EmbeddedResource Include="Model\Index.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Model\ForeignKeyConstraint.hbm.xml" />
+    <None Include="Model\ForeignKeyConstraint.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model\Column.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

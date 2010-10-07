@@ -1,27 +1,44 @@
-using FluentNHibernate.Mapping;
+using System.Collections.Generic;
+using ConfOrm;
+using ConfOrm.NH;
 
 namespace DbTracer.MsSql.Model
 {
-    public abstract class KeyConstraintMap<T> : SubclassMap<T>
-        where T : KeyConstraint
+    public class KeyConstraintMap
     {
-        protected KeyConstraintMap()
+        public void Configure(ObjectRelationalMapper orm, Mapper mapper, List<System.Type> entities)
         {
-            CreateMapping();
-        }
-
-        private void CreateMapping()
-        {
-            DiscriminatorValue(SqlObjectTypeMap.GetCode(ObjectType));
-            Join("sys.key_constraints", t =>
+            mapper.JoinedSubclass<KeyConstraint>(j =>
             {
-                t.KeyColumn("object_id");
-                t.Map(obj => obj.IsSystemNamed, "is_system_named");
-                t.References(obj => obj.Index)
-                    .Columns("parent_object_id", "unique_index_id");
+                j.Schema("sys");
+                j.Table("key_constraints");
+                j.Key(m => m.Column("object_id"));
+                j.Property(p => p.IsSystemNamed, m => m.Column("is_system_named"));
             });
+
+            orm.ExcludeProperty<KeyConstraint>(c => c.Index);
+            //orm.TablePerClass<UniqueKeyConstraint>();
+            // orm.NaturalId<Column>(e => e.Id, e => e.ParentObject);
+            entities.Add(typeof(KeyConstraint));
         }
 
-        protected abstract SqlObjectType ObjectType { get; }
+        //protected KeyConstraintMap()
+        //{
+        //    CreateMapping();
+        //}
+
+        //private void CreateMapping()
+        //{
+        //    DiscriminatorValue(SqlObjectTypeMap.GetCode(ObjectType));
+        //    Join("sys.key_constraints", t =>
+        //    {
+        //        t.KeyColumn("object_id");
+        //        t.Map(obj => obj.IsSystemNamed, "is_system_named");
+        //        t.References(obj => obj.Index)
+        //            .Columns("parent_object_id", "unique_index_id");
+        //    });
+        //}
+
+        //protected abstract SqlObjectType ObjectType { get; }
     }
 }

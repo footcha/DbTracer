@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="DbTracer.MsSql"
+                   namespace="DbTracer.MsSql.Model">
+  <class
+    name="Column"
+    table="sys.columns"
+    mutable="false"
+    batch-size="20"
+    >
+    <composite-id>
+      <key-many-to-one name="ParentObject" column="object_id" />
+      <key-property name="Id" column="column_id" />
+    </composite-id>
+    <many-to-one name="ParentObject" column="object_id" />
+    <many-to-one name="SystemType" column="system_type_id" />
+    <many-to-one name="UserType" column="user_type_id" />
+    <many-to-one name="Default" column="default_object_id" />
+    <property name="Name" column="name" />
+    <property name="MaxLength" column="max_length" />
+    <property name="Precision" column="precision" />
+    <property name="Scale" column="scale" />
+    <property name="Collation" column="collation_name" />
+    <property name="IsNullable" column="is_nullable" />
+    <property name="IsAnsiPadded" column="is_ansi_padded" />
+    <property name="IsRowGuidCol" column="is_rowguidcol" />
+    <property name="IsIdentity" column="is_identity" />
+    <property name="IsComputed" column="is_computed" />
+    <property name="IsFileStream" column="is_filestream" />
+    <property name="IsReplicated" column="is_replicated" />
+    <property name="IsNonSqlSubscribed" column="is_non_sql_subscribed" />
+    <property name="IsMergePublished" column="is_merge_published" />
+    <property name="IsXmlDocument" column="is_dts_replicated" />
+    <property name="XmlCollectionId" column="xml_collection_id" />
+  </class>
+</hibernate-mapping>

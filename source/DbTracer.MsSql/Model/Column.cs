@@ -32,9 +32,9 @@ namespace DbTracer.MsSql.Model
             set
             {
                 defaultConstraint = value;
-                if (value == null) return;
+                //if (value == null) return;
 
-                defaultConstraint.Column = this;
+                //defaultConstraint.Column = this;
             }
         }
 
